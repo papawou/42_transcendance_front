@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import User from "./pages/User";
 import Pong from "./pages/Pong";
 import Settings from "./pages/Settings";
+import Leaderboard from "./pages/Leaderboard"
 
 export function App() {
     return (
@@ -13,6 +14,7 @@ export function App() {
 				<Route path="user" element={<User />} />
 				<Route path="pong" element={<Pong />} />
 				<Route path="settings" element={<Settings />} />
+				<Route path="leaderboard" element={<Leaderboard/>} />
 			</Routes>
        </BrowserRouter>
     )

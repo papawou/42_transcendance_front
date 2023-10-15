@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   User.tsx                                           :+:      :+:    :+:   */
+/*   Settings_Icon.tsx                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:50:58 by jaubarea          #+#    #+#             */
-/*   Updated: 2023/10/15 17:31:00 by jaubarea         ###   ########.fr       */
+/*   Created: 2023/10/15 18:17:30 by jaubarea          #+#    #+#             */
+/*   Updated: 2023/10/15 18:28:17 by jaubarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React from 'react';
-import Avatar from '../components/Avatar/Avatar';
-import Navigation from '../components/Navigation/Navigation';
+import './style.css';
 
-const User = () => {
+const SettingsIcon = () => {
 	return (
-		<div>
-			<Navigation/>
+		<div className='settingsIcon'>
+			<img src='logo_settings.png' alt='settings' width={100}/>
 		</div>
 	);
 };
 
-export default User;
+export default SettingsIcon;

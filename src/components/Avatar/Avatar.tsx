@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   User.tsx                                           :+:      :+:    :+:   */
+/*   Avatar.tsx                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:50:58 by jaubarea          #+#    #+#             */
-/*   Updated: 2023/10/15 17:31:00 by jaubarea         ###   ########.fr       */
+/*   Created: 2023/10/15 16:43:54 by jaubarea          #+#    #+#             */
+/*   Updated: 2023/10/15 19:08:31 by jaubarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import React from 'react';
-import Avatar from '../components/Avatar/Avatar';
-import Navigation from '../components/Navigation/Navigation';
+import './style.css';
 
-const User = () => {
+const Avatar = () => {
 	return (
-		<div>
-			<Navigation/>
+		<div className='avatar'>
+			<img src='jaubarea.png' alt='Avatar' width={100}/>
 		</div>
 	);
 };
 
-export default User;
+export default Avatar;

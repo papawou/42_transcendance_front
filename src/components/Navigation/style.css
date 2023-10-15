@@ -1,0 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   style.css                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/15 17:53:47 by jaubarea          #+#    #+#             */
+/*   Updated: 2023/10/15 19:06:13 by jaubarea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+.navigation {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	list-style-type: none;
+}
+
+.navigation :link {
+	text-decoration: none;
+}
+
+.navigation :first-child {
+	align-self: center;
+}
+
+.settings {
+	overflow: hidden;
+}
+
+.text {
+	text-decoration: none;
+	font-size: 80px;
+	color: rgb(124, 187, 18);
+	border-style:solid;
+	border-radius: 30px;
+	border-width: 5px;
+	border-color: green;
+	border-spacing: 100px;
+	background-color: rgb(114, 114, 114);
+}
