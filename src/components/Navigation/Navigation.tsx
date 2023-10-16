@@ -11,23 +11,22 @@
 /* ************************************************************************** */
 
 import { NavLink } from 'react-router-dom';
-import Avatar from '../Avatar/Avatar';
-import SettingsIcon from './SettingsIcon';
 
 import './style.css';
-import { NavButton } from '../../ui/molecules/NavButton';
-import Paths from 'src/technical/Paths';
+import { NavButton } from '@/ui/molecules/NavButton';
+import Paths from '@/technical/Paths';
+import Avatar from '@/ui/atoms/Avatar';
 
 const Navigation = () => {
 	return (
 		<div className='navigation'>
 			<NavLink to={Paths.User()}>
-				<Avatar />
+				<Avatar src='jaubarea.png' width={150} />
 			</NavLink>
 			<NavButton text="PLAY" to={Paths.Pong} />
 			<NavButton text="LEADERBOARD" to={Paths.Leaderboard} />
 			<NavLink to={Paths.Settings}>
-				<SettingsIcon />
+				<Avatar src="logo_settings.png" width={100} />
 			</NavLink>
 		</div>
 	);
