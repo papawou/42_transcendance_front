@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-import React from 'react';
 import './style.css';
 
 const SettingsIcon = () => {
 	return (
-		<div className='settingsIcon'>
-			<img src='logo_settings.png' alt='settings' width={100}/>
+		<div style={{ borderRadius: "50%", overflow: " hidden" }}>
+			<img src='logo_settings.png' alt='settings' width={100} />
 		</div>
 	);
 };

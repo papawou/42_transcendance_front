@@ -1,0 +1,8 @@
+:root {
+	box-sizing: content-box; 
+}
+
+body {
+	background-color: rgb(114, 114, 114);
+	margin: 0;
+}

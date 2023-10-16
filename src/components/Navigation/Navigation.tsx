@@ -10,29 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Avatar from '../Avatar/Avatar';
+import SettingsIcon from './SettingsIcon';
+
 import './style.css';
-import SettingsIcon from './Settings_Icon/Settings_Icon';
+import { NavButton } from '../../ui/molecules/NavButton';
+import Paths from 'src/technical/Paths';
 
 const Navigation = () => {
 	return (
-		<div>
-			<ul className='navigation'>
-				<NavLink to="/user">
-					<li className='avatar'><Avatar/></li>
-				</NavLink>
-				<NavLink to="/pong">
-					<li className='text'>PLAY</li>
-				</NavLink>
-				<NavLink to="/leaderboard">
-					<li className='text'>LEADERBOARD</li>
-				</NavLink>
-				<NavLink to="/settings">
-					<li className='settings'><SettingsIcon /></li>
-				</NavLink>
-			</ul>
+		<div className='navigation'>
+			<NavLink to={Paths.User()}>
+				<Avatar />
+			</NavLink>
+			<NavButton text="PLAY" to={Paths.Pong} />
+			<NavButton text="LEADERBOARD" to={Paths.Leaderboard} />
+			<NavLink to={Paths.Settings}>
+				<SettingsIcon />
+			</NavLink>
 		</div>
 	);
 };
