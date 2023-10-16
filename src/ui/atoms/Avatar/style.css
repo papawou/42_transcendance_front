@@ -1,25 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   User.tsx                                           :+:      :+:    :+:   */
+/*   style.css                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:50:58 by jaubarea          #+#    #+#             */
-/*   Updated: 2023/10/15 17:31:00 by jaubarea         ###   ########.fr       */
+/*   Created: 2023/10/15 16:55:55 by jaubarea          #+#    #+#             */
+/*   Updated: 2023/10/15 19:08:48 by jaubarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React from 'react';
-import Avatar from '../components/Avatar/Avatar';
-import Navigation from '../components/Navigation/Navigation';
-
-const User = () => {
-	return (
-		<div>
-			<Navigation/>
-		</div>
-	);
-};
-
-export default User;
+.avatar {
+	border-radius: 50%;
+}
