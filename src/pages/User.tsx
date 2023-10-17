@@ -11,13 +11,12 @@
 /* ************************************************************************** */
 
 import React from 'react';
-import Avatar from '../components/Avatar/Avatar';
 import Navigation from '../components/Navigation/Navigation';
 
 const User = () => {
 	return (
 		<div>
-			<Navigation/>
+			<User />
 		</div>
 	);
 };

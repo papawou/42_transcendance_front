@@ -20,7 +20,7 @@ import Avatar from '@/ui/atoms/Avatar';
 const Navigation = () => {
 	return (
 		<div className='navigation'>
-			<NavLink to={Paths.User()}>
+			<NavLink to={Paths.User}>
 				<Avatar src='jaubarea.png' width={150} />
 			</NavLink>
 			<NavButton text="PLAY" to={Paths.Pong} />

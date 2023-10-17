@@ -16,7 +16,6 @@ import Navigation from '../components/Navigation/Navigation';
 const Leaderboard = () => {
 	return (
 		<div>
-			<Navigation />
 			<h1>Leaderboard</h1>
 		</div>
 	);

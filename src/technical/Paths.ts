@@ -1,5 +1,5 @@
 const Paths = {
-	User: (idUser: string | undefined) => "/user" + idUser !== undefined ? `/${idUser}` : "",
+	User: "/user",
 	Pong: "/pong",
 	Leaderboard: "/leaderboard",
 	Settings: "/settings"
