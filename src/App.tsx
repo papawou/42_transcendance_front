@@ -7,14 +7,27 @@ import Leaderboard from "./pages/Leaderboard"
 
 import "./ui/main.css"
 import Navigation from "./components/Navigation/Navigation";
+import OAuth20 from "./components/OAuth20/OAuth20";
+
+const isAuthenticated = false; // KR: this is a bool, true when logged in after OAuth20 successful
+// check if user in cookie
 
 const Boilerplate = () => {
-	return (
-		<>
-			<Navigation />
-			<Outlet />
-		</>
-	)
+	if (!isAuthenticated) {
+		return (
+			<>
+				<OAuth20 /> 
+			</> // KR: at the end of OAuth20, should set isAuthenticated to true
+		)
+	}
+	else {
+		return (
+			<>
+				<Navigation />
+				<Outlet />
+			</>
+		)
+	}		
 }
 
 export function App() {
