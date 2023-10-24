@@ -20,7 +20,8 @@ import Leaderboard from "./pages/Leaderboard"
 import "./ui/main.css"
 import Navigation from "./components/Navigation/Navigation";
 import UserList from "./components/UserList/UserList";
-import axios from "axios";
+import OAuth20 from "./components/OAuth20/OAuth20";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import React, { Component } from 'react'
 import axiosInstance from "./technical/AxiosInstance";
@@ -50,6 +51,26 @@ const Boilerplate = () => {
 			<Outlet />
 		</>
 	)
+
+// const isAuthenticated = false; // KR: this is a bool, true when logged in after OAuth20 successful
+// // check if user in cookie
+
+// const Boilerplate = () => {
+// 	if (!isAuthenticated) {
+// 		return (
+// 			<>
+// 				<OAuth20 /> 
+// 			</> // KR: at the end of OAuth20, should set isAuthenticated to true
+// 		)
+// 	}
+// 	else {
+// 		return (
+// 			<>
+// 				<Navigation />
+// 				<Outlet />
+// 			</>
+// 		)
+// 	}		
 }
 
 export function App() {
