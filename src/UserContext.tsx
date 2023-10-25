@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   User.tsx                                           :+:      :+:    :+:   */
+/*   UserContext.tsx                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:50:58 by jaubarea          #+#    #+#             */
-/*   Updated: 2023/10/19 17:17:06 by jaubarea         ###   ########.fr       */
+/*   Created: 2023/10/24 15:19:59 by jaubarea          #+#    #+#             */
+/*   Updated: 2023/10/24 15:28:59 by jaubarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React from 'react';
-import Navigation from '../components/Navigation/Navigation';
-import Window from '@/components/Window/Window';
+import { createContext } from "react";
 
-const User = () => {
-	return (
-		<div>
-		</div>
-	);
-};
+export const UserContext = createContext([]);
 
-export default User;
