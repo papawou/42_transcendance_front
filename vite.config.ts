@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path';
+import dotenv from 'dotenv';
+
+dotenv.config(); // loads env var from .env file
 
 export default defineConfig({
 	server: {
