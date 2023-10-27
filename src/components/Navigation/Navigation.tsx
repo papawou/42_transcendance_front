@@ -6,16 +6,16 @@
 /*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:26:19 by jaubarea          #+#    #+#             */
-/*   Updated: 2023/10/15 18:57:23 by jaubarea         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:05:13 by jaubarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import { NavLink } from 'react-router-dom';
 
 import './style.css';
-import { NavButton } from '@/ui/molecules/NavButton';
+import { NavButton } from '@/components/NavButton';
 import Paths from '@/technical/Paths';
-import Avatar from '@/ui/atoms/Avatar';
+import Avatar from '@/components/Avatar';
 
 const Navigation = () => {
 	return (

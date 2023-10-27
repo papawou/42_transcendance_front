@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   User.tsx                                           :+:      :+:    :+:   */
+/*   AxiosInstance.tsx                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/15 16:50:58 by jaubarea          #+#    #+#             */
-/*   Updated: 2023/10/19 17:17:06 by jaubarea         ###   ########.fr       */
+/*   Created: 2023/10/27 16:22:01 by jb                #+#    #+#             */
+/*   Updated: 2023/10/27 16:34:09 by jaubarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import React from 'react';
-import Navigation from '../components/Navigation/Navigation';
-import Window from '@/components/Window/Window';
+import axios from "axios";
+import React from "react";
 
-const User = () => {
-	return (
-		<div>
-		</div>
-	);
-};
+const axiosInstance = axios.create({
+    baseURL: "http://localhost:3000"
+})
 
-export default User;
+export default axiosInstance;
