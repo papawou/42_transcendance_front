@@ -21,17 +21,28 @@ import "./ui/main.css"
 import Navigation from "./components/Navigation/Navigation";
 import UserList from "./components/UserList/UserList";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import React, { Component } from 'react'
+
 
 const Boilerplate = () => {
 	
 	const [users, setUsers] = useState([]);
 	const [friends, setFriends] = useState([]);
-	const address = "http://localhost:3000/";
+	const axiosInstance = axios.create({
+		baseURL: "http://localhost:3000"
+	})
 
-	axios.get(address + "user").then(response => {setUsers(response.data)});
-	axios.get(address + "friends").then(response => {setFriends(response.data)});
-	
+	useEffect(() => {
+		axiosInstance.get('/user').then(response => {setUsers(response.data);})
+			.catch(error => {console.error("Error fetching user data:", error);
+			});
+		axiosInstance.get('/friends').then(response => {setFriends(response.data);})
+			.catch(error => {
+				console.error("Error fetching friends data:", error);
+			});
+	}, []);
+
 	return (
 		<>
 			<Navigation />
