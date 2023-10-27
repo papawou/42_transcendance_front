@@ -6,7 +6,7 @@
 /*   By: jaubarea <jaubarea@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 15:41:32 by jaubarea          #+#    #+#             */
-/*   Updated: 2023/10/24 16:50:41 by jaubarea         ###   ########.fr       */
+/*   Updated: 2023/10/27 16:32:58 by jaubarea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,13 @@ import UserList from "./components/UserList/UserList";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import React, { Component } from 'react'
+import axiosInstance from "./technical/AxiosInstance";
 
 
 const Boilerplate = () => {
 	
 	const [users, setUsers] = useState([]);
 	const [friends, setFriends] = useState([]);
-	const axiosInstance = axios.create({
-		baseURL: "http://localhost:3000"
-	})
 
 	useEffect(() => {
 		axiosInstance.get('/user').then(response => {setUsers(response.data);})
