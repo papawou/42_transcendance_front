@@ -23,17 +23,17 @@ import Leaderboard from "./pages/Leaderboard"
 import "./ui/main.css"
 import Navigation from "./components/Navigation/Navigation";
 import UserList from "./components/UserList/UserList";
-// import OAuth20 from "./components/OAuth20/OAuth20";
+import OAuth20 from "./components/OAuth20/OAuth20";
 // import axios from "axios";
 import { useEffect, useState } from "react";
 import React, { Component } from 'react'
 import axiosInstance from "./technical/AxiosInstance";
 
-
 const Boilerplate = () => {
 	
 	const [users, setUsers] = useState([]);
 	const [friends, setFriends] = useState([]);
+	const isAuthenticated = false; // KR: this is a bool, true when logged in after OAuth20 successful
 
 	useEffect(() => {
 		axiosInstance.get('/user').then(response => {setUsers(response.data);})
@@ -45,35 +45,24 @@ const Boilerplate = () => {
 			});
 	}, []);
 
-	return (
-		<>
-			<Navigation />
-			<UserList users={users}/>
-			<br />
-			<UserList users={friends}/>
-			<Outlet />
-		</>
-	)
-
-// const isAuthenticated = false; // KR: this is a bool, true when logged in after OAuth20 successful
-// // check if user in cookie
-
-// const Boilerplate = () => {
-// 	if (!isAuthenticated) {
-// 		return (
-// 			<>
-// 				<OAuth20 /> 
-// 			</> // KR: at the end of OAuth20, should set isAuthenticated to true
-// 		)
-// 	}
-// 	else {
-// 		return (
-// 			<>
-// 				<Navigation />
-// 				<Outlet />
-// 			</>
-// 		)
-// 	}		
+	if (!isAuthenticated) {
+		return (
+			<>
+				<OAuth20 /> 
+			</> // KR: at the end of OAuth20, should set isAuthenticated to true
+		)
+	}
+	else {
+		return (
+			<>
+				<Navigation />
+				<UserList users={users}/>
+				<br />
+				<UserList users={friends}/>
+				<Outlet />
+			</>
+		)
+	}
 }
 
 export function App() {

@@ -6,26 +6,16 @@ import Paths from '@/technical/Paths';
 // https://github.com/pandark/passport-42
 // https://www.youtube.com/watch?v=q8tZQxT4YPU
 
-const API_FT_OAUTH2_URL = `${
-	import.meta.env.VITE_API_FT_URL
-	}/oauth/authorize?client_id=${
-	import.meta.env.VITE_API_FT_CLIENT_ID
-	}&redirect_uri=${encodeURIComponent(
-	import.meta.env.VITE_API_FT_REDIRECT_URL
-	)}&response_type=code`;
-
-
-const Login = () => {
+const OAuth20 = () => {
 	return (
 		<div className='oauth20'>
 			<div>
 				<h1>Welcome in Couz transcendence !</h1>
 				<p>To login click the button below</p>
-
 			</div>
-			<NavButton text="42 LOGIN" to={API_FT_OAUTH2_URL} />
+			<NavButton text="42 LOGIN" to={Paths.Login} />
 		</div>
 	);
 };
 
-export default Login;
+export default OAuth20;
