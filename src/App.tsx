@@ -13,6 +13,7 @@ import Paths from "./technical/Paths";
 import { AuthenticateApi } from "./pages/AuthenticateApi";
 import { useEffect } from "react";
 import { AuthFtCallback } from "./pages/AuthFtCallback";
+import { Chat } from "./components/chat/Chat";
 
 const ProtectedRoute = () => {
 	const navigate = useNavigate()
@@ -32,7 +33,7 @@ const ProtectedRoute = () => {
 }
 
 export function App() {
-	return (
+	return (	
 		<BrowserRouter>
 			<Providers>
 				<Routes>
@@ -43,6 +44,7 @@ export function App() {
 							<Route path={Paths.Pong} element={<Pong />} />
 							<Route path={Paths.Settings} element={<Settings />} />
 							<Route path={Paths.Leaderboard} element={<Leaderboard />} />
+							<Route path={Paths.Chat} element={<Chat />} />
 						</Route>
 						<Route path={Paths.AuthFtCallback} element={<AuthFtCallback />} />
 						<Route path="*" element={<div>notfound</div>} />
