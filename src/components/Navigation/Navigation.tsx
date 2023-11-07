@@ -16,13 +16,12 @@ import './style.css';
 import { NavButton } from '@/components/NavButton';
 import Paths from '@/technical/Paths';
 import Avatar from '@/components/Avatar';
+import { UserNav } from './UserNav';
 
 const Navigation = () => {
 	return (
 		<div className='navigation'>
-			<NavLink to={Paths.User}>
-				<Avatar src='jaubarea.png' width={150} />
-			</NavLink>
+			<UserNav />
 			<NavButton text="PLAY" to={Paths.Pong} />
 			<NavButton text="LEADERBOARD" to={Paths.Leaderboard} />
 			<NavLink to={Paths.Settings}>
