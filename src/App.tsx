@@ -8,9 +8,13 @@ import Leaderboard from "./pages/Leaderboard"
 import "./ui/main.css"
 import Navigation from "./components/Navigation/Navigation";
 import UserList from "./components/UserList/UserList";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axiosInstance from "./technical/AxiosInstance";
+<<<<<<< HEAD
 import { AuthProvider, useAuth } from "./components/AuthProvider";
+=======
+import { Providers } from "./components/providers";
+>>>>>>> master
 
 
 const Boilerplate = () => {
@@ -42,18 +46,10 @@ const Boilerplate = () => {
 	)
 }
 
-export const AppServices = ({ children }: { children: ReactNode }) => {
-	return (
-		<AuthProvider>
-			{children}
-		</AuthProvider>
-	)
-}
-
 export function App() {
 	return (
-		<AppServices>
-			<BrowserRouter>
+		<BrowserRouter>
+			<Providers>
 				<Routes>
 					<Route element={<Boilerplate />}>
 						<Route index element={<Home />} />
@@ -64,7 +60,7 @@ export function App() {
 						<Route path="*" element={<div>notfound</div>} />
 					</Route>
 				</Routes>
-			</BrowserRouter>
-		</AppServices>
+			</Providers>
+		</BrowserRouter>
 	)
 }
