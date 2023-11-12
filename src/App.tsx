@@ -9,8 +9,8 @@ import "./ui/main.css"
 import Navigation from "./components/Navigation/Navigation";
 import UserList from "./components/UserList/UserList";
 import { useEffect, useState } from "react";
-import axiosInstance from "./technical/AxiosInstance";
 import { Providers } from "./components/providers";
+import axiosInstance from "./services/AxiosInstance";
 
 
 const Boilerplate = () => {
