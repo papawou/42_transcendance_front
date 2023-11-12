@@ -13,7 +13,7 @@
 import { NavLink } from 'react-router-dom';
 
 import './style.css';
-import { NavButton } from '@/components/NavButton';
+import { NavButton } from '@/components/Navigation/NavButton';
 import Paths from '@/technical/Paths';
 import Avatar from '@/components/Avatar';
 import { UserNav } from './UserNav';
