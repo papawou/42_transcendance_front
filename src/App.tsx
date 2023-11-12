@@ -10,24 +10,26 @@ import Navigation from "./components/Navigation/Navigation";
 import UserList from "./components/UserList/UserList";
 import { ReactNode, useEffect, useState } from "react";
 import axiosInstance from "./technical/AxiosInstance";
-import { AuthProvider } from "./components/AuthProvider";
+import { AuthProvider, useAuth } from "./components/AuthProvider";
 
 
 const Boilerplate = () => {
 
 	const [users, setUsers] = useState([]);
 	const [friends, setFriends] = useState([]);
+	const { userId, login, logout } = useAuth();
 
 	useEffect(() => {
-		axiosInstance.get('/user').then(response => { setUsers(response.data); })
+		axiosInstance.get('/users').then(response => { setUsers(response.data); })
 			.catch(error => {
 				console.error("Error fetching user data:", error);
 			});
-		axiosInstance.get('/friends').then(response => { setFriends(response.data); })
+		axiosInstance.get(`/users/${userId}/friends`).then(response => { setFriends(response.data); })
 			.catch(error => {
 				console.error("Error fetching friends data:", error);
 			});
-	}, []);
+	}, [userId]);
+
 
 	return (
 		<>
