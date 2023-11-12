@@ -1,39 +1,40 @@
 import { useCallback, useState } from "react"
-import { useAuth } from "../AuthProvider"
+import { useAuth } from "../providers/AuthProvider"
 import { NavLink } from "react-router-dom"
 import Paths from "@/technical/Paths"
 import { isDef } from "@/technical/isDef"
+import { UserJWT } from "@/technical/AccessTokenManager"
 
 const Login = ({ login }: { login: (userId: string) => void }) => {
-    const [username, setUsername] = useState<string>("")
+    const [name, setName] = useState<string>("")
 
     const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value ?? "";
-        setUsername(value.trim())
+        setName(value.trim())
     }, [])
 
     const handleClick = useCallback(() => {
-        if (username.length === 0) {
+        if (name.length === 0) {
             return;
         }
-        login(username);
-    }, [login, username])
+        login(name);
+    }, [login, name])
 
     return (
         <>
-            <input onChange={handleChange} name="username" />
+            <input onChange={handleChange} name="name" />
             <button onClick={handleClick}>Connect</button>
         </>
     )
 }
 
-const UserLogged = ({ logout, userId }: { logout: () => void, userId: string }) => {
+const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => {
     return (
         <>
             <div>
                 <NavLink to={Paths.User}>
                     <h2>
-                        {userId}
+                        {user.name}
                     </h2>
                 </NavLink>
             </div>
@@ -50,9 +51,9 @@ export function UserNav() {
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
             {
-                !isDef(user.userId) ?
+                !isDef(user.user) ?
                     <Login login={user.login} />
-                    : <UserLogged userId={user.userId} logout={user.logout} />
+                    : <UserLogged user={user.user} logout={user.logout} />
             }
         </div>
     )
