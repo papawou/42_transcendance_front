@@ -51,7 +51,8 @@ const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => 
 export function UserNav() {
     const user = useAuth()
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", border: "2px solid black" }}>
+            CUSTOM LOGIN
             {
                 !isDef(user.user) ?
                     <Login login={user.login} />

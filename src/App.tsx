@@ -6,37 +6,18 @@ import Settings from "./pages/Settings";
 import Leaderboard from "./pages/Leaderboard"
 
 import "./ui/main.css"
-import Navigation from "./components/Navigation/Navigation";
-import UserList from "./components/UserList/UserList";
-import { useEffect, useState } from "react";
 import { Providers } from "./components/providers";
-import axiosInstance from "./services/AxiosInstance";
+import { ProtectedChildren } from "./components/ProtectedChildren";
+import { Boilerplate } from "./pages/Boilerplate";
+import Paths from "./technical/Paths";
+import { AuthenticateApi } from "./pages/AuthenticateApi";
 
 
-const Boilerplate = () => {
-
-	const [users, setUsers] = useState([]);
-	const [friends, setFriends] = useState([]);
-
-	useEffect(() => {
-		axiosInstance.get('/user').then(response => { setUsers(response.data); })
-			.catch(error => {
-				console.error("Error fetching user data:", error);
-			});
-		axiosInstance.get('/friends').then(response => { setFriends(response.data); })
-			.catch(error => {
-				console.error("Error fetching friends data:", error);
-			});
-	}, []);
-
+const ProtectedRoute = () => {
 	return (
-		<>
-			<Navigation />
-			<UserList users={users} />
-			<br />
-			<UserList users={friends} />
+		<ProtectedChildren>
 			<Outlet />
-		</>
+		</ProtectedChildren>
 	)
 }
 
@@ -47,14 +28,17 @@ export function App() {
 				<Routes>
 					<Route element={<Boilerplate />}>
 						<Route index element={<Home />} />
-						<Route path="user" element={<User />} />
-						<Route path="pong" element={<Pong />} />
-						<Route path="settings" element={<Settings />} />
-						<Route path="leaderboard" element={<Leaderboard />} />
+						<Route element={<ProtectedRoute />}>
+							<Route path={Paths.User} element={<User />} />
+							<Route path={Paths.Pong} element={<Pong />} />
+							<Route path={Paths.Settings} element={<Settings />} />
+							<Route path={Paths.Leaderboard} element={<Leaderboard />} />
+						</Route>
+						<Route path={Paths.Authenticate} element={<AuthenticateApi />} />
 						<Route path="*" element={<div>notfound</div>} />
 					</Route>
 				</Routes>
 			</Providers>
-		</BrowserRouter>
+		</BrowserRouter >
 	)
 }

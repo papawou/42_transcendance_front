@@ -3,7 +3,8 @@ const Paths = {
 	User: "/user",
 	Pong: "/pong",
 	Leaderboard: "/leaderboard",
-	Settings: "/settings"
+	Settings: "/settings",
+	Authenticate: "/authenticate"
 }
 
 export default Paths
