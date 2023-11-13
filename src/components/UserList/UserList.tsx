@@ -1,27 +1,48 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import "./style.css"
 import Avatar from '@/components/Avatar';
 import AddFriendButton from '../UserButtons/AddFriendButton';
+import { useAuth } from '../providers/AuthProvider';
+import axiosInstance from '@/services/AxiosInstance';
+import { isDef } from '@/technical/isDef';
 
 interface User {
 	name: string
 	id: number
 }
 
-interface Props {
-	users: User[];
-}
-
 const User = ({ name, id }: { name: string, id: number }) => {
+	const { user } = useAuth();
+
+	const handleClick = useCallback((route: string) => {
+		if (!isDef(user)) {
+			return;
+		}
+
+		const config = {
+			method: 'post',
+			url: `/users/${route}/${id}`,
+		}
+
+		axiosInstance(config)
+			.then(response => {
+				console.log(response);
+			})
+	}, [id, user]);
+
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
 			<Avatar src='jaubarea.png' width={20} /> {name}
-			<AddFriendButton width={10} image='addfriend.png' route='send-friend-request' frId={id} />
-			<AddFriendButton width={10} image='deletefriend.png' route='delete-friend' frId={id} />
-			<AddFriendButton width={10} image='blockfriend.png' route='block-user' frId={id} />
-			<AddFriendButton width={10} image='unblockuser.png' route='unblock-user' frId={id} />
+			<AddFriendButton width={10} image='addfriend.png' onClick={() => handleClick("send-friend-request")} />
+			<AddFriendButton width={10} image='deletefriend.png' onClick={() => handleClick("delete-friend")} />
+			<AddFriendButton width={10} image='blockfriend.png' onClick={() => handleClick("block-user")} />
+			<AddFriendButton width={10} image='unblockuser.png' onClick={() => handleClick("unblock-user")} />
 		</div>
 	)
+}
+
+interface Props {
+	users: User[];
 }
 
 const UserList = ({ users }: Props) => {

@@ -1,20 +1,16 @@
-import React from 'react';
 import "./style.css"
 import Avatar from '../Avatar';
 import AddFriendButton from '../UserButtons/AddFriendButton';
+import { useUsersServiceUserControllerAddFriend, useUsersServiceUserControllerGetPending, useUsersServiceUserControllerRefuseFriendRequest } from '@/services/openapi/queries';
 
-interface User {
-    name: string;
-    id: number;
-}
+const PendingList = () => {
+    const { data: users, isLoading } = useUsersServiceUserControllerGetPending();
+    const { mutateAsync: postAddFriend } = useUsersServiceUserControllerAddFriend();
+    const { mutateAsync: postRefuseFriendRequest } = useUsersServiceUserControllerRefuseFriendRequest()
 
-interface Props {
-    users: User[];
-}
-
-const PendingList = ({ users }: Props) => {
-
-
+    if (isLoading) {
+        return "loading"
+    }
 
     return (
         <div style={{ paddingLeft: '10px' }}>
@@ -23,8 +19,8 @@ const PendingList = ({ users }: Props) => {
                     <div style={{ display: "flex", alignItems: "center", gap: "5px" }} key={user.id}>
                         <Avatar src='jaubarea.png' width={20} />
                         {user.name}
-                        <AddFriendButton width={10} image='valider.png' route='add-friend' frId={user.id} />
-                        <AddFriendButton width={10} image='refuse.png' route='refuse-friend-request' frId={user.id} />
+                        <AddFriendButton width={10} image='valider.png' onClick={() => postAddFriend({ friendId: user.id })} />
+                        <AddFriendButton width={10} image='refuse.png' onClick={() => postRefuseFriendRequest({ friendId: user.id })} />
                     </div>
                 ))}
             </div>

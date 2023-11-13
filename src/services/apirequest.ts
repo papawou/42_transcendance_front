@@ -18,7 +18,7 @@ export const request = <T>(
                 signal: abortController.signal
             })
             .then((res) => {
-                resolve(res.data);
+                resolve(res?.data);
             })
             .catch((error) => {
                 reject(error);
