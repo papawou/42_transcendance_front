@@ -6,48 +6,18 @@ import Settings from "./pages/Settings";
 import Leaderboard from "./pages/Leaderboard"
 
 import "./ui/main.css"
-import Navigation from "./components/Navigation/Navigation";
-import UserList from "./components/UserList/UserList";
-import { useEffect, useState } from "react";
-import axiosInstance from "./technical/AxiosInstance";
-
 import { Providers } from "./components/providers";
-import { useAuth } from "./components/providers/AuthProvider";
-import PendingList from "./components/UserList/PendingList";
-import { isDef } from "./technical/isDef";
+import { ProtectedChildren } from "./components/ProtectedChildren";
+import { Boilerplate } from "./pages/Boilerplate";
+import Paths from "./technical/Paths";
+import { AuthenticateApi } from "./pages/AuthenticateApi";
 
 
-const Boilerplate = () => {
-
-	const [users, setUsers] = useState([]);
-	const [friends, setFriends] = useState([]);
-	const [pendings, setPendings] = useState([]);
-	const { user, login, logout } = useAuth();
-
-	useEffect(() => {
-		axiosInstance.get('/users').then(response => { setUsers(response.data); })
-			.catch(error => {
-				console.error("Error fetching user data:", error);
-			});
-		axiosInstance.get(`/users/${user?.id}/friends`).then(response => { setFriends(response.data); })
-			.catch(error => {
-				console.error("Error fetching friends data:", error);
-			});
-		axiosInstance.get(`/users/${user?.id}/pending`).then(response => { setPendings(response.data); })
-			.catch(error => {
-				console.error("Error fetching friends data:", error);
-			});
-	}, [user?.id]);
-
-
+const ProtectedRoute = () => {
 	return (
-		<>
-			<Navigation />
-			<UserList users={users} />
-			<PendingList users={pendings} />
-			<UserList users={friends} />
+		<ProtectedChildren>
 			<Outlet />
-		</>
+		</ProtectedChildren>
 	)
 }
 
@@ -58,14 +28,17 @@ export function App() {
 				<Routes>
 					<Route element={<Boilerplate />}>
 						<Route index element={<Home />} />
-						<Route path="user" element={<User />} />
-						<Route path="pong" element={<Pong />} />
-						<Route path="settings" element={<Settings />} />
-						<Route path="leaderboard" element={<Leaderboard />} />
+						<Route element={<ProtectedRoute />}>
+							<Route path={Paths.User} element={<User />} />
+							<Route path={Paths.Pong} element={<Pong />} />
+							<Route path={Paths.Settings} element={<Settings />} />
+							<Route path={Paths.Leaderboard} element={<Leaderboard />} />
+						</Route>
+						<Route path={Paths.Authenticate} element={<AuthenticateApi />} />
 						<Route path="*" element={<div>notfound</div>} />
 					</Route>
 				</Routes>
 			</Providers>
-		</BrowserRouter>
+		</BrowserRouter >
 	)
 }

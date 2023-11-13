@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import Paths from "@/technical/Paths"
 import { isDef } from "@/technical/isDef"
 import { UserJWT } from "@/technical/AccessTokenManager"
+import { useDefaultServiceAppControllerGetProfile } from "@/services/openapi/queries"
 
 const Login = ({ login }: { login: (userId: string) => void }) => {
     const [name, setName] = useState<string>("")
@@ -29,6 +30,7 @@ const Login = ({ login }: { login: (userId: string) => void }) => {
 }
 
 const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => {
+    const { refetch } = useDefaultServiceAppControllerGetProfile(undefined)
     return (
         <>
             <div>
@@ -40,6 +42,7 @@ const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => 
             </div>
             <div>
                 <button onClick={() => logout()}>LOGOUT</button>
+                <button onClick={() => refetch()}>DEBUG_ME</button>
             </div>
         </>
     )
@@ -47,14 +50,15 @@ const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => 
 
 export function UserNav() {
     const user = useAuth()
-
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", border: "2px solid black" }}>
+            CUSTOM LOGIN
             {
                 !isDef(user.user) ?
                     <Login login={user.login} />
                     : <UserLogged user={user.user} logout={user.logout} />
             }
+
         </div>
     )
 }

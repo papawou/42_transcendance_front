@@ -1,10 +1,11 @@
-import { UserJWT, addAccessToken, getAccessToken, getMetaToken, removeAccessToken } from "@/technical/AccessTokenManager";
-import axiosInstance from "@/technical/AxiosInstance";
+import { registerCustomEvent, removeCustomEvent } from "@/services/events";
+import { useDefaultServiceAuthControllerLogin } from "@/services/openapi/queries";
+import { UserJWT, addAccessToken, getMetaToken, removeAccessToken } from "@/technical/AccessTokenManager";
+
 import Paths from "@/technical/Paths";
 import { isDef } from "@/technical/isDef";
-import { AxiosError, InternalAxiosRequestConfig, isAxiosError } from "axios";
 import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 type AuthContextValue = {
     user?: UserJWT
@@ -18,7 +19,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<UserJWT>();
-    const navigate = useNavigate()
+    const { isPending, mutateAsync: login } = useDefaultServiceAuthControllerLogin();
 
     useEffect(() => {
         const token = getMetaToken();
@@ -32,54 +33,41 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const handleLogout = useCallback(() => {
         removeAccessToken()
         setUser(undefined)
-        navigate(Paths.Home)
-    }, [navigate])
+        redirect(Paths.Home)
+    }, [])
 
     const handleLogin = useCallback(async (name: string) => {
         if (isDef(user)) {
             console.warn("user already auth")
         }
-        const res = await axiosInstance.post("/auth/login", { name })
-        addAccessToken(res.data.access_token);
-        const token = getMetaToken();
-        if (!isDef(token)) { //should not happen
-            handleLogout();
-            return;
+        try {
+            const res = await login({ requestBody: { name } })
+            addAccessToken(res.access_token);
+            const token = getMetaToken();
+            if (!isDef(token)) {
+                throw ("should not happend")
+            }
+            setUser(token)
         }
-        setUser(token)
-    }, [handleLogout, user])
+        catch (e) {
+            handleLogout()
+        }
+    }, [handleLogout, login, user])
 
-    //axios
-    //set header
-    const axiosHeaders = useCallback((config: InternalAxiosRequestConfig) => {
-        const token = getAccessToken();
-        if (isDef(token)) {
-            config.headers.set('Authorization', `Bearer ${token}`);
-        }
-        return config;
-    }, [])
     useEffect(() => {
-        const interceptor = axiosInstance.interceptors.request.use((config) => axiosHeaders(config));
-        return () => axiosInstance.interceptors.request.eject(interceptor)
-    }, [axiosHeaders])
-
-    //catch 401
-    const axiosErrorUnauthorized = useCallback((error: Error | AxiosError) => {
-        if (isAxiosError(error) && error.status === 401) {
-            handleLogout();
-        }
-        Promise.reject(error)
+        registerCustomEvent("logout", handleLogout);
+        return () => removeCustomEvent("logout", handleLogout)
     }, [handleLogout])
-    useEffect(() => {
-        const interceptor = axiosInstance.interceptors.response.use(undefined, (err) => axiosErrorUnauthorized(err))
-        return () => axiosInstance.interceptors.request.eject(interceptor)
-    })
 
     const contextValue: AuthContextValue = useMemo(() => ({
         user: user,
         login: (name: string) => handleLogin(name),
         logout: () => handleLogout()
     }), [handleLogin, handleLogout, user])
+
+    if (isPending) {
+        return "User connecting..."
+    }
 
     return (
         <AuthContext.Provider value={contextValue}>
