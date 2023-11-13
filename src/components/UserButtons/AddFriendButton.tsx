@@ -1,6 +1,5 @@
-import axios from 'axios';
-import React, { CSSProperties, useState } from 'react';
-import { useAuth } from '../AuthProvider';
+import React, { CSSProperties} from 'react';
+import { useAuth } from '../providers/AuthProvider';
 import axiosInstance from '@/technical/AxiosInstance';
 
 type Props = {
@@ -12,11 +11,11 @@ type Props = {
 
 const AddFriendButton = (props: Props) => {
 
-    const { userId, login, logout } = useAuth();
+    const { user, login, logout } = useAuth();
 
     const handleButton = () => {
-        if (userId) {
-            const userIdParam = userId;
+        if (user?.id) {
+            const userIdParam = user.id;
             const friendId = props.frId;
 
             const url = `/users/${userIdParam}/${props.route}/${friendId}`;

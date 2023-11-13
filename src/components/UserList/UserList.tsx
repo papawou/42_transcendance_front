@@ -16,9 +16,10 @@ const User = ({ name, id }: { name: string, id: number }) => {
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
 			<Avatar src='jaubarea.png' width={20} /> {name}
-			<AddFriendButton width={10} image='addfriend.png' route='add-friend' frId={id} />
+			<AddFriendButton width={10} image='addfriend.png' route='send-friend-request' frId={id} />
 			<AddFriendButton width={10} image='deletefriend.png' route='delete-friend' frId={id} />
 			<AddFriendButton width={10} image='blockfriend.png' route='block-user' frId={id} />
+			<AddFriendButton width={10} image='unblockuser.png' route='unblock-user' frId={id} />
 		</div>
 	)
 }

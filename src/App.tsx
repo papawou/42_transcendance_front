@@ -10,36 +10,41 @@ import Navigation from "./components/Navigation/Navigation";
 import UserList from "./components/UserList/UserList";
 import { useEffect, useState } from "react";
 import axiosInstance from "./technical/AxiosInstance";
-<<<<<<< HEAD
-import { AuthProvider, useAuth } from "./components/AuthProvider";
-=======
+
 import { Providers } from "./components/providers";
->>>>>>> master
+import { useAuth } from "./components/providers/AuthProvider";
+import PendingList from "./components/UserList/PendingList";
+import { isDef } from "./technical/isDef";
 
 
 const Boilerplate = () => {
 
 	const [users, setUsers] = useState([]);
 	const [friends, setFriends] = useState([]);
-	const { userId, login, logout } = useAuth();
+	const [pendings, setPendings] = useState([]);
+	const { user, login, logout } = useAuth();
 
 	useEffect(() => {
 		axiosInstance.get('/users').then(response => { setUsers(response.data); })
 			.catch(error => {
 				console.error("Error fetching user data:", error);
 			});
-		axiosInstance.get(`/users/${userId}/friends`).then(response => { setFriends(response.data); })
+		axiosInstance.get(`/users/${user?.id}/friends`).then(response => { setFriends(response.data); })
 			.catch(error => {
 				console.error("Error fetching friends data:", error);
 			});
-	}, [userId]);
+		axiosInstance.get(`/users/${user?.id}/pending`).then(response => { setPendings(response.data); })
+			.catch(error => {
+				console.error("Error fetching friends data:", error);
+			});
+	}, [user?.id]);
 
 
 	return (
 		<>
 			<Navigation />
 			<UserList users={users} />
-			<br />
+			<PendingList users={pendings} />
 			<UserList users={friends} />
 			<Outlet />
 		</>
