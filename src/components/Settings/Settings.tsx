@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import axiosInstance from '@/technical/AxiosInstance';
-import { AuthProvider, useAuth } from '../providers/AuthProvider';
+import { useState } from 'react';
+import { useAuth } from '../providers/AuthProvider';
+import axiosInstance from '@/services/AxiosInstance';
 
 const UserSettings = () => {
 
     const [input, setInput] = useState('');
-    const {user, login, logout} = useAuth();
+    const { user } = useAuth();
 
     const handleValidation = () => {
 
         axiosInstance.post(`/users/${user?.id}/change-name/${input}`)
-            .then(response => {console.log(response);})
-            .catch(error => {console.log(`can't change username to ${input}` + error);
-        });
+            .then(response => { console.log(response); })
+            .catch(error => {
+                console.log(`can't change username to ${input}` + error);
+            });
     };
 
     return (

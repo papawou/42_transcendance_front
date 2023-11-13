@@ -1,6 +1,6 @@
-import React, { CSSProperties} from 'react';
+import { CSSProperties } from 'react';
 import { useAuth } from '../providers/AuthProvider';
-import axiosInstance from '@/technical/AxiosInstance';
+import axiosInstance from '@/services/AxiosInstance';
 
 type Props = {
     width: CSSProperties["width"]
@@ -11,7 +11,7 @@ type Props = {
 
 const AddFriendButton = (props: Props) => {
 
-    const { user, login, logout } = useAuth();
+    const { user } = useAuth();
 
     const handleButton = () => {
         if (user?.id) {
