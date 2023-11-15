@@ -1,4 +1,4 @@
-import { GameObjectClient } from "../client/GameObjectClient";
+import { GameObjectClient } from "@/pong/GameObjectClient";
 
 export type GameEngineStatus = "RUNNING" | "PENDING"
 
@@ -6,7 +6,7 @@ export type PlayerData = {
     playerId: string,
     barId?: string,
     user?: {
-        userId: string,
+        userId: number,
         score: number,
         isReady: boolean
     },
