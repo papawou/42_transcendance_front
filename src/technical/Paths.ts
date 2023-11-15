@@ -4,7 +4,7 @@ const Paths = {
 	Pong: "/pong",
 	Leaderboard: "/leaderboard",
 	Settings: "/settings",
-	Authenticate: "/authenticate"
+    AuthFtCallback: "/auth/ft/callback"
 }
 
 export default Paths

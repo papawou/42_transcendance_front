@@ -10,7 +10,7 @@ import { Providers } from "./components/providers";
 import { ProtectedChildren } from "./components/ProtectedChildren";
 import { Boilerplate } from "./pages/Boilerplate";
 import Paths from "./technical/Paths";
-import { AuthenticateApi } from "./pages/AuthenticateApi";
+import { AuthFtCallback } from "./pages/AuthFtCallback";
 
 
 const ProtectedRoute = () => {
@@ -34,7 +34,7 @@ export function App() {
 							<Route path={Paths.Settings} element={<Settings />} />
 							<Route path={Paths.Leaderboard} element={<Leaderboard />} />
 						</Route>
-						<Route path={Paths.Authenticate} element={<AuthenticateApi />} />
+						<Route path={Paths.AuthFtCallback} element={<AuthFtCallback />} />
 						<Route path="*" element={<div>notfound</div>} />
 					</Route>
 				</Routes>
