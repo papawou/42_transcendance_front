@@ -15,7 +15,7 @@ export const UsersList = () => {
     const { data, isLoading } = useUsersServiceUserControllerGetUsers();
 
     if (isLoading) {
-        return "suerslist loading"
+        return "userlist loading"
     }
 
     return <UserList users={data} />

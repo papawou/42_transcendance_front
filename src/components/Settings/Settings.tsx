@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { useAuth } from '../providers/AuthProvider';
 import axiosInstance from '@/services/AxiosInstance';
+import {Socket, io} from "socket.io-client"
 
 const UserSettings = () => {
 
     const [input, setInput] = useState('');
-    const { user } = useAuth();
-
     const handleValidation = () => {
 
-        axiosInstance.post(`/users/${user?.id}/change-name/${input}`)
+        axiosInstance.post(`/users/change-name/${input}`)
             .then(response => { console.log(response); })
             .catch(error => {
                 console.log(`can't change username to ${input}` + error);
             });
+
     };
 
     return (
@@ -32,3 +32,4 @@ const UserSettings = () => {
 };
 
 export default UserSettings;
+
