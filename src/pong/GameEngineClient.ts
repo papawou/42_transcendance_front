@@ -1,10 +1,10 @@
 import { isDef } from "@/technical/isDef";
 import { GameObjectClient } from "./GameObjectClient";
-import Scene from "@/pong/base/Scene";
-import { Physics } from "@/pong/base/physics/Physics";
-import { GameEngineData } from "@/pong/base/pong";
-import { GameEngine } from "@/pong/base/GameEngine";
-import { Player } from "@/pong/base/Player";
+import { GameEngine } from "@/shared/pong/GameEngine";
+import { GameEngineData } from "@/shared/pong/pong";
+import Scene from "@/shared/pong/Scene";
+import { Physics } from "@/shared/pong/physics/Physics";
+import { Player } from "@/shared/pong/Player";
 
 export class GameEngineClient extends GameEngine<GameObjectClient> {
     ctx?: CanvasRenderingContext2D | null = null;

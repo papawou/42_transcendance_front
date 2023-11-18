@@ -1,23 +1,27 @@
-import { socket } from "@/providers/socketio";
+import { emit } from "@/providers/socketio";
 import { isDef } from "@/technical/isDef";
 import { useCallback, useEffect, useState } from "react";
 import { Game } from "./Game";
-import { GameEngineClient } from "@/pong/client/GameEngineClient";
-import { GameEngineData } from "../../pong/base/pong";
+import { GameEngineClient } from "@/pong/GameEngineClient";
+import { WS_FAIL, WsGame, WsGameOut } from "@/shared/ws-game";
 
-export const roomId = "test";
+export const roomId = "game:test";
 
 const Pong = () => {
   const [game, setGame] = useState<GameEngineClient | null>(null)
 
-  const ackJoinRoom = useCallback((data: GameEngineData) => {
+  const ackJoinRoom = useCallback((data: WsGameOut<WsGame.joinRoom>) => {
+    if (data === WS_FAIL) {
+      console.warn("joinRoom");
+      return;
+    }
     setGame(new GameEngineClient(data))
   }, []);
 
   useEffect(() => {
-    socket.emit("joinRoom", roomId, ackJoinRoom);
+    emit(WsGame.joinRoom, { roomId }, ackJoinRoom);
     return () => {
-      socket.emit("leaveRoom", roomId);
+      emit(WsGame.leaveRoom, { roomId });
       setGame(null);
     };
   }, [ackJoinRoom]);

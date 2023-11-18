@@ -1,7 +1,7 @@
 import { BodyCircle } from "./Circle"
 import { BodyBox } from "./Box"
 import { BodyLine } from "./Line"
-import { Vector, getVec } from "@/pong/utils/Vector"
+import { Vector, getVec } from "@/shared/pong/utils/Vector"
 
 type Shape = "circle" | "box" | "line"
 
@@ -18,6 +18,7 @@ export type BodyBase<T extends Shape, U = unknown> = {
 	isTrigger: boolean
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getBody = (): Omit<BodyBase<any>, "shape" | "g"> => ({
 	p: getVec(),
 	v: getVec(),

@@ -1,14 +1,13 @@
-import { GameEngineClient } from "@/pong/client/GameEngineClient";
-import { socket } from "@/providers/socketio";
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { GameEngineClient } from "@/pong/GameEngineClient";
+import { emit, on, socket } from "@/providers/socketio";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { roomId } from ".";
 import { isDef } from "@/technical/isDef";
-import { GameEngineData } from "../../pong/base/pong";
-
-
-const userId = "a"
+import { useAuth } from "@/components/providers/AuthProvider";
+import { WsGame, WsGameEvents } from "@/shared/ws-game";
 
 export const Game = ({ game }: { game: GameEngineClient }) => {
+  const { user } = useAuth()
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [, setTriggerRender] = useState(false);
 
@@ -17,7 +16,7 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
     setTriggerRender((prev) => !prev);
   }, []);
 
-  const onUpdateGame = useCallback((data: GameEngineData) => {
+  const onUpdateGame = useCallback((data: WsGameEvents["updateGame"]["out"]) => {
     game.ge = data;
     game.update();
     const ctx = canvasRef.current?.getContext("2d");
@@ -28,7 +27,7 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
   }, [game, physicsLoop]);
 
   useEffect(() => {
-    socket.on("updateGame", onUpdateGame);
+    on(WsGame.update, onUpdateGame);
     return () => {
       socket.off("updateGame", onUpdateGame)
     };
@@ -36,7 +35,8 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
 
   //key events
   const sendKey = useCallback((key: KeyboardEvent["key"], isUp: boolean) => {
-    socket.emit("sendKey", { roomId, event: { key, isUp } });
+    const payload = { key, isUp, roomId };
+    emit(WsGame.sendKey, payload);
   }, [])
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -58,9 +58,16 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
     };
   }, [handleKeyDown, handleKeyUp]);
 
-  const player = game.getPlayer(userId)?.player;
+  const player = useMemo(() => {
+    if (!isDef(user)) {
+      return undefined
+    }
+    return game.getPlayer(user.id)?.player;
+  }, [game, user])
+
+
   if (!isDef(player)) {
-    return "Inconsistency detected"
+    return "An error occured"
   }
 
   return (
