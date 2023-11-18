@@ -10,7 +10,6 @@ import { Providers } from "./components/providers";
 import { ProtectedChildren, useIsLogged } from "./components/ProtectedChildren";
 import { Boilerplate } from "./pages/Boilerplate";
 import Paths from "./technical/Paths";
-import { AuthenticateApi } from "./pages/AuthenticateApi";
 import { useEffect } from "react";
 import { AuthFtCallback } from "./pages/AuthFtCallback";
 import { Chat } from "./components/chat/Chat";
@@ -33,7 +32,7 @@ const ProtectedRoute = () => {
 }
 
 export function App() {
-	return (	
+	return (
 		<BrowserRouter>
 			<Providers>
 				<Routes>

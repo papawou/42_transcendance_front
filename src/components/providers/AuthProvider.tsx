@@ -8,7 +8,7 @@ import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, 
 import { useNavigate } from "react-router-dom";
 
 type AuthContextValue = {
-    user?: UserJWT
+    user?: UserJWT | null
     logout: () => void
     login: (name: string) => void
 }
@@ -18,13 +18,13 @@ const AuthContext = createContext<AuthContextValue>(Object.create(null))
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<UserJWT>();
+    const [user, setUser] = useState<UserJWT | null>(getMetaToken());
     const { isPending, mutateAsync: login } = useDefaultServiceAuthControllerLogin();
     const navigate = useNavigate()
 
     const handleLogout = useCallback(() => {
         removeAccessToken()
-        setUser(undefined)
+        setUser(null)
         navigate(Paths.Home, { replace: true })
     }, [navigate])
 
