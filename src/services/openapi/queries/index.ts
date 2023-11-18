@@ -9,7 +9,7 @@ export const useUsersServiceUserControllerGetUsers = <TQueryKey extends Array<un
 };
 export const useUsersServiceUserControllerGetUserKey = "UsersServiceUserControllerGetUser";
 export const useUsersServiceUserControllerGetUser = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetUser>>, TError = unknown>({ id }: {
-    id: string;
+    id: number;
 }, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetUser>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetUser>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetUserKey, ...(queryKey ?? [{ id }])], queryFn: () => UsersService.userControllerGetUser(id), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetUser>>, TError>, "data"> & {
     data: TData;
 };
@@ -25,50 +25,44 @@ export const useUsersServiceUserControllerGetFriends = <TQueryKey extends Array<
     data: TData;
 };
 export const useUsersServiceUserControllerAddFriend = <TData = Awaited<ReturnType<typeof UsersService.userControllerAddFriend>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerAddFriend>>, unknown, {
-    friendId: string;
+    friendId: number;
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ friendId }) => UsersService.userControllerAddFriend(friendId), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerAddFriend>>, TError, {
-    friendId: string;
+    friendId: number;
 }, TContext>, "data"> & {
     data: TData;
 };
 export const useUsersServiceUserControllerDeleteFriend = <TData = Awaited<ReturnType<typeof UsersService.userControllerDeleteFriend>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerDeleteFriend>>, unknown, {
-    friendId: string;
+    friendId: number;
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ friendId }) => UsersService.userControllerDeleteFriend(friendId), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerDeleteFriend>>, TError, {
-    friendId: string;
+    friendId: number;
 }, TContext>, "data"> & {
     data: TData;
 };
 export const useUsersServiceUserControllerBlockUser = <TData = Awaited<ReturnType<typeof UsersService.userControllerBlockUser>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerBlockUser>>, unknown, {
-    blockedUserId: string;
+    blockedUserId: number;
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ blockedUserId }) => UsersService.userControllerBlockUser(blockedUserId), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerBlockUser>>, TError, {
-    blockedUserId: string;
+    blockedUserId: number;
 }, TContext>, "data"> & {
     data: TData;
 };
 export const useUsersServiceUserControllerUnblockUser = <TData = Awaited<ReturnType<typeof UsersService.userControllerUnblockUser>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerUnblockUser>>, unknown, {
-    blockedUserId: string;
+    blockedUserId: number;
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ blockedUserId }) => UsersService.userControllerUnblockUser(blockedUserId), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerUnblockUser>>, TError, {
-    blockedUserId: string;
+    blockedUserId: number;
 }, TContext>, "data"> & {
     data: TData;
 };
-export const useUsersServiceUserControllerGetBlockedKey = "UsersServiceUserControllerGetBlocked";
-export const useUsersServiceUserControllerGetBlocked = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetBlocked>>, TError = unknown>({ id }: {
-    id: string;
-}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetBlocked>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetBlocked>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetBlockedKey, ...(queryKey ?? [{ id }])], queryFn: () => UsersService.userControllerGetBlocked(id), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetBlocked>>, TError>, "data"> & {
-    data: TData;
-};
 export const useUsersServiceUserControllerSendFriendRequest = <TData = Awaited<ReturnType<typeof UsersService.userControllerSendFriendRequest>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerSendFriendRequest>>, unknown, {
-    friendId: string;
+    friendId: number;
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ friendId }) => UsersService.userControllerSendFriendRequest(friendId), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerSendFriendRequest>>, TError, {
-    friendId: string;
+    friendId: number;
 }, TContext>, "data"> & {
     data: TData;
 };
 export const useUsersServiceUserControllerRefuseFriendRequest = <TData = Awaited<ReturnType<typeof UsersService.userControllerRefuseFriendRequest>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerRefuseFriendRequest>>, unknown, {
-    friendId: string;
+    friendId: number;
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ friendId }) => UsersService.userControllerRefuseFriendRequest(friendId), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerRefuseFriendRequest>>, TError, {
-    friendId: string;
+    friendId: number;
 }, TContext>, "data"> & {
     data: TData;
 };
@@ -85,5 +79,12 @@ export const useDefaultServiceAuthControllerLogin = <TData = Awaited<ReturnType<
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => DefaultService.authControllerLogin(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerLogin>>, TError, {
     requestBody: LoginDTO;
 }, TContext>, "data"> & {
+    data: TData;
+};
+export const useDefaultServiceAuthControllerHandleFtCallbackKey = "DefaultServiceAuthControllerHandleFtCallback";
+export const useDefaultServiceAuthControllerHandleFtCallback = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, unknown, Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useDefaultServiceAuthControllerHandleFtCallbackKey, ...(queryKey ?? [])], queryFn: () => DefaultService.authControllerHandleFtCallback(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, TError>, "data"> & {
+    data: TData;
+};
+export const useDefaultServiceAuthControllerFtCallback = <TData = Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => DefaultService.authControllerFtCallback(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError, void, TContext>, "data"> & {
     data: TData;
 };

@@ -36,4 +36,26 @@ export class DefaultService {
         });
     }
 
+    /**
+     * @returns any
+     * @throws ApiError
+     */
+    public static authControllerHandleFtCallback(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/auth/ft/callback',
+        });
+    }
+
+    /**
+     * @returns any
+     * @throws ApiError
+     */
+    public static authControllerFtCallback(): CancelablePromise<Record<string, any>> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/auth/ft/callback',
+        });
+    }
+
 }
