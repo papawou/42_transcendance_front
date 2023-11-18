@@ -1,0 +1,55 @@
+import React, { useEffect, useState } from 'react';
+import { Button, Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
+import Avatar from '../Avatar';
+import axiosInstance from '@/technical/AxiosInstance';
+import { isDef } from '@/technical/isDef';
+
+interface matchHistory {
+	type: 			string,
+	player1Score:	number,
+	player2Score:	number,
+	player1Name:	string,
+	player2Name:	string,
+}
+
+interface User {
+	name: string,
+	id: number,
+	wins: number,
+	loses: number,
+	rank: number,
+	matchHistory: matchHistory[]
+}
+
+const UserProfile = ({ open, onClose, userId, userName }) => {
+
+	const [user, setUser] = useState<User | null>(null);
+
+	useEffect(() => {
+		const getUser = async () => {
+			const response = await axiosInstance.get(`users/${userId}/user`)
+			setUser(response.data)
+		}
+		if (open && userId)
+			getUser();
+	}, [open, userId]);
+
+	if (isDef(user))
+	{
+		return (
+			<Dialog open={open} onClose={onClose} maxWidth='md' fullWidth>
+				<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}><Avatar src='jaubarea.png' width={50} />{`Profil de ${userName}`}</DialogTitle>
+				<DialogContent sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
+					<p>Wins : {user.wins} Loses : {user.loses} Rank : {user.rank}</p>
+					<p> </p>
+					<Button variant="outlined" color="secondary" onClick={onClose} sx={{ color: 'black' }}>
+						Fermer
+					</Button>
+				</DialogContent>
+			</Dialog >
+		);
+	}
+	return;
+};
+
+export default UserProfile;
