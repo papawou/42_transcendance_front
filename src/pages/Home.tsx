@@ -3,9 +3,17 @@ import { useAuth } from "@/components/providers/AuthProvider";
 import { isDef } from "@/technical/isDef";
 import { useCallback } from "react";
 
+const API_FT_OAUTH2_URL = `${
+	import.meta.env.VITE_API_FT_URL
+	}/oauth/authorize?client_id=${
+	import.meta.env.VITE_API_FT_CLIENT_ID
+	}&redirect_uri=${encodeURIComponent(
+	import.meta.env.VITE_API_FT_CALLBACK_URL
+	)}&response_type=code`;
+
 const ButtonLogin = () => {
 	const handleClick = useCallback(() => {
-		//kenneth: redirect to API42 using import.meta.env.VITE_42_CLIENTID)
+        window.location.href = API_FT_OAUTH2_URL;
 	}, [])
 
 	return (
@@ -18,18 +26,24 @@ const ButtonLogin = () => {
 	)
 }
 
-const Home = () => {
+export const Home = ({ data }: { data: any }) => {
 	const auth = useAuth()
 
-	if (!isDef(auth.user)) {
+    console.log({
+        where: "Home",
+        data: data,
+    });
+    
+	// if (!isDef(auth.user)) {
+    if (!isDef(data)) {
 		return <ButtonLogin />
 	}
 
 	return (
 		<div>
 			<h1>HOME</h1>
+            <p>Welcome {data.login} 🤩</p>
 		</div>
 	);
 };
-
 export default Home;
