@@ -1,4 +1,4 @@
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import User from "./pages/User";
 import Pong from "./pages/Pong";
@@ -7,13 +7,23 @@ import Leaderboard from "./pages/Leaderboard"
 
 import "./ui/main.css"
 import { Providers } from "./components/providers";
-import { ProtectedChildren } from "./components/ProtectedChildren";
+import { ProtectedChildren, useIsLogged } from "./components/ProtectedChildren";
 import { Boilerplate } from "./pages/Boilerplate";
 import Paths from "./technical/Paths";
+import { AuthenticateApi } from "./pages/AuthenticateApi";
+import { useEffect } from "react";
 import { AuthFtCallback } from "./pages/AuthFtCallback";
 
-
 const ProtectedRoute = () => {
+	const navigate = useNavigate()
+	const isLogged = useIsLogged()
+
+	useEffect(() => {
+		if (!isLogged) {
+			navigate(Paths.Home)
+		}
+	}, [isLogged, navigate])
+
 	return (
 		<ProtectedChildren>
 			<Outlet />

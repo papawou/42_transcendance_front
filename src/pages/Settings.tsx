@@ -1,7 +1,9 @@
+import UserSettings from "@/components/Settings/Settings";
+
 const Settings = () => {
 	return (
 		<div>
-			<h1>SETTINGSS</h1>
+			<UserSettings />
 		</div>
 	);
 };

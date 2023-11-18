@@ -1,10 +1,44 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import "./style.css"
 import Avatar from '@/components/Avatar';
+import AddFriendButton from '../UserButtons/AddFriendButton';
+import { useAuth } from '../providers/AuthProvider';
+import axiosInstance from '@/services/AxiosInstance';
+import { isDef } from '@/technical/isDef';
 
 interface User {
 	name: string
 	id: number
+}
+
+const User = ({ name, id }: { name: string, id: number }) => {
+	const { user } = useAuth();
+
+	const handleClick = useCallback((route: string) => {
+		if (!isDef(user)) {
+			return;
+		}
+
+		const config = {
+			method: 'post',
+			url: `/users/${route}/${id}`,
+		}
+
+		axiosInstance(config)
+			.then(response => {
+				console.log(response);
+			})
+	}, [id, user]);
+
+	return (
+		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+			<Avatar src='jaubarea.png' width={20} /> {name}
+			<AddFriendButton width={10} image='addfriend.png' onClick={() => handleClick("send-friend-request")} />
+			<AddFriendButton width={10} image='deletefriend.png' onClick={() => handleClick("delete-friend")} />
+			<AddFriendButton width={10} image='blockfriend.png' onClick={() => handleClick("block-user")} />
+			<AddFriendButton width={10} image='unblockuser.png' onClick={() => handleClick("unblock-user")} />
+		</div>
+	)
 }
 
 interface Props {
@@ -15,15 +49,16 @@ const UserList = ({ users }: Props) => {
 
 	const [searchInput, setSearchInput] = useState("");
 
+	const filteredUsers = useMemo(() => {
+		return users.filter((user) => user.name.toLowerCase().includes(searchInput.toLowerCase()))
+	}, [searchInput, users])
+
 	return (
 		<div style={{ paddingLeft: '10px' }}>
 			<div className='window'>
-				{users
-					.filter((user) => user.name.toLowerCase().includes(searchInput.toLowerCase())).map((user) => (
-						<div key={user.id} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-							<Avatar src='jaubarea.png' width={20} /> {user.name}
-						</div>
-					))}
+				{
+					filteredUsers.map((user) => <User key={user.id} name={user.name} id={user.id} />)
+				}
 			</div>
 			<input
 				type='text'

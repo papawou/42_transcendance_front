@@ -2,12 +2,17 @@ import { ReactNode } from "react";
 import { useAuth } from "./providers/AuthProvider";
 import { isDef } from "@/technical/isDef";
 
+export const useIsLogged = () => {
+	const auth = useAuth()
+
+	return isDef(auth.user)
+}
+
 export const ProtectedChildren = ({ children, fallback }: { children: ReactNode, fallback?: ReactNode }) => {
-	const auth = useAuth();
+	const isLogged = useIsLogged()
 
-	if (!isDef(auth.user)) {
-		return <div>{fallback}</div>
+	if (!isLogged) {
+		return <>{fallback}</>
 	}
-
 	return <>{children}</>
 }
