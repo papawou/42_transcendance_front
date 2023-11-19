@@ -1,10 +1,12 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import "./style.css"
 import Avatar from '@/components/Avatar';
 import AddFriendButton from '../UserButtons/AddFriendButton';
 import { useAuth } from '../providers/AuthProvider';
 import axiosInstance from '@/services/AxiosInstance';
 import { isDef } from '@/technical/isDef';
+import { socket } from '@/providers/socketio';
+import UserProfile from '../UserProfile/UserProfile';
 
 interface User {
 	name: string
@@ -13,6 +15,14 @@ interface User {
 
 const User = ({ name, id }: { name: string, id: number }) => {
 	const { user } = useAuth();
+	const [openProfileDialog, setOpenProfileDialog] = useState(false);
+
+	const handleClickProfile = () => {
+		setOpenProfileDialog(true);
+	};
+	const handleCloseProfileDialog = () => {
+		setOpenProfileDialog(false);
+	};
 
 	const handleClick = useCallback((route: string) => {
 		if (!isDef(user)) {
@@ -30,13 +40,36 @@ const User = ({ name, id }: { name: string, id: number }) => {
 			})
 	}, [id, user]);
 
+	const handleEmit = () => {
+		if (!isDef(user))
+			return;
+		socket.emit('sendFriendRequest', { friendId: id })
+	}
+
+	useEffect(() => {
+		socket.on('friendRequestResponse', (response) => {
+			console.log(response);
+		});
+
+		return () => {
+			socket.disconnect();
+		};
+	}, []);
+
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
 			<Avatar src='jaubarea.png' width={20} /> {name}
-			<AddFriendButton width={10} image='addfriend.png' onClick={() => handleClick("send-friend-request")} />
+			<AddFriendButton width={10} image='addfriend.png' onClick={() => handleEmit()} />
 			<AddFriendButton width={10} image='deletefriend.png' onClick={() => handleClick("delete-friend")} />
 			<AddFriendButton width={10} image='blockfriend.png' onClick={() => handleClick("block-user")} />
 			<AddFriendButton width={10} image='unblockuser.png' onClick={() => handleClick("unblock-user")} />
+			<AddFriendButton width={10} image='viewprofile.png' onClick={() => handleClickProfile()} />
+			<UserProfile
+				open={openProfileDialog}
+				onClose={handleCloseProfileDialog}
+				userId={id}
+				userName={name}
+			/>
 		</div>
 	)
 }
