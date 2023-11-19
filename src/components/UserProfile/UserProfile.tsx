@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Button, Dialog, DialogContent, DialogTitle} from '@mui/material';
 import Avatar from '../Avatar';
 import { isDef } from '@/technical/isDef';
 import axiosInstance from '@/services/AxiosInstance';
@@ -40,8 +40,11 @@ const UserProfile = ({ open, onClose, userId, userName }) => {
 				<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}><Avatar src='jaubarea.png' width={50} />{`Profil de ${userName}`}</DialogTitle>
 				<DialogContent sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
 					<p>Wins : {user.wins} Loses : {user.loses} Rank : {user.rank}</p>
-					<p> </p>
-					<Button variant="outlined" color="secondary" onClick={onClose} sx={{ color: 'black' }}>
+					<br></br>
+					<div>{user.matchHistory.map((match) => (
+						<div>{match.player1Name} : {match.player1Score}  VS  {match.player2Score} : {match.player2Name}</div>
+					))}</div>
+					<Button variant="outlined" color="secondary" onClick={onClose} sx={{ color: 'black' }} style={{borderColor: 'black'}}>
 						Fermer
 					</Button>
 				</DialogContent>
