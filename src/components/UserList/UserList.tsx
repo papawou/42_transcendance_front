@@ -52,7 +52,7 @@ const User = ({ name, id }: { name: string, id: number }) => {
 		});
 
 		return () => {
-			socket.disconnect();
+			socket.off();
 		};
 	}, []);
 

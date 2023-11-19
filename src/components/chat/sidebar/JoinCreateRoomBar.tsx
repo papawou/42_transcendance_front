@@ -1,8 +1,11 @@
 import { CreateRoomDialog } from "./CreateRoomDialog"
 import { JoinRoomDialog } from "./JoinRoomDialog"
+import { AllRoomsTabs } from "./AllRoomsTabs"
+
 import { ChatAPI } from "../chat.api"
 import { socket } from "@/providers/socketio"
 import { useEffect, useState } from "react"
+
 
 
   
@@ -12,7 +15,7 @@ export const JoinCreateRoomBar = () => {
 
     useEffect(() => {  
         const fetchRoomNames = async() => {
-            const resp: {rooms: string[]} = await ChatAPI.getAllRoomNames();
+            const resp: {rooms: string[]} = await ChatAPI.getAllPublicRooms();
             setAllRooms(resp.rooms);
         }
 
@@ -47,14 +50,16 @@ export const JoinCreateRoomBar = () => {
     const createClick = () => {
         setOpenCreateRoom(true);
     }
-
+    
     return (
     <>    
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <button onClick={joinClick}>Join</button>
         <button onClick={createClick}>Create</button>
     </div>
-
+    <AllRoomsTabs
+        rooms={allRooms}
+    />
     <CreateRoomDialog
         open={openCreateRoom}
         setOpen={setOpenCreateRoom}

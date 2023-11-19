@@ -14,7 +14,7 @@ export const RoomTabs = ({
 }: RoomTabsProps) => {
 
   return (
-    <div style={{ maxWidth: '100px'}}>
+    <div>
       <div style={{ padding: '8px 16px'}}>
         <strong>Rooms</strong>
       </div>

@@ -139,9 +139,9 @@ export const Chat = () => {
   };
 
   return (
-    <div className="chat">
+    <div style={{display: 'flex', width: '300px'}}>
       {/* ------------ LEFT BAR ------------ */}
-      <div style={{ width: '25%' }}>
+      <div style={{ width: '100px' }}>
         <JoinCreateRoomBar />
 
         <RoomTabs
@@ -169,7 +169,7 @@ export const Chat = () => {
       </div>
 
       {/* ------------ FEED ------------ */}
-      <div style={{ width: '75%' }}>
+      <div style={{ width: '200px' }}>
         <Feed
           rooms={rooms}
           privateMsgs={privateMsgs}

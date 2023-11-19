@@ -30,10 +30,10 @@ export const PrivateMessages = ({
             !user?.blocked?.find(({id}) => message.userId === id) ?
             
             <PMessage>
-                <div className="sender" style={{ fontSize: '1vw' }}>
+                <div className="sender" style={{ fontSize: '15px' }}>
                     <strong>{message.userName}</strong>
                 </div>
-                <div className="message" style={{ fontSize: '0.8vw', wordWrap: 'break-word' }}>
+                <div className="message" style={{ fontSize: '10px', wordWrap: 'break-word' }}>
                     {message.message}
                 </div>
             </PMessage>
