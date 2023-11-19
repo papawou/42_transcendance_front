@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Dialog, DialogContent, DialogTitle, Paper } from '@mui/material';
 import Avatar from '../Avatar';
-import axiosInstance from '@/technical/AxiosInstance';
 import { isDef } from '@/technical/isDef';
+import axiosInstance from '@/services/AxiosInstance';
 
 interface matchHistory {
-	type: 			string,
-	player1Score:	number,
-	player2Score:	number,
-	player1Name:	string,
-	player2Name:	string,
+	type: string,
+	player1Score: number,
+	player2Score: number,
+	player1Name: string,
+	player2Name: string,
 }
 
 interface User {
@@ -34,8 +34,7 @@ const UserProfile = ({ open, onClose, userId, userName }) => {
 			getUser();
 	}, [open, userId]);
 
-	if (isDef(user))
-	{
+	if (isDef(user)) {
 		return (
 			<Dialog open={open} onClose={onClose} maxWidth='md' fullWidth>
 				<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}><Avatar src='jaubarea.png' width={50} />{`Profil de ${userName}`}</DialogTitle>
