@@ -1,5 +1,5 @@
-import { BodyBox, tlBox } from "../base/physics/rigid/Box";
-import { BodyCircle } from "../base/physics/rigid/Circle";
+import { BodyBox, tlBox } from "@/shared/pong/physics/rigid/Box";
+import { BodyCircle } from "@/shared/pong/physics/rigid/Circle";
 
 export const drawCircle = (body: BodyCircle, ctx: CanvasRenderingContext2D) => {
     ctx.beginPath();

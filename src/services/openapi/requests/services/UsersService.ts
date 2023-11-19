@@ -24,8 +24,8 @@ export class UsersService {
      * @throws ApiError
      */
     public static userControllerGetUser(
-        id: string,
-    ): CancelablePromise<Record<string, any>> {
+        id: number,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{id}/user',
@@ -70,8 +70,8 @@ export class UsersService {
      * @throws ApiError
      */
     public static userControllerAddFriend(
-        friendId: string,
-    ): CancelablePromise<Record<string, any>> {
+        friendId: number,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/add-friend/{friendId}',
@@ -87,8 +87,8 @@ export class UsersService {
      * @throws ApiError
      */
     public static userControllerDeleteFriend(
-        friendId: string,
-    ): CancelablePromise<Record<string, any>> {
+        friendId: number,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/delete-friend/{friendId}',
@@ -105,8 +105,8 @@ export class UsersService {
      * @throws ApiError
      */
     public static userControllerBlockUser(
-        blockedUserId: string,
-    ): CancelablePromise<Record<string, any>> {
+        blockedUserId: number,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/block-user/{blockedUserId}',
@@ -122,30 +122,13 @@ export class UsersService {
      * @throws ApiError
      */
     public static userControllerUnblockUser(
-        blockedUserId: string,
-    ): CancelablePromise<Record<string, any>> {
+        blockedUserId: number,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/unblock-user/{blockedUserId}',
             path: {
                 'blockedUserId': blockedUserId,
-            },
-        });
-    }
-
-    /**
-     * @param id
-     * @returns any
-     * @throws ApiError
-     */
-    public static userControllerGetBlocked(
-        id: string,
-    ): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/users/{id}/blocked',
-            path: {
-                'id': id,
             },
         });
     }
@@ -157,8 +140,8 @@ export class UsersService {
      * @throws ApiError
      */
     public static userControllerSendFriendRequest(
-        friendId: string,
-    ): CancelablePromise<Record<string, any>> {
+        friendId: number,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/send-friend-request/{friendId}',
@@ -174,8 +157,8 @@ export class UsersService {
      * @throws ApiError
      */
     public static userControllerRefuseFriendRequest(
-        friendId: string,
-    ): CancelablePromise<Record<string, any>> {
+        friendId: number,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/refuse-friend-request/{friendId}',

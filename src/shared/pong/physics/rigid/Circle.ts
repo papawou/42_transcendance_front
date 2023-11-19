@@ -1,4 +1,4 @@
-import { BodyRigid, BodyBase, getBody } from "./BodyRigid"
+import {  BodyBase, getBody } from "./BodyRigid"
 
 export type Circle = {
     rad: number

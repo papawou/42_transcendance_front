@@ -1,14 +1,14 @@
-import { registerCustomEvent, removeCustomEvent } from "@/services/events";
+import { dispatchCustomEvent, registerCustomEvent, removeCustomEvent } from "@/services/events";
 import { useDefaultServiceAuthControllerLogin } from "@/services/openapi/queries";
 import { UserJWT, addAccessToken, getMetaToken, removeAccessToken } from "@/technical/AccessTokenManager";
 
 import Paths from "@/technical/Paths";
 import { isDef } from "@/technical/isDef";
 import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type AuthContextValue = {
-    user?: UserJWT
+    user?: UserJWT | null
     logout: () => void
     login: (name: string) => void
 }
@@ -18,46 +18,45 @@ const AuthContext = createContext<AuthContextValue>(Object.create(null))
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<UserJWT>();
+    const [user, setUser] = useState<UserJWT | null>(getMetaToken());
     const { isPending, mutateAsync: login } = useDefaultServiceAuthControllerLogin();
-
-    useEffect(() => {
-        const token = getMetaToken();
-        if (!isDef(token)) {
-            setUser(undefined)
-            return;
-        }
-        setUser(token)
-    }, [])
+    const navigate = useNavigate()
 
     const handleLogout = useCallback(() => {
         removeAccessToken()
-        setUser(undefined)
-        redirect(Paths.Home)
-    }, [])
+        setUser(null)
+        navigate(Paths.Home, { replace: true })
+    }, [navigate])
 
-    const handleLogin = useCallback(async (name: string) => {
-        if (isDef(user)) {
-            console.warn("user already auth")
-        }
+    const handleLogin = useCallback(async (name?: string) => {
         try {
-            const res = await login({ requestBody: { name } })
-            addAccessToken(res.access_token);
+            if (isDef(name)) {
+                const res = await login({ requestBody: { name } })
+                addAccessToken(res.access_token);
+            }
             const token = getMetaToken();
             if (!isDef(token)) {
                 throw ("should not happend")
             }
             setUser(token)
+            dispatchCustomEvent("login", undefined)
         }
         catch (e) {
             handleLogout()
         }
-    }, [handleLogout, login, user])
+    }, [handleLogout, login])
 
     useEffect(() => {
         registerCustomEvent("logout", handleLogout);
         return () => removeCustomEvent("logout", handleLogout)
     }, [handleLogout])
+
+    useEffect(() => {
+        const token = getMetaToken();
+        if (isDef(token)) {
+            handleLogin();
+        }
+    }, [handleLogin])
 
     const contextValue: AuthContextValue = useMemo(() => ({
         user: user,
