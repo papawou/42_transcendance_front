@@ -9,13 +9,15 @@ export const socket: Socket = io(import.meta.env.VITE_API_URL, {
 });
 
 const onLogout = () => {
+    console.log("logout")
     socket.disconnect()
 }
 registerCustomEvent("logout", onLogout)
 
-const onLogin = () => [
+const onLogin = () => {
+    console.log("login")
     socket.connect()
-]
+}
 registerCustomEvent("login", onLogin)
 
 

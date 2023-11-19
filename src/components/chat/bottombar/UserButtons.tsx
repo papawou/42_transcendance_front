@@ -4,6 +4,7 @@ import { AdminUserDialog } from './AdminUserDialog'
 import { BanMuteUserDialog } from './BanMuteUserDialog'
 import { UserDto, RoomDto } from '../chat.api'
 import { useState } from 'react'
+import UserProfile from '@/components/UserProfile/UserProfile';
 
 enum Sentence {
     none = -1,
@@ -25,6 +26,7 @@ export const UserButtons = ({
     const [openPM, setOpenPM] = useState<boolean>(false);
     const [openAdmin, setOpenAdmin] = useState<boolean>(false);
     const [openBanMute, setOpenBanMute] = useState<boolean>(false);
+    const [openProfile, setOpenProfile] = useState<boolean>(false);
     const [sentence, setSentence] = useState<Sentence>(Sentence.none);
 
     const handleBan = () => {
@@ -49,7 +51,7 @@ export const UserButtons = ({
                 <button onClick={() => {setOpenKick(true)}}>Kick</button>
                 <button onClick={() => {setOpenAdmin(true)}}>Admin</button>
                 <button>Duel</button>
-                <button>Profile??</button>
+                <button onClick={() => {setOpenProfile(true)}}>Profile</button>
                 <button onClick={() => {setOpenPM(true)}}>PM</button>
             </div>
             <KickUserDialog
@@ -76,6 +78,12 @@ export const UserButtons = ({
                 roomName={room.roomName}
                 sentence={sentence}
                 setSentence={setSentence}
+            />
+            <UserProfile
+                open={openProfile}
+                onClose={setOpenProfile(false)}
+                userId={currentUser.id}
+                userName={currentUser.name}
             />
         </div>
     )

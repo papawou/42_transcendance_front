@@ -75,13 +75,13 @@ export const Feed = ({
   }, [send]);
 
   return (
-    <div className='conversation' style={{height: '90vh'}}>
+    <div>
       <div className='chat' style={{height: '75vh'}}>
         {channelType === ChannelType.publicChannel && rooms.map((room: RoomDto, index: number) => {
           return (
             <TabPanel value={tabIndex} index={index} key={index} >                       
                                           
-              <div style={{ height: '70vh', maxWidth: '12vw', overflow: "hidden", overflowY: "scroll"}}>
+              <div style={{ height: '70vh', maxWidth: '200px', overflow: "hidden", overflowY: "scroll"}}>
 
                 <ChatOptions room={room}/>
                 <ChatMessages room={room}/>
@@ -95,7 +95,7 @@ export const Feed = ({
           return (  
             <TabPanel value={tabIndex} index={index} key={index} >                       
                                             
-              <div style={{ height: '70vh', maxWidth: '12vw', overflow: "hidden", overflowY: "scroll"}}>
+              <div style={{ height: '70vh', maxWidth: '200px', overflow: "hidden", overflowY: "scroll"}}>
 
                 <PrivateMessages pms={msgs}/>
 

@@ -10,12 +10,13 @@ interface CreateRoomDialogProps {
 export const CreateRoomDialog = ({
     open,
     setOpen
-} : CreateRoomDialogProps) => {
+}: CreateRoomDialogProps) => {
 
     const [roomName, setRoomName] = useState<string>('');
     const [error, setError] = useState<string>('');
     const [pwd, setPwd] = useState<string>('');
     const [errorPwd, setErrorPwd] = useState<string>('');
+    const [privacyPublic, setPrivacyPublic] = useState<boolean>(true);
 
     const handlePwdChange = (e: ChangeEvent<HTMLInputElement>) => {
         setPwd(e.target.value);
@@ -37,25 +38,32 @@ export const CreateRoomDialog = ({
         if (roomName === '') {
             setError('Please enter a room name')
         }
-        else if (roomName.length > 15) {
-            setError('Name too long (15 char max)')
+        else if (roomName.length > 10) {
+            setError('Name too long (10 char max)')
         }
-        else if (pwd.length !== 0 && pwd.length < 4) {
-            setErrorPwd('Password to short (4 char min)')
+        else if (pwd.length !== 0 && pwd.length < 3) {
+            setErrorPwd('Password to short (3 char min)')
         }
-        else if (pwd.length > 15) {
-            setErrorPwd('Password to long (15 char max)')
+        else if (pwd.length > 10) {
+            setErrorPwd('Password to long (10 char max)')
         }
         else {
-            socket.emit('createRoom', {roomName: roomName, password: pwd});
+            socket.emit('createRoom', { roomName: roomName, password: pwd, privacy: privacyPublic });
             setRoomName('');
             closeAndResetError();
         }
     }
 
+    const onPrivacy = () => {
+        if (privacyPublic)
+            setPrivacyPublic(false);
+        else
+            setPrivacyPublic(true);
+    }
+
     return (
         <Dialog open={open}>
-        <DialogTitle>Create Room</DialogTitle>
+            <DialogTitle>Create Room</DialogTitle>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <input
                     type="text"
@@ -75,6 +83,7 @@ export const CreateRoomDialog = ({
                 <div>
                     <button onClick={onCreate}>Create</button>
                     <button onClick={closeAndResetError}>Cancel</button>
+                    <button onClick={onPrivacy}>{privacyPublic ? 'Public' : 'Private'}</button>
                 </div>
             </div>
         </Dialog>

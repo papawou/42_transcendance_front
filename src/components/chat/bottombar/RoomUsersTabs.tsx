@@ -32,7 +32,7 @@ export const RoomUsersTabs = ({
 
   return (
     <div>
-      <div style={{ maxWidth: '100px' }}>
+      <div>
         <div style={{ padding: '8px 16px' }}>
           <strong>Users</strong>
         </div>
@@ -51,7 +51,7 @@ export const RoomUsersTabs = ({
                       : 'transparent',
                 }}
               >
-                <span style={{ fontSize: '12px' }}>{displayedUser.name}</span>
+                <span style={{ fontSize: '12px' }}>{room.admins.includes(displayedUser.id) ? '@' + displayedUser.name : displayedUser.name}</span>
               </li>
             ))}
           </ul>

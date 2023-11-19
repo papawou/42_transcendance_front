@@ -14,7 +14,7 @@ export const DiscussionTabs = ({
 }: DiscussionTabsProps) => {
 
   return (
-    <div style={{ maxWidth: '100px'}}>
+    <div>
       <div style={{ padding: '8px 16px'}}>
         <strong>PMs</strong>
       </div>
