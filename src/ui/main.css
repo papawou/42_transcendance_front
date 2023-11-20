@@ -1,5 +1,6 @@
 :root {
-	box-sizing: content-box; 
+	box-sizing: border-box;
+	--header-height: 125px
 }
 
 body {
