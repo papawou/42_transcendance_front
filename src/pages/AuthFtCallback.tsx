@@ -1,26 +1,29 @@
 import axiosInstance from "@/services/AxiosInstance";
 import { isDef } from "@/technical/isDef";
-import axios from "axios";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Home } from "./Home";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { addAccessToken } from "@/technical/AccessTokenManager";
+import Paths from "@/technical/Paths";
 
 export function AuthFtCallback() {
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
-    if (!isDef(code)) return;
+    const navigate = useNavigate();
     
-    const [data, setData] = useState(undefined);
+    const auth = useAuth();
     useEffect (() => {
+        if (!isDef(code)) return;
         axiosInstance
-            .post(`/auth/ft/callback`, { code })
+            .post(`/auth/ft/callback`, { code }) // pourquoi tu cries ?
             .then(res => {
-                setData(res.data);
                 console.log({
                     where: "AuthFtCallback/useEffect.then",
-                    resData: res.data,
+                    res: res,
                 });
+                addAccessToken(res.data.access_token); // save token in browser
+                auth.login();
+                navigate(Paths.Home, { replace: true });
             })
             .catch(err => {
                 console.error({
@@ -28,7 +31,8 @@ export function AuthFtCallback() {
                     err: err,
                 });
             });
-    }, [code])
+    }, [auth, code, navigate])
+    if (!isDef(code)) return;
     // console.log({
     //     where: "END AuthFtCallback",
     //     code: code,
@@ -36,7 +40,7 @@ export function AuthFtCallback() {
     // })
     return (
         <div>
-            {isDef(code) ? (isDef(data) ? <Home data={data}/> : "Loading...") : "NO CODE"}
+            {isDef(code) ? "Loading..." : "NO CODE, call the devs"}
         </div>
     )
 }

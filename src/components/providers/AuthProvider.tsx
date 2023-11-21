@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 type AuthContextValue = {
     user?: UserJWT | null
     logout: () => void
-    login: (name: string) => void
+    login: (name?: string) => void
 }
 
 const AuthContext = createContext<AuthContextValue>(Object.create(null))
