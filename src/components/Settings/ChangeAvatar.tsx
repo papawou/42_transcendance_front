@@ -1,13 +1,10 @@
 import axiosInstance from '@/services/AxiosInstance';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone'
 
 const ChangeAvatar = () => {
-	const [image, setImage] = useState<File | null>(null);
 
 	const onDrop = async (acceptedFiles: File[]) => {
-		setImage(acceptedFiles[0]);
-
 		const imageToString = await convertImage(acceptedFiles[0]);
 		await sendImage(imageToString);
 	};
