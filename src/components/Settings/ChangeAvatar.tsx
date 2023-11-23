@@ -35,16 +35,6 @@ const ChangeAvatar = () => {
 		<div>
 			<h2 style={{ textAlign: 'center' }}>Changer d&apos;avatar: glisser une image</h2>
 			<ImageDropZone onDrop={onDrop} />
-			{image && (
-				<div>
-					<h3>Image téléchargée</h3>
-					<img
-						src={URL.createObjectURL(image)}
-						alt="Uploaded"
-						style={{ width: '100%', height: 'auto' }}
-					/>
-				</div>
-			)}
 		</div>
 	);
 }
