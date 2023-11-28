@@ -12,15 +12,18 @@ export function AuthFtCallback() {
     const navigate = useNavigate();
     
     const auth = useAuth();
-    useEffect (() => {
-        if (!isDef(code)) return;
+    useEffect (() => { // normal behavior to do it twice : https://stackoverflow.com/a/73129390
+        if (!isDef(code)) {
+            console.log({
+                where: "AuthFtCallback/useEffect@isDef(code)",
+                code: code,
+            });
+            return;
+        }
         axiosInstance
-            .post(`/auth/ft/callback`, { code }) // pourquoi tu cries ?
+            .post(`/auth/ft/callback`, { code })
             .then(res => {
-                console.log({
-                    where: "AuthFtCallback/useEffect.then",
-                    res: res,
-                });
+                if (!res.data) return ;
                 addAccessToken(res.data.access_token); // save token in browser
                 auth.login();
                 navigate(Paths.Home, { replace: true });
@@ -28,16 +31,13 @@ export function AuthFtCallback() {
             .catch(err => {
                 console.error({
                     where: "AuthFtCallback/useEffect.catch",
-                    err: err,
+                    errRespData: err.response?.data,
                 });
+                return;
             });
     }, [auth, code, navigate])
     if (!isDef(code)) return;
-    // console.log({
-    //     where: "END AuthFtCallback",
-    //     code: code,
-    //     data: data,
-    // })
+
     return (
         <div>
             {isDef(code) ? "Loading..." : "NO CODE, call the devs"}
