@@ -11,9 +11,10 @@ import UserProfile from '../UserProfile/UserProfile';
 interface User {
 	name: string
 	id: number
+	pic: string
 }
 
-const User = ({ name, id }: { name: string, id: number }) => {
+const User = ({ name, id, pic }: { name: string, id: number, pic: string }) => {
 	const { user } = useAuth();
 	const [openProfileDialog, setOpenProfileDialog] = useState(false);
 
@@ -52,13 +53,13 @@ const User = ({ name, id }: { name: string, id: number }) => {
 		socket.on('friendRequestResponse', friendRequestResponseAck);
 
 		return () => {
-			socket.off('friendRequestResponse', friendRequestResponseAck);
+			socket.off();
 		};
 	}, []);
 
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-			<Avatar src='jaubarea.png' width={20} /> {name}
+			<Avatar src={pic} width={20} /> {name}
 			<AddFriendButton width={10} image='addfriend.png' onClick={() => handleEmit()} />
 			<AddFriendButton width={10} image='deletefriend.png' onClick={() => handleClick("delete-friend")} />
 			<AddFriendButton width={10} image='blockfriend.png' onClick={() => handleClick("block-user")} />
@@ -90,7 +91,7 @@ const UserList = ({ users }: Props) => {
 		<div style={{ paddingLeft: '10px' }}>
 			<div className='window'>
 				{
-					filteredUsers.map((user) => <User key={user.id} name={user.name} id={user.id} />)
+					filteredUsers.map((user) => <User key={user.id} name={user.name} id={user.id} pic={user.pic} />)
 				}
 			</div>
 			<input
