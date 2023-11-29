@@ -48,9 +48,9 @@ const User = ({ name, id, pic }: { name: string, id: number, pic: string }) => {
 	}
 
 	useEffect(() => {
-		socket.on('friendRequestResponse', (response) => {
-			console.log(response);
-		});
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const friendRequestResponseAck = (response: any) => console.log(response);
+		socket.on('friendRequestResponse', friendRequestResponseAck);
 
 		return () => {
 			socket.off();
