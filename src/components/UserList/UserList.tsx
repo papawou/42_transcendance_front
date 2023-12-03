@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import "./style.css"
 import Avatar from '@/components/Avatar';
 import AddFriendButton from '../UserButtons/AddFriendButton';
@@ -46,16 +46,6 @@ const User = ({ name, id, pic }: { name: string, id: number, pic: string }) => {
 			return;
 		socket.emit('sendFriendRequest', { friendId: id })
 	}
-
-	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const friendRequestResponseAck = (response: any) => console.log(response);
-		socket.on('friendRequestResponse', friendRequestResponseAck);
-
-		return () => {
-			socket.off();
-		};
-	}, []);
 
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
