@@ -31,6 +31,7 @@ export const CreateRoomDialog = ({
         setErrorPwd('');
         setRoomName('');
         setPwd('');
+        setPrivacyPublic(true);
         setOpen(false);
     }
 

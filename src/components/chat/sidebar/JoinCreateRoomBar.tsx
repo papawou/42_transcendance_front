@@ -12,6 +12,7 @@ import { useEffect, useState } from "react"
 export const JoinCreateRoomBar = () => {
 
     const [allRooms, setAllRooms] = useState<string[]>([]);
+    const [roomToJoin, setRoomToJoin] = useState<string>('');
 
     useEffect(() => {  
         const fetchRoomNames = async() => {
@@ -59,6 +60,7 @@ export const JoinCreateRoomBar = () => {
     </div>
     <AllRoomsTabs
         rooms={allRooms}
+        setRoomToJoin={setRoomToJoin}
     />
     <CreateRoomDialog
         open={openCreateRoom}
@@ -68,6 +70,7 @@ export const JoinCreateRoomBar = () => {
     <JoinRoomDialog
         open={openJoinRoom}
         setOpen={setOpenJoinRoom}
+        roomToJoin={roomToJoin}
     />
     </>
     )

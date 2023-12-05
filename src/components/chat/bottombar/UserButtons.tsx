@@ -29,6 +29,13 @@ export const UserButtons = ({
     const [openProfile, setOpenProfile] = useState<boolean>(false);
     const [sentence, setSentence] = useState<Sentence>(Sentence.none);
 
+    const handleOpenProfile = () => {
+        setOpenProfile(true);
+    }
+    const handleCloseProfile = () => {
+        setOpenProfile(false);
+    }
+
     const handleBan = () => {
         setSentence(Sentence.ban);
         setOpenBanMute(true);
@@ -51,7 +58,7 @@ export const UserButtons = ({
                 <button onClick={() => {setOpenKick(true)}}>Kick</button>
                 <button onClick={() => {setOpenAdmin(true)}}>Admin</button>
                 <button>Duel</button>
-                <button onClick={() => {setOpenProfile(true)}}>Profile</button>
+                <button onClick={handleOpenProfile}>Profile</button>
                 <button onClick={() => {setOpenPM(true)}}>PM</button>
             </div>
             <KickUserDialog
@@ -81,7 +88,7 @@ export const UserButtons = ({
             />
             <UserProfile
                 open={openProfile}
-                onClose={setOpenProfile(false)}
+                onClose={handleCloseProfile}
                 userId={currentUser.id}
                 userName={currentUser.name}
             />
