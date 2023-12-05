@@ -47,6 +47,16 @@ const User = ({ name, id, pic }: { name: string, id: number, pic: string }) => {
 		socket.emit('sendFriendRequest', { friendId: id })
 	}
 
+	useEffect(() => {
+		socket.on('friendRequestResponse', (response) => {
+			console.log(response);
+		});
+
+		return () => {
+			socket.off();
+		};
+	}, []);
+
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
 			<Avatar src={pic} width={20} /> {name}
