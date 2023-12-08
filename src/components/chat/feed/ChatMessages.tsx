@@ -1,7 +1,7 @@
 import { styled } from "@mui/material"
 import { MessageDto, RoomDto, UserDto } from "../chat.api"
 import { UserContext } from "../Context"
-import { useContext } from "react"
+import { useContext, useMemo } from "react"
 
 const CMessage = styled('div')({
     backgroundColor: 'blue',
@@ -18,31 +18,27 @@ interface ChatMessagesProps {
 export const ChatMessages = ({
     room
 }: ChatMessagesProps) => {
-
+    const blocked: number[] = []
     const user: UserDto | null = useContext(UserContext);
 
     return (
         <>
-        {room.messages.map((message: MessageDto, index: number) => {
-        return (
-            <div key={index}>
-            { 
-            !user?.blocked?.find(({id}) => message.userId === id) ?
-            
-            <CMessage>
-                <div className="sender" style={{ fontSize: '15px' }}>
-                    <strong>{message.userName}</strong>
-                </div>
-                <div className="message" style={{ fontSize: '10px', wordWrap: 'break-word' }}>
-                    {message.message}
-                </div>
-            </CMessage>
-            : 
-            null
+            {
+                room.messages
+                    .filter(message => !blocked.includes(message.userId))
+                    .map((message: MessageDto, index: number) => (
+                        <div key={index}>
+                            <CMessage>
+                                <div className="sender" style={{ fontSize: '15px' }}>
+                                    <strong>{message.userName}</strong>
+                                </div>
+                                <div className="message" style={{ fontSize: '10px', wordWrap: 'break-word' }}>
+                                    {message.message}
+                                </div>
+                            </CMessage>
+                        </div>
+                    ))
             }
-            </div>
-        );
-        })}
         </>
     )
 }

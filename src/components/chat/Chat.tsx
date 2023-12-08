@@ -28,7 +28,6 @@ export const Chat = () => {
       const pms: { privateMsgs: PrivateMsgsDto[] } = await ChatAPI.getPMsFromUser();
       setPrivateMsgs(pms.privateMsgs);
     };
-
     fetchMsgs();
   }, []);
 
@@ -89,6 +88,7 @@ export const Chat = () => {
 
   useEffect(() => {
     socket.on("addRoom", ({ room }) => {
+      console.log(room)
       setRooms((rooms) => [...rooms, room]);
     });
     return () => {

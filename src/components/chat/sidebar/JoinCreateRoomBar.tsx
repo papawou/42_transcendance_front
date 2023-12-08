@@ -19,8 +19,11 @@ export const JoinCreateRoomBar = () => {
             const resp: {rooms: string[]} = await ChatAPI.getAllPublicRooms();
             setAllRooms(resp.rooms);
         }
-
         fetchRoomNames();
+        const refreshTimer = setInterval(() => {
+            fetchRoomNames();
+        }, 5000);
+        return () => clearInterval(refreshTimer);
     }, []);
 
     useEffect(() => {
@@ -31,15 +34,6 @@ export const JoinCreateRoomBar = () => {
           socket.off('roomCreated');
         };
       }, []);
-
-      useEffect(() => {
-        socket.on('deleteRoom', ({roomName}) => {
-          setAllRooms(allRooms.filter(room => room !== roomName));
-        });
-        return () => {
-          socket.off('deleteRoom');
-        };
-      }, [allRooms]);
 
     const [openJoinRoom, setOpenJoinRoom] = useState<boolean>(false);
     const [openCreateRoom, setOpenCreateRoom] = useState<boolean>(false);

@@ -23,7 +23,10 @@ export const RoomUsersTabs = ({
   }, [user, users]);
 
   const handleChangeUser = (selectedUser: UserDto) => {
-    setCurrentUser(selectedUser);
+    if (currentUser && currentUser.id === selectedUser.id)
+      setCurrentUser(null);
+    else
+      setCurrentUser(selectedUser);
   }
 
   if (!users || !room) {

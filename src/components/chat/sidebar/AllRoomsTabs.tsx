@@ -28,7 +28,7 @@ export const AllRoomsTabs = ({
 			</div>
 			<div style={{ maxHeight: '150px', overflowY: 'scroll' }}>
 				<ul style={{ listStyle: 'none', padding: 0 }}>
-					{rooms.map((roomnames, index) => (
+					{rooms.map((roomname, index) => (
 						<li
 							key={index}
 							onClick={() => handleRoomClick(index)}
@@ -38,7 +38,7 @@ export const AllRoomsTabs = ({
 								backgroundColor: selectedRoomIndex === index ? '#f0f0f0' : 'transparent',
 							}}
 						>
-							<span style={{ fontSize: '12px' }}>{roomnames}</span>
+							<span style={{ fontSize: '12px' }}>{roomname}</span>
 						</li>
 					))}
 				</ul>
