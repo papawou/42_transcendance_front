@@ -59,7 +59,7 @@ const UserProfile = ({ open, onClose, userId, userName }: Props) => {
 			</Dialog >
 		);
 	}
-	return;
+	return null;
 };
 
 export default UserProfile;

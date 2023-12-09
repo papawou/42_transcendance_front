@@ -1,52 +1,67 @@
 import { Dialog, DialogTitle } from "@mui/material"
 import { socket } from "@/providers/socketio"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState, useEffect } from "react"
 
 interface JoinRoomDialogProps {
-    open: boolean
-    setOpen: (open: boolean) => void
+  open: boolean
+  setOpen: (open: boolean) => void
+  roomToJoin: string
 }
 
 export const JoinRoomDialog = ({
-    open,
-    setOpen
-}: JoinRoomDialogProps ) => {
+  open,
+  setOpen,
+  roomToJoin
+}: JoinRoomDialogProps) => {
 
-    const [pwd, setPwd] = useState<string>('');
-    const [roomName, setRoomName] = useState('');
+  const [pwd, setPwd] = useState<string>('');
+  const [roomName, setRoomName] = useState('');
 
-    const joinRoom = () => {
-        socket.emit('joinRoom', {roomName: roomName, password: pwd});
-        setRoomName('');
-        setPwd('');
-        setOpen(false);
-    }
+  useEffect(() => {
+    if (roomToJoin !== null)
+      setRoomName(roomToJoin);
+    else
+      setRoomName("");
+  }, [roomToJoin]);
 
-    const handlePwdChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setPwd(event.target.value);
-    }
+  const joinRoom = () => {
+    socket.emit('joinRoom', { roomName: roomName, password: pwd });
+    setRoomName('');
+    setPwd('');
+    setOpen(false);
+  }
+  
+  const closeAndReset = () => {
+    setRoomName('');
+    setPwd('');
+    setOpen(false);
+  }
 
-    return (
-        <Dialog open={open}>
-        <DialogTitle>Join Room</DialogTitle>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <input
-              type="text"
-              placeholder="Room Name"
-              value={roomName}
-              onChange={(e) => setRoomName(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password (optional)"
-              value={pwd}
-              onChange={handlePwdChange}
-            />
-            <div>
-                <button onClick={joinRoom}>Join</button>
-                <button onClick={() => setOpen(false)}>Cancel</button>
-            </div>
-          </div>
-      </Dialog>
-    );
+  const handlePwdChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPwd(event.target.value);
+  }
+
+  return (
+    <Dialog open={open}>
+      <DialogTitle>Join Room</DialogTitle>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <input
+          type="text"
+          placeholder="Room Name"
+          value={roomName}
+          onChange={(e) => setRoomName(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password (optional)"
+          value={pwd}
+          onChange={handlePwdChange}
+        />
+        <div>
+          <button onClick={joinRoom}>Join</button>
+          <button onClick={closeAndReset}>Cancel</button>
+        </div>
+      </div>
+    </Dialog>
+  );
 }

@@ -23,7 +23,10 @@ export const RoomUsersTabs = ({
   }, [user, users]);
 
   const handleChangeUser = (selectedUser: UserDto) => {
-    setCurrentUser(selectedUser);
+    if (currentUser && currentUser.id === selectedUser.id)
+      setCurrentUser(null);
+    else
+      setCurrentUser(selectedUser);
   }
 
   if (!users || !room) {
@@ -32,7 +35,7 @@ export const RoomUsersTabs = ({
 
   return (
     <div>
-      <div style={{ maxWidth: '100px' }}>
+      <div>
         <div style={{ padding: '8px 16px' }}>
           <strong>Users</strong>
         </div>
@@ -51,7 +54,8 @@ export const RoomUsersTabs = ({
                       : 'transparent',
                 }}
               >
-                <span style={{ fontSize: '12px' }}>{displayedUser.name}</span>
+                <span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+                  {room.admins.includes(displayedUser.id) ? '@' + displayedUser.name : displayedUser.name}</span>
               </li>
             ))}
           </ul>

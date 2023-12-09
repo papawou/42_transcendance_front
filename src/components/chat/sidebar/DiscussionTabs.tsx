@@ -14,7 +14,7 @@ export const DiscussionTabs = ({
 }: DiscussionTabsProps) => {
 
   return (
-    <div style={{ maxWidth: '100px'}}>
+    <div>
       <div style={{ padding: '8px 16px'}}>
         <strong>PMs</strong>
       </div>
@@ -30,7 +30,8 @@ export const DiscussionTabs = ({
                 backgroundColor: value === index ? '#f0f0f0' : 'transparent',
               }}
             >
-              <span style={{ fontSize: '12px' }}>{privateMsgs.userDto.name}</span>
+              <span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {privateMsgs.userDto.name}</span>
             </li>
           ))}
         </ul>

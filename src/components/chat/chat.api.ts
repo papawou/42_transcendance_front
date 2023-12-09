@@ -29,31 +29,37 @@ export class ChatAPI {
 
   public static async getRoomsFromUser(): Promise<{ rooms: RoomDto[] }> {
 
-    const resp = await fetch(
-      `http://localhost:3000/chat/userRooms`,
-      {
-        credentials: "include",
-        method: "GET",
+    try {
+      const response = await axiosInstance.get('/chat/userRooms');
+  
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return { rooms: [] };
       }
-    );
-
-    return resp.ok ? resp.json() : {rooms : []};
+    } catch (error) {
+      console.error('An error occurred while fetching User Rooms:', error);
+      return { rooms: [] };
+    }
   }
 
   public static async getPMsFromUser(): Promise<{ privateMsgs: PrivateMsgsDto[] }> {
 
-    const resp = await fetch(
-      `http://localhost:3000/chat/userPMs`,
-      {
-        credentials: "include",
-        method: "GET",
+    try {
+      const response = await axiosInstance.get('/chat/userPMs');
+  
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return { privateMsgs: [] };
       }
-    );
-
-    return resp.ok ? resp.json() : {privateMsgs : []};
+    } catch (error) {
+      console.error('An error occurred while fetching User PMs:', error);
+      return { privateMsgs: [] };
+    }
   }
 
-  public static async getAllRoomNames(): Promise<{ rooms: string[] }> {
+  public static async getAllPublicRooms(): Promise<{ rooms: string[] }> {
 
     try {
       const response = await axiosInstance.get('/chat/roomNames');
