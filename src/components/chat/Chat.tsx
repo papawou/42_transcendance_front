@@ -88,7 +88,6 @@ export const Chat = () => {
 
   useEffect(() => {
     socket.on("addRoom", ({ room }) => {
-      console.log(room)
       setRooms((rooms) => [...rooms, room]);
     });
     return () => {
