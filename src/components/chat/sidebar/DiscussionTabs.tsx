@@ -30,7 +30,8 @@ export const DiscussionTabs = ({
                 backgroundColor: value === index ? '#f0f0f0' : 'transparent',
               }}
             >
-              <span style={{ fontSize: '12px' }}>{privateMsgs.userDto.name}</span>
+              <span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {privateMsgs.userDto.name}</span>
             </li>
           ))}
         </ul>

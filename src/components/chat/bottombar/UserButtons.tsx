@@ -70,7 +70,8 @@ export const UserButtons = ({
             <PMUserDialog
                 open={openPM}
                 setOpen={setOpenPM}
-                user={currentUser}
+                userId={currentUser.id}
+                userName={currentUser.name}
             />
             <AdminUserDialog
                 open={openAdmin}

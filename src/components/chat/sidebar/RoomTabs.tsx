@@ -18,7 +18,7 @@ export const RoomTabs = ({
       <div style={{ padding: '8px 16px'}}>
         <strong>Rooms</strong>
       </div>
-      <div style={{ maxHeight: '150px', overflowY: 'scroll' }}>
+      <div style={{ maxHeight: '150px', overflowY: 'scroll'}}>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {rooms.map((channel, index) => (
             <li
@@ -30,7 +30,8 @@ export const RoomTabs = ({
                 backgroundColor: value === index ? '#f0f0f0' : 'transparent',
               }}
             >
-              <span style={{ fontSize: '12px' }}>{channel.roomName}</span>
+              <span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {channel.roomName}</span>
             </li>
           ))}
         </ul>

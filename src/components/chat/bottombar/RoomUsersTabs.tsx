@@ -54,7 +54,8 @@ export const RoomUsersTabs = ({
                       : 'transparent',
                 }}
               >
-                <span style={{ fontSize: '12px' }}>{room.admins.includes(displayedUser.id) ? '@' + displayedUser.name : displayedUser.name}</span>
+                <span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+                  {room.admins.includes(displayedUser.id) ? '@' + displayedUser.name : displayedUser.name}</span>
               </li>
             ))}
           </ul>

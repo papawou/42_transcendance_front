@@ -7,6 +7,7 @@ import axiosInstance from '@/services/AxiosInstance';
 import { isDef } from '@/technical/isDef';
 import { socket } from '@/providers/socketio';
 import UserProfile from '../UserProfile/UserProfile';
+import { PMUserDialog } from '../chat/bottombar/PMUserDialog';
 
 interface User {
 	name: string
@@ -17,6 +18,7 @@ interface User {
 const User = ({ name, id, pic }: { name: string, id: number, pic: string }) => {
 	const { user } = useAuth();
 	const [openProfileDialog, setOpenProfileDialog] = useState(false);
+	const [openPM, setOpenPM] = useState<boolean>(false);
 
 	const handleClickProfile = () => {
 		setOpenProfileDialog(true);
@@ -55,12 +57,19 @@ const User = ({ name, id, pic }: { name: string, id: number, pic: string }) => {
 			<AddFriendButton width={10} image='blockfriend.png' onClick={() => handleClick("block-user")} />
 			<AddFriendButton width={10} image='unblockuser.png' onClick={() => handleClick("unblock-user")} />
 			<AddFriendButton width={10} image='viewprofile.png' onClick={() => handleClickProfile()} />
+			<AddFriendButton width={10} image='privateMessage.png' onClick={() => {setOpenPM(true)}} />
 			<UserProfile
 				open={openProfileDialog}
 				onClose={handleCloseProfileDialog}
 				userId={id}
 				userName={name}
 			/>
+			 <PMUserDialog
+                open={openPM}
+                setOpen={setOpenPM}
+                userId={id}
+                userName={name}
+            />
 		</div>
 	)
 }

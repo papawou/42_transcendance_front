@@ -38,7 +38,8 @@ export const AllRoomsTabs = ({
 								backgroundColor: selectedRoomIndex === index ? '#f0f0f0' : 'transparent',
 							}}
 						>
-							<span style={{ fontSize: '12px' }}>{roomname}</span>
+							<span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+								{roomname}</span>
 						</li>
 					))}
 				</ul>

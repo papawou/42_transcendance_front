@@ -4,7 +4,7 @@ import { UserContext } from "../Context"
 import { useContext } from "react"
 
 const PMessage = styled('div')({
-    backgroundColor: 'blue',
+    backgroundColor: 'rgb(124, 187, 18)',
     color: 'white',
     borderRadius: '10px',
     padding: "5px 10px",

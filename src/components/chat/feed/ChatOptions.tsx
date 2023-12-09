@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import { RoomDto, UserDto } from '../chat.api'
-import { UserContext } from '../Context'
 import { ChangePwdDialog } from './ChangePwdDialog'
 import { Dialog, DialogTitle } from "@mui/material"
 import { socket } from "@/providers/socketio"
