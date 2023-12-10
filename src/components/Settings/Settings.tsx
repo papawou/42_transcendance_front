@@ -5,18 +5,12 @@ const UserSettings = () => {
 
     const [input, setInput] = useState('');
     const handleValidation = () => {
-
-        axiosInstance.post(`/users/change-name/${input}`)
-            .then(response => { console.log(response); })
-            .catch(error => {
-                console.log(`can't change username to ${input}` + error);
-            });
-
+        axiosInstance.post(`/users/change-name/${input.trim()}`)
     };
 
     return (
-        <div style={{textAlign:'center'}}>
-            <h2 style={{textAlign: 'center'}}> Changer de nom</h2>
+        <div style={{ textAlign: 'center' }}>
+            <h2 style={{ textAlign: 'center' }}> Changer de nom</h2>
             <input
                 type='text'
                 value={input}

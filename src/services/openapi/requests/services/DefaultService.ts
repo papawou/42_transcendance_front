@@ -58,4 +58,48 @@ export class DefaultService {
         });
     }
 
+    /**
+     * @returns any
+     * @throws ApiError
+     */
+    public static chatControllerGetRoomsFromUser(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/chat/userRooms',
+        });
+    }
+
+    /**
+     * @returns any
+     * @throws ApiError
+     */
+    public static chatControllerGetPMsFromUser(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/chat/userPMs',
+        });
+    }
+
+    /**
+     * @returns any
+     * @throws ApiError
+     */
+    public static chatControllerGetBlockedUsers(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/chat/blockedUsers',
+        });
+    }
+
+    /**
+     * @returns any
+     * @throws ApiError
+     */
+    public static chatControllerGetAllPublicRooms(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/chat/roomNames',
+        });
+    }
+
 }
