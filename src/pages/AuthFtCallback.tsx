@@ -1,10 +1,9 @@
 import axiosInstance from "@/services/AxiosInstance";
 import { isDef } from "@/technical/isDef";
-import axios from "axios";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Home } from "./Home";
 import { useState } from "react";
+import { EnableTwoFactor } from "@/components/TwoFactorAuth/Enable2fa";
 
 export function AuthFtCallback() {
     const params = new URLSearchParams(window.location.search);
@@ -12,6 +11,7 @@ export function AuthFtCallback() {
     if (!isDef(code)) return;
     
     const [data, setData] = useState(undefined);
+    const [is2FARequired, setIs2FARequired] = useState(false);
     useEffect (() => {
         axiosInstance
             .post(`/auth/ft/callback`, { code })
@@ -21,6 +21,9 @@ export function AuthFtCallback() {
                     where: "AuthFtCallback/useEffect.then",
                     resData: res.data,
                 });
+                if (res.data.is2FARequired) {
+                    setIs2FARequired(true);
+                  }
             })
             .catch(err => {
                 console.error({
@@ -36,7 +39,17 @@ export function AuthFtCallback() {
     // })
     return (
         <div>
-            {isDef(code) ? (isDef(data) ? <Home data={data}/> : "Loading...") : "NO CODE"}
+          {isDef(code) ? (
+            isDef(data) ? (
+              <Home data={data} />
+            ) : is2FARequired ? (
+              <EnableTwoFactor />
+            ) : (
+              "Loading..."
+            )
+          ) : (
+            "NO CODE"
+          )}
         </div>
-    )
+      );
 }
