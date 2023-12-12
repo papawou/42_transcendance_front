@@ -5,6 +5,7 @@ import { BanMuteUserDialog } from './BanMuteUserDialog'
 import { UserDto, RoomDto } from '../chat.api'
 import { useState } from 'react'
 import UserProfile from '@/components/UserProfile/UserProfile';
+import axiosInstance from '@/services/AxiosInstance'
 
 enum Sentence {
     none = -1,
@@ -57,7 +58,11 @@ export const UserButtons = ({
                 <button onClick={handleMute}>Mute</button>
                 <button onClick={() => {setOpenKick(true)}}>Kick</button>
                 <button onClick={() => {setOpenAdmin(true)}}>Admin</button>
-                <button>Duel</button>
+                <button onClick={() => {
+                    axiosInstance.post("games/duel/invite", {
+                        targetId: currentUser.id
+                    })
+                }}>Duel</button>
                 <button onClick={handleOpenProfile}>Profile</button>
                 <button onClick={() => {setOpenPM(true)}}>PM</button>
             </div>
