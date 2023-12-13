@@ -3,7 +3,6 @@ import axiosInstance from "@/services/AxiosInstance";
 export interface UserDto {
   id: number,
   name: string,
-  blocked?: UserDto[],
 }
 
 export interface MessageDto {

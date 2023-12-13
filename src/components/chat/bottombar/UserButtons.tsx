@@ -6,6 +6,7 @@ import { DuelDialog } from './DuelDialog'
 import { UserDto, RoomDto } from '../chat.api'
 import { useState } from 'react'
 import UserProfile from '@/components/UserProfile'
+import { isDef } from '@/technical/isDef'
 
 enum Sentence {
     none = -1,
@@ -48,7 +49,7 @@ export const UserButtons = ({
         setOpenBanMute(true);
     };
 
-    if (!currentUser || !room ) {
+    if (!isDef(currentUser) || !isDef(room)) {
         return null;
     }
 
@@ -60,8 +61,8 @@ export const UserButtons = ({
                 <button onClick={() => {setOpenKick(true)}}>Kick</button>
                 <button onClick={() => {setOpenAdmin(true)}}>Admin</button>
                 <button onClick={() => {setOpenDuel(true)}}>Duel</button>
-                <button onClick={handleOpenProfile}>Profile</button>
                 <button onClick={() => {setOpenPM(true)}}>PM</button>
+                <button onClick={handleOpenProfile}>Profile</button>
             </div>
             <KickUserDialog
                 open={openKick}

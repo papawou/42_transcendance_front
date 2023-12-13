@@ -23,7 +23,7 @@ export const ChatMessages = ({
     const { user } = useAuth();
 
     return (
-        <div style={{ width: '200px' }}>
+        <div style={{ width: '165px' }}>
             {room.messages.map((message: MessageDto, index: number) => {
                 const isCurrentUserMessage = user?.id === message.userId;
                 return (

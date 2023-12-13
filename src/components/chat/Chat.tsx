@@ -6,7 +6,6 @@ import { RoomTabs } from "./sidebar/RoomTabs"
 import { DiscussionTabs } from "./sidebar/DiscussionTabs"
 import { JoinCreateRoomBar } from "./sidebar/JoinCreateRoomBar"
 import { RoomUsersTabs } from "./bottombar/RoomUsersTabs"
-import "./style.css"
 import { useEffect, useState } from "react"
 
 enum ChannelType {
@@ -73,20 +72,6 @@ export const Chat = () => {
   }, [rooms]);
 
   useEffect(() => {
-    socket.on("goToPM", ({ userDto: newUser }) => {
-      let index = privateMsgs.findIndex(({ userDto }) => userDto.id === newUser.id);
-      if (index < 0) {
-        index = privateMsgs.length + 1;
-      }
-      setTabIndex(index);
-      setChannelType(ChannelType.privateMessage);
-    });
-    return () => {
-      socket.off("goToPM");
-    };
-  }, [privateMsgs]);
-
-  useEffect(() => {
     socket.on("addRoom", ({ room }) => {
       setRooms((rooms) => [...rooms, room]);
     });
@@ -139,6 +124,17 @@ export const Chat = () => {
 
   return (
     <div style={{display: 'flex', width: '300px'}}>
+
+      {/* ------------ FEED ------------ */}
+      <div style={{ width: '200px' }}>
+        <Feed
+          rooms={rooms}
+          privateMsgs={privateMsgs}
+          tabIndex={tabIndex}
+          channelType={channelType}
+        />
+      </div>
+
       {/* ------------ LEFT BAR ------------ */}
       <div style={{ width: '100px' }}>
         <JoinCreateRoomBar />
@@ -166,17 +162,6 @@ export const Chat = () => {
           room={channelType === ChannelType.publicChannel ? rooms.at(tabIndex) || null : null}
         />
       </div>
-
-      {/* ------------ FEED ------------ */}
-      <div style={{ width: '200px' }}>
-        <Feed
-          rooms={rooms}
-          privateMsgs={privateMsgs}
-          tabIndex={tabIndex}
-          channelType={channelType}
-        />
-      </div>
-
       <ChatNotif />
     </div>
   );

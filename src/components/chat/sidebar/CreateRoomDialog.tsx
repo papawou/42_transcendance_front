@@ -73,7 +73,7 @@ export const CreateRoomDialog = ({
                     onChange={handleRoomChange}
                 />
                 <input
-                    type="text"
+                    type="password"
                     placeholder="Password (optional)"
                     value={pwd}
                     onChange={handlePwdChange}
