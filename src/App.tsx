@@ -1,11 +1,9 @@
 import { BrowserRouter, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import User from "./pages/User";
-import Pong from "./pages/Pong";
 import Settings from "./pages/Settings";
 import Leaderboard from "./pages/Leaderboard"
 
-import "./ui/main.css"
 import { Providers } from "./components/providers";
 import { ProtectedChildren, useIsLogged } from "./components/ProtectedChildren";
 import { Boilerplate } from "./pages/Boilerplate";
@@ -13,6 +11,9 @@ import Paths from "./technical/Paths";
 import { useEffect } from "react";
 import { AuthFtCallback } from "./pages/AuthFtCallback";
 import { Chat } from "./components/chat/Chat";
+import { Pong } from "./pages/Pong";
+
+import "./ui/main.css"
 
 const ProtectedRoute = () => {
 	const navigate = useNavigate()
@@ -37,7 +38,7 @@ export function App() {
 			<Providers>
 				<Routes>
 					<Route element={<Boilerplate />}>
-						<Route index element={<Home />} />
+						<Route index element={<Home data={undefined} />} />
 						<Route element={<ProtectedRoute />}>
 							<Route path={Paths.User} element={<User />} />
 							<Route path={Paths.Pong} element={<Pong />} />
