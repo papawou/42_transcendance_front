@@ -18,7 +18,7 @@ export const DiscussionTabs = ({
       <div style={{ padding: '8px 16px'}}>
         <strong>PMs</strong>
       </div>
-      <div style={{ maxHeight: '150px', overflowY: 'scroll' }}>
+      <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {rooms.map((privateMsgs, index) => (
             <li
