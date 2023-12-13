@@ -5,33 +5,9 @@ import { Game } from "./Game";
 import { useCallback, useEffect, useState } from "react";
 import { emit, socket } from "@/providers/socketio";
 import { GameEngineClient } from "@/pong/GameEngineClient";
-import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import axiosInstance from "@/services/AxiosInstance";
 import Paths from "@/technical/Paths";
-
-const PongContent = () => {
-  const userGame = useUserGame();
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    if (!isDef(userGame) || !isDef(userGame.gameId)) {
-      return;
-    }
-    navigate({
-      pathname: Paths.Pong,
-      search: createSearchParams({
-        gameId: userGame.gameId
-      }).toString()
-    })
-  }, [navigate, userGame])
-
-  switch (userGame?.status) {
-    case "SEARCHING":
-      return "Search game..."
-    case "PASSIVE":
-      return <button onClick={() => emit(WsGame.search, undefined)}>search</button>
-  }
-  return "loading UserGame..."
-}
 
 const WrapGame = ({ gameId }: { gameId: string }) => {
   const [game, setGame] = useState<GameEngineClient | null>()
@@ -43,11 +19,11 @@ const WrapGame = ({ gameId }: { gameId: string }) => {
 
   const handleInitGame = useCallback((gameData: WsGameOut<WsGame.metaGetGame>) => {
     if (gameData === WS_FAIL) {
-      console.log("handleInitGame - inconsistent")
       return;
     }
     setGame(new GameEngineClient(gameData))
   }, [])
+
   useEffect(() => {
     socket.once(WsGame.metaGetGame, handleInitGame)
     emit(WsGame.metaGetGame, undefined)
@@ -64,17 +40,33 @@ const WrapGame = ({ gameId }: { gameId: string }) => {
 
 export function Pong() {
   const [params] = useSearchParams()
+  const userGame = useUserGame();
+  const navigate = useNavigate()
 
   const gameId = params.get("gameId")
+
+  useEffect(() => {
+    const tmpId = userGame?.gameId
+    if (!isDef(gameId) && isDef(tmpId)) {
+      navigate({
+        pathname: Paths.Pong,
+        search: `?gameId=${tmpId}`
+      })
+    }
+  }, [gameId, navigate, userGame?.gameId])
+
+  if (!isDef(userGame)) {
+    return <span>Chargement du profil de jeu...</span>
+  }
+
   return (
     <div>
-      <h1>PONG</h1>
-      <button onClick={() => { emit(WsGame.debug, undefined, (data) => console.log(data)) }}>DEBUG</button>
-      <div>
-        {
-          !isDef(gameId) ? <PongContent /> : <WrapGame gameId={gameId} />
-        }
-      </div>
-    </div>
+      {
+        isDef(gameId) ? <WrapGame gameId={gameId} /> :
+          <button onClick={() => axiosInstance.post(userGame.search ? "/games/search/cancel" : "/games/search/start")}>
+            {userGame.search ? "Annuler la recherche" : "Rechercher une partie"}
+          </button>
+      }
+    </div >
   )
 }
