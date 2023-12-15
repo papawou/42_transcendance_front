@@ -71,7 +71,7 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
 					</button>
 				}
 			</div>
-			<h1>
+			<div style={{ display: "flex" }}>
 				{
 					game.getScores().map(p => (
 						<div key={p.userId}>
@@ -79,19 +79,16 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
 						</div>
 					))
 				}
-			</h1>
-			<h2>{game.status}</h2>
-			{
-				game.status == "CLOSED" && game.closed_reason
-			}
-			<div>
+			</div>
+			<div style={{ position: "relative" }}>
 				<canvas
 					tabIndex={1}
 					width={1000}
 					height={1000 * (game.width / game.height)}
-					style={{ width: "100%" }}
+					style={{ width: "100%", position: "absolute", backgroundColor: "white" }}
 					ref={canvasRef}
 				></canvas>
+				<div style={{ position: "absolute" }}>TEST</div>
 			</div>
 		</div >
 	);
