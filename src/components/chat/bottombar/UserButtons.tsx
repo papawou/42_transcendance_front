@@ -93,7 +93,6 @@ export const UserButtons = ({
                 open={openProfile}
                 onClose={handleCloseProfile}
                 userId={currentUser.id}
-                userName={currentUser.name}
             />
             <DuelDialog
                 open={openDuel}

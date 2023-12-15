@@ -1,6 +1,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { UserDTO } from '../models/UserDTO';
+
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
@@ -8,10 +10,10 @@ import { request as __request } from '../core/request';
 export class UsersService {
 
     /**
-     * @returns any
+     * @returns UserDTO
      * @throws ApiError
      */
-    public static userControllerGetUsers(): CancelablePromise<any> {
+    public static userControllerGetUsers(): CancelablePromise<Array<UserDTO>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users',
@@ -20,12 +22,12 @@ export class UsersService {
 
     /**
      * @param id
-     * @returns any
+     * @returns UserDTO
      * @throws ApiError
      */
     public static userControllerGetUser(
         id: number,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<UserDTO> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{id}/user',
@@ -37,12 +39,12 @@ export class UsersService {
 
     /**
      * @param newName
-     * @returns any
+     * @returns UserDTO
      * @throws ApiError
      */
     public static userControllerChangeName(
         newName: string,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<UserDTO> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/users/change-name/{newName}',
@@ -53,11 +55,22 @@ export class UsersService {
     }
 
     /**
-     * ------------------------------FRIENDS--------------------------
-     * @returns any
+     * @returns UserDTO
      * @throws ApiError
      */
-    public static userControllerGetFriends(): CancelablePromise<any> {
+    public static userControllerChangeAvatar(): CancelablePromise<UserDTO> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/users/change-avatar',
+        });
+    }
+
+    /**
+     * ------------------------------FRIENDS--------------------------
+     * @returns UserDTO
+     * @throws ApiError
+     */
+    public static userControllerGetFriends(): CancelablePromise<Array<UserDTO>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/friends',
@@ -65,58 +78,7 @@ export class UsersService {
     }
 
     /**
-     * @param friendId
-     * @returns any
-     * @throws ApiError
-     */
-    public static userControllerAddFriend(
-        friendId: number,
-    ): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/users/add-friend/{friendId}',
-            path: {
-                'friendId': friendId,
-            },
-        });
-    }
-
-    /**
-     * @param friendId
-     * @returns any
-     * @throws ApiError
-     */
-    public static userControllerDeleteFriend(
-        friendId: number,
-    ): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/users/delete-friend/{friendId}',
-            path: {
-                'friendId': friendId,
-            },
-        });
-    }
-
-    /**
      * ------------------------------BLOCK--------------------------
-     * @param blockedUserId
-     * @returns any
-     * @throws ApiError
-     */
-    public static userControllerBlockUser(
-        blockedUserId: number,
-    ): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/users/block-user/{blockedUserId}',
-            path: {
-                'blockedUserId': blockedUserId,
-            },
-        });
-    }
-
-    /**
      * @param blockedUserId
      * @returns any
      * @throws ApiError
@@ -135,44 +97,10 @@ export class UsersService {
 
     /**
      * ------------------------------FRIEND-REQUEST--------------------------
-     * @param friendId
-     * @returns any
+     * @returns UserDTO
      * @throws ApiError
      */
-    public static userControllerSendFriendRequest(
-        friendId: number,
-    ): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/users/send-friend-request/{friendId}',
-            path: {
-                'friendId': friendId,
-            },
-        });
-    }
-
-    /**
-     * @param friendId
-     * @returns any
-     * @throws ApiError
-     */
-    public static userControllerRefuseFriendRequest(
-        friendId: number,
-    ): CancelablePromise<any> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/users/refuse-friend-request/{friendId}',
-            path: {
-                'friendId': friendId,
-            },
-        });
-    }
-
-    /**
-     * @returns any
-     * @throws ApiError
-     */
-    public static userControllerGetPending(): CancelablePromise<any> {
+    public static userControllerGetPending(): CancelablePromise<Array<UserDTO>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/pending',

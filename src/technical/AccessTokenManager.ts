@@ -28,15 +28,15 @@ export const getMetaToken = (): UserJWT | null => {
         return null;
     }
     const decoded = jwtDecode<UserJWTPayload>(token);
-    if (!isDef(decoded) || !isDef(decoded.exp)) {
+    if (!isDef(decoded)) { //!isDef(decoded.exp)
         removeAccessToken();
         return null;
     }
-    const isExpired = (decoded.exp * 1000) < new Date().getTime();
-    if (isExpired) {
-        removeAccessToken()
-        return null;
-    }
+    // const isExpired = (decoded.exp * 1000) < new Date().getTime();
+    // if (isExpired) {
+    //     removeAccessToken()
+    //     return null;
+    // }
 
     return { id: decoded.sub, name: decoded.name }
 }
