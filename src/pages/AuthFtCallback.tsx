@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { addAccessToken } from "@/technical/AccessTokenManager";
 import Paths from "@/technical/Paths";
+// import { Home } from "./Home";
+// import { useState } from "react";
+// import { EnableTwoFactor } from "@/components/TwoFactorAuth/Enable2fa";
 
 export function AuthFtCallback() {
     const params = new URLSearchParams(window.location.search);
@@ -12,6 +15,7 @@ export function AuthFtCallback() {
     const navigate = useNavigate();
     
     const auth = useAuth();
+    // const [is2FARequired, setIs2FARequired] = useState(false);
     useEffect (() => { // normal behavior to do it twice : https://stackoverflow.com/a/73129390
         if (!isDef(code)) {
             console.log({
@@ -24,6 +28,9 @@ export function AuthFtCallback() {
             .post(`/auth/ft/callback`, { code })
             .then(res => {
                 if (!res.data) return ;
+                // if (res.data.is2FARequired) {
+                //     setIs2FARequired(true);
+                // }
                 addAccessToken(res.data.access_token); // save token in browser
                 auth.login();
                 navigate(Paths.Home, { replace: true });
@@ -41,6 +48,17 @@ export function AuthFtCallback() {
     return (
         <div>
             {isDef(code) ? "Loading..." : "NO CODE, call the devs"}
+          {/* {isDef(code) ? (
+            isDef(data) ? (
+              <Home data={data} />
+            ) : is2FARequired ? (
+              <EnableTwoFactor />
+            ) : (
+              "Loading..."
+            )
+          ) : (
+            "NO CODE"
+          )} */}
         </div>
-    )
+      );
 }

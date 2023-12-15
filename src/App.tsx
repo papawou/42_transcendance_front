@@ -39,8 +39,12 @@ export function App() {
 				<Routes>
 					<Route element={<Boilerplate />}>
 						<Route index element={<Home />} />
+<<<<<<< HEAD
                         <Route path={Paths.AuthFtCallback} element={<AuthFtCallback />} />
 						{/* <Route element={<ProtectedRoute />}> */}
+=======
+						{/*<Route element={<ProtectedRoute />}>*/}
+>>>>>>> origin/2fa2
 							<Route path={Paths.User} element={<User />} />
 							<Route path={Paths.Pong} element={<Pong />} />
 							<Route path={Paths.Settings} element={<Settings />} />
@@ -48,7 +52,7 @@ export function App() {
 							<Route path={Paths.Chat} element={<Chat />} />
 						{/* </Route> */}
 						<Route path="*" element={<div>notfound</div>} />
-					</Route>
+					{/*</Route>*/}
 				</Routes>
 			</Providers>
 		</BrowserRouter >
