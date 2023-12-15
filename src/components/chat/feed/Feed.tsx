@@ -4,7 +4,7 @@ import { socket } from "@/providers/socketio"
 import { ChatMessages } from './ChatMessages'
 import { PrivateMessages } from './PrivateMessages'
 import { ChatOptions } from './ChatOptions'
-import { useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -81,7 +81,7 @@ export const Feed = ({
           return (
             <TabPanel value={tabIndex} index={index} key={index} >                       
                                           
-              <div style={{ height: '70vh', maxWidth: '200px', overflow: "hidden", overflowY: "scroll"}}>
+              <div style={{ height: '70vh', maxWidth: '200px', overflow: "hidden", overflowY: "auto"}}>
 
                 <ChatOptions room={room}/>
                 <ChatMessages room={room}/>
@@ -95,7 +95,7 @@ export const Feed = ({
           return (  
             <TabPanel value={tabIndex} index={index} key={index} >                       
                                             
-              <div style={{ height: '70vh', maxWidth: '200px', overflow: "hidden", overflowY: "scroll"}}>
+              <div style={{ height: '70vh', maxWidth: '200px', overflow: "hidden", overflowY: "auto"}}>
 
                 <PrivateMessages pms={msgs}/>
 

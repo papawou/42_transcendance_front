@@ -28,7 +28,6 @@ export interface RoomDto {
 export class ChatAPI {
 
   public static async getRoomsFromUser(): Promise<{ rooms: RoomDto[] }> {
-
     try {
       const response = await axiosInstance.get('/chat/userRooms');
   
@@ -44,7 +43,6 @@ export class ChatAPI {
   }
 
   public static async getPMsFromUser(): Promise<{ privateMsgs: PrivateMsgsDto[] }> {
-
     try {
       const response = await axiosInstance.get('/chat/userPMs');
   
@@ -60,7 +58,6 @@ export class ChatAPI {
   }
 
   public static async getAllPublicRooms(): Promise<{ rooms: string[] }> {
-
     try {
       const response = await axiosInstance.get('/chat/roomNames');
   
@@ -72,6 +69,21 @@ export class ChatAPI {
     } catch (error) {
       console.error('An error occurred while fetching room names:', error);
       return { rooms: [] };
+    }
+  }
+
+  public static async getBlockedUsers(): Promise<{ blockedUsers: number[] }> {
+    try {
+      const response = await axiosInstance.get('chat/blockedUsers');
+
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        return { blockedUsers: [] };
+      }
+    } catch (error) {
+      console.error('An error occurred while fetching blocked users:', error);
+      return { blockedUsers: [] };
     }
   }
 }

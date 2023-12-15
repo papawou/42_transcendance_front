@@ -4,27 +4,27 @@ import { socket } from "@/providers/socketio"
 
 export const ChatNotif = () => {
 
-    const [open, setOpen] = useState<boolean>(false);
-    const [message, setMessage] = useState<string>('');
+  const [open, setOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
 
 
-    useEffect(() => {
-      socket.on('chatNotif', ({notif}) => {
-        setMessage(notif);
-        setOpen(true);
-      });
-      return () => {
-        socket.off('chatNotif');
-      };
-    }, []);
+  useEffect(() => {
+    socket.on('chatNotif', ({ notif }) => {
+      setMessage(notif);
+      setOpen(true);
+    });
+    return () => {
+      socket.off('chatNotif');
+    };
+  }, []);
 
-    const handleClose = () => {
-      setOpen(false);
-    }
+  const handleClose = () => {
+    setOpen(false);
+  }
 
-    return (
+  return (
     <Dialog open={open}>
-    <DialogTitle>Chat notification</DialogTitle>
+      <DialogTitle>Chat notification</DialogTitle>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {message}
         <div>
@@ -32,5 +32,5 @@ export const ChatNotif = () => {
         </div>
       </div>
     </Dialog>
-    )
+  )
 }

@@ -1,7 +1,8 @@
-import { useContext, useEffect, useState } from 'react'
+import { socket } from '@/providers/socketio'
+import { useEffect, useState } from 'react'
 import { RoomDto, UserDto } from '../chat.api'
-import { UserContext } from '../Context'
 import { UserButtons } from './UserButtons'
+import { useAuth } from '@/components/providers/AuthProvider'
 
 interface RoomUsersTabsProps {
   users: UserDto[] | null
@@ -13,14 +14,14 @@ export const RoomUsersTabs = ({
   room
 }: RoomUsersTabsProps) => {
 
-  const user: UserDto | null = useContext(UserContext);
   const [roomUsers, setRoomUsers] = useState<UserDto[]>([]);
   const [currentUser, setCurrentUser] = useState<UserDto | null>(null);
+  const { user } = useAuth();
 
 
   useEffect(() => {
     setRoomUsers(users ? users : [])
-  }, [user, users]);
+  }, [users]);
 
   const handleChangeUser = (selectedUser: UserDto) => {
     if (currentUser && currentUser.id === selectedUser.id)
@@ -39,7 +40,7 @@ export const RoomUsersTabs = ({
         <div style={{ padding: '8px 16px' }}>
           <strong>Users</strong>
         </div>
-        <div style={{ maxHeight: '150px', overflowY: 'scroll' }}>
+        <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {roomUsers.map((displayedUser) => (
               <li
@@ -54,7 +55,13 @@ export const RoomUsersTabs = ({
                       : 'transparent',
                 }}
               >
-                <span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>
+                <span style={{
+                  fontSize: '12px',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  fontWeight: displayedUser.id === user?.id ? 'bold' : 'normal',
+                  }}>
                   {room.admins.includes(displayedUser.id) ? '@' + displayedUser.name : displayedUser.name}</span>
               </li>
             ))}

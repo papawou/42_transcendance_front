@@ -2,6 +2,7 @@ import { KickUserDialog } from './KickUserDialog'
 import { PMUserDialog } from './PMUserDialog'
 import { AdminUserDialog } from './AdminUserDialog'
 import { BanMuteUserDialog } from './BanMuteUserDialog'
+import { DuelDialog } from './DuelDialog'
 import { UserDto, RoomDto } from '../chat.api'
 import { useState } from 'react'
 import UserProfile from '@/components/UserProfile/UserProfile';
@@ -27,6 +28,7 @@ export const UserButtons = ({
     const [openAdmin, setOpenAdmin] = useState<boolean>(false);
     const [openBanMute, setOpenBanMute] = useState<boolean>(false);
     const [openProfile, setOpenProfile] = useState<boolean>(false);
+    const [openDuel, setOpenDuel] = useState<boolean>(false);
     const [sentence, setSentence] = useState<Sentence>(Sentence.none);
 
     const handleOpenProfile = () => {
@@ -57,7 +59,7 @@ export const UserButtons = ({
                 <button onClick={handleMute}>Mute</button>
                 <button onClick={() => {setOpenKick(true)}}>Kick</button>
                 <button onClick={() => {setOpenAdmin(true)}}>Admin</button>
-                <button>Duel</button>
+                <button onClick={() => {setOpenDuel(true)}}>Duel</button>
                 <button onClick={handleOpenProfile}>Profile</button>
                 <button onClick={() => {setOpenPM(true)}}>PM</button>
             </div>
@@ -91,7 +93,11 @@ export const UserButtons = ({
                 open={openProfile}
                 onClose={handleCloseProfile}
                 userId={currentUser.id}
-                userName={currentUser.name}
+            />
+            <DuelDialog
+                open={openDuel}
+                setOpen={setOpenDuel}
+                user={currentUser}
             />
         </div>
     )
