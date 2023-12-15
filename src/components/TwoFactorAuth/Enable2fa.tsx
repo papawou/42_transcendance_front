@@ -4,6 +4,7 @@ import axiosInstance from "@/services/AxiosInstance";
 export function EnableTwoFactor() {
   const [code, setCode] = useState("");
   const [qrCodeImage, setQrCodeImage] = useState("");
+  const [secretKey, setSecretKey] = useState("");
 
   const handleCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value);
@@ -11,11 +12,12 @@ export function EnableTwoFactor() {
 
   const handleSubmit = () => {
     axiosInstance
-      .put("/auth/2fa/enable", { code })
+      .post("auth/2fa/enable", { code, secretKey })
       .then((res) => {
-        console.log("2FA enabled:", res.data);
-        if (res.data && res.data.qrCodeImage) {
+        console.log("2FA enabled:", res.data.message);
+        if (res.data && res.data.qrCodeImage && res.data.secretKey) {
           setQrCodeImage(res.data.qrCodeImage);
+          setSecretKey(res.data.secretKey);
         }
       })
       .catch((err) => {
@@ -32,6 +34,7 @@ export function EnableTwoFactor() {
         <div>
           <h3>Scan this QR Code</h3>
           <img src={qrCodeImage} alt="QR Code" />
+          <p>Secret Key: {secretKey}</p>
         </div>
       )}
     </div>
