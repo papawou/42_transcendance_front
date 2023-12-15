@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react'
 import { RoomDto, UserDto } from '../chat.api'
-import { UserContext } from '../Context'
 import { ChangePwdDialog } from './ChangePwdDialog'
 import { Dialog, DialogTitle } from "@mui/material"
 import { socket } from "@/providers/socketio"
+import { useAuth } from '@/components/providers/AuthProvider'
 
 export const ChatOptions = ({room}: {room: RoomDto}) => {
-    const user: UserDto | null = useContext(UserContext);
+    const {user} = useAuth();
 
     const [openLeaveRoom, setOpenLeaveRoom] = useState<boolean>(false);
     const [openPwdRoom, setOpenPwdRoom] = useState<boolean>(false);

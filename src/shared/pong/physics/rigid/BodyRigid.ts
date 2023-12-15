@@ -18,7 +18,6 @@ export type BodyBase<T extends Shape, U = unknown> = {
 	isTrigger: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getBody = (): Omit<BodyBase<any>, "shape" | "g"> => ({
 	p: getVec(),
 	v: getVec(),

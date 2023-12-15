@@ -1,21 +1,22 @@
 import { Dialog, DialogTitle } from "@mui/material"
-import { UserDto } from "../chat.api"
 import { socket } from "@/providers/socketio"
 
 interface PMUserDialogProps {
     open: boolean
     setOpen: (open: boolean) => void
-    user: UserDto
+    userId: number
+    userName: string
 }
 
 export const PMUserDialog = ({
     open,
     setOpen,
-    user,
+    userId,
+    userName,
 }: PMUserDialogProps) => {
     
     const pmCurrentUser = () => {
-       socket.emit('sendPM', {userId: user.id});
+       socket.emit('sendPM', {userId: userId});
        setOpen(false);
     }
 
@@ -24,7 +25,7 @@ export const PMUserDialog = ({
         <DialogTitle>PM User</DialogTitle>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div>
-                    Are you sure you want to PM {user.name} ?
+                    Are you sure you want to PM {userName} ?
                 </div>
                 <div>
                     <button onClick={pmCurrentUser}>PM</button>

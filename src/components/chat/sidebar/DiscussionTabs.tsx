@@ -14,11 +14,11 @@ export const DiscussionTabs = ({
 }: DiscussionTabsProps) => {
 
   return (
-    <div style={{ maxWidth: '100px'}}>
+    <div>
       <div style={{ padding: '8px 16px'}}>
         <strong>PMs</strong>
       </div>
-      <div style={{ maxHeight: '150px', overflowY: 'scroll' }}>
+      <div style={{ maxHeight: '150px', overflowY: 'auto' }}>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {rooms.map((privateMsgs, index) => (
             <li
@@ -30,7 +30,8 @@ export const DiscussionTabs = ({
                 backgroundColor: value === index ? '#f0f0f0' : 'transparent',
               }}
             >
-              <span style={{ fontSize: '12px' }}>{privateMsgs.userDto.name}</span>
+              <span style={{ fontSize: '12px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {privateMsgs.userDto.name}</span>
             </li>
           ))}
         </ul>

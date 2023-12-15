@@ -4,7 +4,7 @@ const Paths = {
 	Pong: "/pong",
 	Leaderboard: "/leaderboard",
 	Settings: "/settings",
-    AuthFtCallback: "/auth/ft/callback",
+	AuthFtCallback: "/auth/ft/callback",
 	Chat: "/chat"
 }
 

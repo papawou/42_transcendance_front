@@ -63,6 +63,8 @@ export function normVec(v: Vector): Vector {
 	const magn = magnVec(v);
 
 	if (magn <= 0) {
+
+		debugger;
 		throw (`normVec: fatal Error magn = ${magn}`)
 	}
 
