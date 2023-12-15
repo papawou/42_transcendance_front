@@ -38,8 +38,6 @@ export function App() {
 			<Providers>
 				<Routes>
 					<Route element={<Boilerplate />}>
-						<Route index element={<Home />} />
-						{/*<Route element={<ProtectedRoute />}>*/}
 						<Route index element={<Home data={undefined} />} />
 						<Route element={<ProtectedRoute />}>
 							<Route path={Paths.User} element={<User />} />
@@ -49,7 +47,7 @@ export function App() {
 						</Route>
 						<Route path={Paths.AuthFtCallback} element={<AuthFtCallback />} />
 						<Route path="*" element={<div>notfound</div>} />
-					{/*</Route>*/}
+					</Route>
 				</Routes>
 			</Providers>
 		</BrowserRouter >
