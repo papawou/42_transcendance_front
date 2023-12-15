@@ -47,6 +47,7 @@ export function App() {
 							<Route path={Paths.Leaderboard} element={<Leaderboard />} />
 							<Route path={Paths.Chat} element={<Chat />} />
 						</Route>
+						{/* </Route> */}
 						<Route path="*" element={<div>notfound</div>} />
 					{/*</Route>*/}
 				</Routes>
