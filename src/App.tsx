@@ -38,16 +38,18 @@ export function App() {
 			<Providers>
 				<Routes>
 					<Route element={<Boilerplate />}>
-						<Route index element={<Home data={undefined} />} />
-						<Route element={<ProtectedRoute />}>
+						<Route index element={<Home />} />
+						{/* <Route element={<ProtectedRoute />}> */}
+                            <Route path={Paths.AuthFtCallback} element={<AuthFtCallback />} />
 							<Route path={Paths.User} element={<User />} />
 							<Route path={Paths.Pong} element={<Pong />} />
 							<Route path={Paths.Settings} element={<Settings />} />
 							<Route path={Paths.Leaderboard} element={<Leaderboard />} />
+							<Route path={Paths.Chat} element={<Chat />} />
 						</Route>
-						<Route path={Paths.AuthFtCallback} element={<AuthFtCallback />} />
+						{/* </Route> */}
 						<Route path="*" element={<div>notfound</div>} />
-					</Route>
+					{/*</Route>*/}
 				</Routes>
 			</Providers>
 		</BrowserRouter >
