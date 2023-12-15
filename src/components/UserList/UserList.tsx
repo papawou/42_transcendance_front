@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import "./style.css"
 import Avatar from '@/components/Avatar';
 import AddFriendButton from '../UserButtons/AddFriendButton';
@@ -7,15 +7,18 @@ import axiosInstance from '@/services/AxiosInstance';
 import { isDef } from '@/technical/isDef';
 import { socket } from '@/providers/socketio';
 import UserProfile from '../UserProfile/UserProfile';
+import { PMUserDialog } from '../chat/bottombar/PMUserDialog';
 
 interface User {
 	name: string
 	id: number
+	pic: string
 }
 
-const User = ({ name, id }: { name: string, id: number }) => {
+const User = ({ name, id, pic }: { name: string, id: number, pic: string }) => {
 	const { user } = useAuth();
 	const [openProfileDialog, setOpenProfileDialog] = useState(false);
+	const [openPM, setOpenPM] = useState<boolean>(false);
 
 	const handleClickProfile = () => {
 		setOpenProfileDialog(true);
@@ -46,30 +49,27 @@ const User = ({ name, id }: { name: string, id: number }) => {
 		socket.emit('sendFriendRequest', { friendId: id })
 	}
 
-	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		const friendRequestResponseAck = (response: any) => console.log(response);
-		socket.on('friendRequestResponse', friendRequestResponseAck);
-
-		return () => {
-			socket.off('friendRequestResponse', friendRequestResponseAck);
-		};
-	}, []);
-
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-			<Avatar src='jaubarea.png' width={20} /> {name}
+			<Avatar src={pic} width={20} /> {name}
 			<AddFriendButton width={10} image='addfriend.png' onClick={() => handleEmit()} />
 			<AddFriendButton width={10} image='deletefriend.png' onClick={() => handleClick("delete-friend")} />
 			<AddFriendButton width={10} image='blockfriend.png' onClick={() => handleClick("block-user")} />
 			<AddFriendButton width={10} image='unblockuser.png' onClick={() => handleClick("unblock-user")} />
 			<AddFriendButton width={10} image='viewprofile.png' onClick={() => handleClickProfile()} />
+			<AddFriendButton width={10} image='privateMessage.png' onClick={() => {setOpenPM(true)}} />
 			<UserProfile
 				open={openProfileDialog}
 				onClose={handleCloseProfileDialog}
 				userId={id}
 				userName={name}
 			/>
+			 <PMUserDialog
+                open={openPM}
+                setOpen={setOpenPM}
+                userId={id}
+                userName={name}
+            />
 		</div>
 	)
 }
@@ -90,7 +90,7 @@ const UserList = ({ users }: Props) => {
 		<div style={{ paddingLeft: '10px' }}>
 			<div className='window'>
 				{
-					filteredUsers.map((user) => <User key={user.id} name={user.name} id={user.id} />)
+					filteredUsers.map((user) => <User key={user.id} name={user.name} id={user.id} pic={user.pic} />)
 				}
 			</div>
 			<input

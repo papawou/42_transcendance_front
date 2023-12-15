@@ -19,11 +19,11 @@ export const ChangePwdDialog = ({
     const [errorPwd, setErrorPwd] = useState<string>('');
 
     const changePwd = () => {
-        if (pwd.length !== 0 && pwd.length < 4) {
-            setErrorPwd('Password to short (4 char min)')
+        if (pwd.length !== 0 && pwd.length < 3) {
+            setErrorPwd('Password to short (3 char min)')
         }
-        else if (pwd.length > 15) {
-            setErrorPwd('Password to long (15 char max)')
+        else if (pwd.length > 10) {
+            setErrorPwd('Password to long (10 char max)')
         }
         else {
             setOpen(false);

@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../providers/AuthProvider';
 import axiosInstance from '@/services/AxiosInstance';
-import {Socket, io} from "socket.io-client"
 
 const UserSettings = () => {
 
@@ -17,8 +15,8 @@ const UserSettings = () => {
     };
 
     return (
-        <div>
-            changer de nom
+        <div style={{textAlign:'center'}}>
+            <h2 style={{textAlign: 'center'}}> Changer de nom</h2>
             <input
                 type='text'
                 value={input}

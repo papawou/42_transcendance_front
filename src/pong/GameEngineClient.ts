@@ -14,7 +14,7 @@ export class GameEngineClient extends GameEngine<GameObjectClient> {
     constructor(ge: GameEngineData) {
         const scene = new Scene(ge.sc.objs.map(obj => new GameObjectClient(obj.body, obj.id, obj.prevState)))
         const physics = new Physics(1 / 60, ge.physics.currentTime, ge.physics.accumulator)
-        super(ge.roomId, ge.width, ge.height, scene, physics)
+        super(ge.gameId, ge.width, ge.height, scene, physics)
         this.ge = ge;
         this.update()
     }
@@ -31,7 +31,16 @@ export class GameEngineClient extends GameEngine<GameObjectClient> {
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        const refRes = { width: this.width, height: this.height }
+
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+        const scale = Math.min(ctx.canvas.width / refRes.width, ctx.canvas.height / refRes.height);
+        const origin = {
+            x: (ctx.canvas.width - refRes.width * scale) / 2,
+            y: (ctx.canvas.height - refRes.height * scale) / 2
+        };
+        ctx.setTransform(scale, 0, 0, scale, origin.x, origin.y);
+
         this.sc.objs.forEach(obj => obj.draw(ctx))
     }
 
@@ -57,6 +66,7 @@ export class GameEngineClient extends GameEngine<GameObjectClient> {
         this.width = this.ge.width
         this.height = this.ge.height
         this.status = this.ge.status
+				this.closed_reason = this.ge.closed_reason
 
         this.players.clear()
         this.playersBar.clear()
@@ -68,7 +78,6 @@ export class GameEngineClient extends GameEngine<GameObjectClient> {
                 this.playersBar.set(p.playerId, p.barId)
             }
         })
-
         this.ge = undefined;
     }
 }

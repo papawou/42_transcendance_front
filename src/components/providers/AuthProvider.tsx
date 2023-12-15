@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }), [handleLogin, handleLogout, user])
 
     if (isPending) {
-        return "User connecting..."
+        return <>User connecting...</>
     }
 
     return (

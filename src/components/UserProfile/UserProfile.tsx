@@ -15,13 +15,21 @@ interface matchHistory {
 interface User {
 	name: string,
 	id: number,
+	pic: string,
 	wins: number,
 	loses: number,
 	rank: number,
 	matchHistory: matchHistory[]
 }
 
-const UserProfile = ({ open, onClose, userId, userName }) => {
+interface Props {
+	open: boolean;
+	onClose: () => void;
+	userId: number;
+	userName: string;
+  }
+
+const UserProfile = ({ open, onClose, userId, userName }: Props) => {
 
 	const [user, setUser] = useState<User | null>(null);
 
@@ -37,12 +45,12 @@ const UserProfile = ({ open, onClose, userId, userName }) => {
 	if (isDef(user)) {
 		return (
 			<Dialog open={open} onClose={onClose} maxWidth='md' fullWidth>
-				<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}><Avatar src='jaubarea.png' width={50} />{`Profil de ${userName}`}</DialogTitle>
+				<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}><Avatar src={user.pic} width={50} />{`Profil de ${userName}`}</DialogTitle>
 				<DialogContent sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
 					<p>Wins : {user.wins} Loses : {user.loses} Rank : {user.rank}</p>
 					<br></br>
-					<div>{user.matchHistory.map((match) => (
-						<div>{match.player1Name} : {match.player1Score}  VS  {match.player2Score} : {match.player2Name}</div>
+					<div>{user.matchHistory.map((match, index) => (
+						<div key={index}>{match.player1Name} : {match.player1Score}  VS  {match.player2Score} : {match.player2Name}</div>
 					))}</div>
 					<Button variant="outlined" color="secondary" onClick={onClose} sx={{ color: 'black' }} style={{borderColor: 'black'}}>
 						Fermer
@@ -51,7 +59,7 @@ const UserProfile = ({ open, onClose, userId, userName }) => {
 			</Dialog >
 		);
 	}
-	return;
+	return null;
 };
 
 export default UserProfile;
