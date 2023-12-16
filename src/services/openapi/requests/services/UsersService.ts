@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { LeaderboardUserDTO } from '../models/LeaderboardUserDTO';
 import type { UserDTO } from '../models/UserDTO';
 import type { UserHistoryDTO } from '../models/UserHistoryDTO';
 
@@ -122,6 +123,17 @@ export class UsersService {
             path: {
                 'id': id,
             },
+        });
+    }
+
+    /**
+     * @returns LeaderboardUserDTO
+     * @throws ApiError
+     */
+    public static userControllerGetLeaderboard(): CancelablePromise<Array<LeaderboardUserDTO>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/users/leaderboard',
         });
     }
 

@@ -9,6 +9,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 export type { DuelAcceptDTO } from './models/DuelAcceptDTO';
 export type { DuelInviteDTO } from './models/DuelInviteDTO';
 export type { GameDTO } from './models/GameDTO';
+export type { LeaderboardUserDTO } from './models/LeaderboardUserDTO';
 export type { LoginDTO } from './models/LoginDTO';
 export type { UserDTO } from './models/UserDTO';
 export type { UserHistoryDTO } from './models/UserHistoryDTO';

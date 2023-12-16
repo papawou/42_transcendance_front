@@ -1,7 +1,7 @@
 import { BrowserRouter, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
-import Leaderboard from "./pages/Leaderboard"
+import { Leaderboard } from "./pages/Leaderboard";
 
 import { Providers } from "./components/providers";
 import { ProtectedChildren, useIsLogged } from "./components/ProtectedChildren";

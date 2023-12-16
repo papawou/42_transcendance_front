@@ -3,6 +3,7 @@ import { useQuery, useMutation, UseQueryResult, UseQueryOptions, UseMutationOpti
 import { UserHistoryDTO } from "../requests/models/UserHistoryDTO";
 import { UserDTO } from "../requests/models/UserDTO";
 import { LoginDTO } from "../requests/models/LoginDTO";
+import { LeaderboardUserDTO } from "../requests/models/LeaderboardUserDTO";
 import { GameDTO } from "../requests/models/GameDTO";
 import { DuelInviteDTO } from "../requests/models/DuelInviteDTO";
 import { DuelAcceptDTO } from "../requests/models/DuelAcceptDTO";
@@ -48,6 +49,10 @@ export const useUsersServiceUserControllerGetUserHistoryKey = "UsersServiceUserC
 export const useUsersServiceUserControllerGetUserHistory = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, TError = unknown>({ id }: {
     id: number;
 }, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetUserHistoryKey, ...(queryKey ?? [{ id }])], queryFn: () => UsersService.userControllerGetUserHistory(id), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, TError>, "data"> & {
+    data: TData;
+};
+export const useUsersServiceUserControllerGetLeaderboardKey = "UsersServiceUserControllerGetLeaderboard";
+export const useUsersServiceUserControllerGetLeaderboard = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetLeaderboardKey, ...(queryKey ?? [])], queryFn: () => UsersService.userControllerGetLeaderboard(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, TError>, "data"> & {
     data: TData;
 };
 export const useGamesServiceGameControllerDuelInvite = <TData = Awaited<ReturnType<typeof GamesService.gameControllerDuelInvite>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof GamesService.gameControllerDuelInvite>>, unknown, {
