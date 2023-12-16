@@ -1,6 +1,5 @@
 import { BrowserRouter, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
-import User from "./pages/User";
 import Settings from "./pages/Settings";
 import Leaderboard from "./pages/Leaderboard"
 
@@ -10,7 +9,6 @@ import { Boilerplate } from "./pages/Boilerplate";
 import Paths from "./technical/Paths";
 import { useEffect } from "react";
 import { AuthFtCallback } from "./pages/AuthFtCallback";
-import { Chat } from "./components/chat/Chat";
 import { Pong } from "./pages/Pong";
 
 import "./ui/main.css"
@@ -40,7 +38,6 @@ export function App() {
 					<Route element={<Boilerplate />}>
 						<Route index element={<Home data={undefined} />} />
 						<Route element={<ProtectedRoute />}>
-							<Route path={Paths.User} element={<User />} />
 							<Route path={Paths.Pong} element={<Pong />} />
 							<Route path={Paths.Settings} element={<Settings />} />
 							<Route path={Paths.Leaderboard} element={<Leaderboard />} />

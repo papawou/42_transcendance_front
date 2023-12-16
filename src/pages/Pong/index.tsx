@@ -63,9 +63,14 @@ export function Pong() {
     <div>
       {
         isDef(gameId) ? <WrapGame gameId={gameId} /> :
-          <button onClick={() => axiosInstance.post(userGame.search ? "/games/search/cancel" : "/games/search/start")}>
-            {userGame.search ? "Annuler la recherche" : "Rechercher une partie"}
-          </button>
+          <>
+            <button onClick={() => emit(WsGame.debug, {gameId: true})}>
+              debug
+            </button>
+            <button onClick={() => axiosInstance.post(userGame.search ? "/games/search/cancel" : "/games/search/start")}>
+              {userGame.search ? "Annuler la recherche" : "Rechercher une partie"}
+            </button>
+          </>
       }
     </div >
   )

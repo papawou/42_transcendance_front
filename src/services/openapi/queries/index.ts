@@ -1,7 +1,9 @@
 // generated with @7nohe/openapi-react-query-codegen@0.5.1 
 import { useQuery, useMutation, UseQueryResult, UseQueryOptions, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
+import { UserHistoryDTO } from "../requests/models/UserHistoryDTO";
 import { UserDTO } from "../requests/models/UserDTO";
 import { LoginDTO } from "../requests/models/LoginDTO";
+import { GameDTO } from "../requests/models/GameDTO";
 import { DuelInviteDTO } from "../requests/models/DuelInviteDTO";
 import { DuelAcceptDTO } from "../requests/models/DuelAcceptDTO";
 import { UsersService } from "../requests/services/UsersService";
@@ -40,6 +42,12 @@ export const useUsersServiceUserControllerUnblockUser = <TData = Awaited<ReturnT
 };
 export const useUsersServiceUserControllerGetPendingKey = "UsersServiceUserControllerGetPending";
 export const useUsersServiceUserControllerGetPending = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetPending>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetPending>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetPending>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetPendingKey, ...(queryKey ?? [])], queryFn: () => UsersService.userControllerGetPending(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetPending>>, TError>, "data"> & {
+    data: TData;
+};
+export const useUsersServiceUserControllerGetUserHistoryKey = "UsersServiceUserControllerGetUserHistory";
+export const useUsersServiceUserControllerGetUserHistory = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, TError = unknown>({ id }: {
+    id: number;
+}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetUserHistoryKey, ...(queryKey ?? [{ id }])], queryFn: () => UsersService.userControllerGetUserHistory(id), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetUserHistory>>, TError>, "data"> & {
     data: TData;
 };
 export const useGamesServiceGameControllerDuelInvite = <TData = Awaited<ReturnType<typeof GamesService.gameControllerDuelInvite>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof GamesService.gameControllerDuelInvite>>, unknown, {

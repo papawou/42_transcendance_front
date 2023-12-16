@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { UserDTO } from '../models/UserDTO';
+import type { UserHistoryDTO } from '../models/UserHistoryDTO';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -104,6 +105,23 @@ export class UsersService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/pending',
+        });
+    }
+
+    /**
+     * @param id
+     * @returns UserHistoryDTO
+     * @throws ApiError
+     */
+    public static userControllerGetUserHistory(
+        id: number,
+    ): CancelablePromise<UserHistoryDTO> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/users/{id}/user/history',
+            path: {
+                'id': id,
+            },
         });
     }
 
