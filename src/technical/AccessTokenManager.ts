@@ -27,16 +27,19 @@ export const getMetaToken = (): UserJWT | null => {
     if (!isDef(token)) {
         return null;
     }
-    const decoded = jwtDecode<UserJWTPayload>(token);
-    if (!isDef(decoded)) { //!isDef(decoded.exp)
-        removeAccessToken();
-        return null;
-    }
-    // const isExpired = (decoded.exp * 1000) < new Date().getTime();
-    // if (isExpired) {
-    //     removeAccessToken()
-    //     return null;
-    // }
+    try {
+        const decoded = jwtDecode<UserJWTPayload>(token)
 
-    return { id: decoded.sub, name: decoded.name }
+        if (!isDef(decoded)) { //!isDef(decoded.exp)
+            removeAccessToken();
+            return null;
+        }
+
+        return { id: decoded.sub, name: decoded.name }
+    }
+    catch {
+        return null
+    }
+
+
 }

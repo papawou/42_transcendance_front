@@ -1,5 +1,4 @@
 import { dispatchCustomEvent, registerCustomEvent, removeCustomEvent } from "@/services/events";
-import { useDefaultServiceAuthControllerLogin } from "@/services/openapi/queries";
 import { UserJWT, addAccessToken, getMetaToken, removeAccessToken } from "@/technical/AccessTokenManager";
 
 import Paths from "@/technical/Paths";
@@ -10,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 type AuthContextValue = {
     user?: UserJWT | null
     logout: () => void
-    login: (name: string) => void
+    login: (jwt: string) => void
 }
 
 const AuthContext = createContext<AuthContextValue>(Object.create(null))
@@ -19,54 +18,36 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<UserJWT | null>(getMetaToken());
-    const { isPending, mutateAsync: login } = useDefaultServiceAuthControllerLogin();
     const navigate = useNavigate()
 
     const handleLogout = useCallback(() => {
         removeAccessToken()
         setUser(null)
         navigate(Paths.Home, { replace: true })
-    }, [navigate])
+    }, [])
 
-    const handleLogin = useCallback(async (name?: string) => {
-        try {
-            if (isDef(name)) {
-                const res = await login({ requestBody: { name } })
-                addAccessToken(res.access_token);
-            }
-            const token = getMetaToken();
-            if (!isDef(token)) {
-                throw ("should not happend")
-            }
-            setUser(token)
-            dispatchCustomEvent("login", undefined)
+    const handleLogin = useCallback((jwt: string) => {
+        addAccessToken(jwt);
+        const token = getMetaToken();
+        if (!isDef(token)) {
+            dispatchCustomEvent("logout", undefined)
+            return
         }
-        catch (e) {
-            handleLogout()
-        }
-    }, [handleLogout, login])
+        setUser(token)
+        navigate(Paths.Home, { replace: true })
+        dispatchCustomEvent("login", undefined)
+    }, [])
 
     useEffect(() => {
         registerCustomEvent("logout", handleLogout);
         return () => removeCustomEvent("logout", handleLogout)
     }, [handleLogout])
 
-    useEffect(() => {
-        const token = getMetaToken();
-        if (isDef(token)) {
-            handleLogin();
-        }
-    }, [handleLogin])
-
     const contextValue: AuthContextValue = useMemo(() => ({
         user: user,
-        login: (name: string) => handleLogin(name),
+        login: (jwt: string) => handleLogin(jwt),
         logout: () => handleLogout()
     }), [handleLogin, handleLogout, user])
-
-    if (isPending) {
-        return <>User connecting...</>
-    }
 
     return (
         <AuthContext.Provider value={contextValue}>

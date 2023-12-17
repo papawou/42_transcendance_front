@@ -17,7 +17,6 @@ axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 axiosInstance.interceptors.response.use(undefined, (error: Error | AxiosError) => {
     if (isAxiosError(error) && error.response?.status === 401) {
-        removeAccessToken();
         dispatchCustomEvent("logout", undefined)
     }
     Promise.reject(error)

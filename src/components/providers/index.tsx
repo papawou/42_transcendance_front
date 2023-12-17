@@ -6,19 +6,22 @@ import { QueryApiProvider } from "./QueryProvider";
 import { UserGameProvider } from "./UserGameProvider";
 import { SnackbarProvider } from "notistack";
 import { MeProvider } from "./MeProvider";
+import { LoginProtect } from "../ProtectedChildren";
 
 export function Providers({ children }: { children: ReactNode }) {
     return (
         <QueryApiProvider>
             <SnackbarProvider>
                 <AuthProvider>
-                    <MeProvider>
-                        <BlockedUsersProvider>
-                            <UserGameProvider>
-                                {children}
-                            </UserGameProvider>
-                        </BlockedUsersProvider>
-                    </MeProvider>
+                    <LoginProtect>
+                        <MeProvider>
+                            <BlockedUsersProvider>
+                                <UserGameProvider>
+                                    {children}
+                                </UserGameProvider>
+                            </BlockedUsersProvider>
+                        </MeProvider>
+                    </LoginProtect>
                 </AuthProvider>
             </SnackbarProvider>
         </QueryApiProvider>

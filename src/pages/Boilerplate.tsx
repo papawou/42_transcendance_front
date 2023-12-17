@@ -1,16 +1,10 @@
 import Navigation from "@/components/Navigation/Navigation";
-import { useIsLogged } from "@/components/ProtectedChildren";
 import { SocialPanel } from "@/components/SocialPanel";
 import { Chat } from "@/components/chat/Chat";
 import { Outlet } from "react-router-dom";
 
 
 export const Boilerplate = () => {
-    const isLogged = useIsLogged()
-
-    if (!isLogged) {
-        return <Outlet />
-    }
     return (
         <div>
             <Navigation />
