@@ -45,7 +45,7 @@ export const ChangePwdDialog = ({
                     Please enter the new password for {roomName}
                 </div>
                 <input
-                    type="text"
+                    type="password"
                     placeholder="Password (optional)"
                     value={pwd}
                     onChange={handlePwdChange}

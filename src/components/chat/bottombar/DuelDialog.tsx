@@ -1,5 +1,4 @@
 import { Dialog, DialogTitle } from "@mui/material"
-import { socket } from "@/providers/socketio"
 import { UserDto } from '../chat.api'
 import axiosInstance from "@/services/AxiosInstance"
 

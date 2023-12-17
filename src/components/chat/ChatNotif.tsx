@@ -1,36 +1,32 @@
-import { Dialog, DialogTitle } from "@mui/material"
-import { useEffect, useState } from "react"
-import { socket } from "@/providers/socketio"
+import { useEffect } from "react";
+import { useSnackbar } from "notistack";
+import { socket } from "@/providers/socketio";
 
 export const ChatNotif = () => {
-
-  const [open, setOpen] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   useEffect(() => {
-    socket.on('chatNotif', ({ notif }) => {
-      setMessage(notif);
-      setOpen(true);
-    });
-    return () => {
-      socket.off('chatNotif');
+    const handleChatNotif = ({ notif }: { notif: string }) => {
+      enqueueSnackbar(notif, {
+        variant: "info",
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: "right",
+        },
+        autoHideDuration: 5000,
+        action: (key) => (
+          <button onClick={() => closeSnackbar(key)}>OK</button>
+        ),
+        style: { backgroundColor: "green" },
+      });
     };
-  }, []);
 
-  const handleClose = () => {
-    setOpen(false);
-  }
+    socket.on("chatNotif", handleChatNotif);
 
-  return (
-    <Dialog open={open}>
-      <DialogTitle>Chat notification</DialogTitle>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        {message}
-        <div>
-          <button onClick={handleClose}>ok</button>
-        </div>
-      </div>
-    </Dialog>
-  )
-}
+    return () => {
+      socket.off("chatNotif", handleChatNotif);
+    };
+  }, [enqueueSnackbar]);
+
+  return null;
+};

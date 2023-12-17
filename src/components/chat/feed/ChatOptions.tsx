@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react'
-import { RoomDto, UserDto } from '../chat.api'
+import { useState } from 'react'
+import { RoomDto } from '../chat.api'
 import { ChangePwdDialog } from './ChangePwdDialog'
 import { Dialog, DialogTitle } from "@mui/material"
 import { socket } from "@/providers/socketio"

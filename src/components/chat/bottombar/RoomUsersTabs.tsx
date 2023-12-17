@@ -1,8 +1,8 @@
-import { socket } from '@/providers/socketio'
 import { useEffect, useState } from 'react'
 import { RoomDto, UserDto } from '../chat.api'
 import { UserButtons } from './UserButtons'
 import { useAuth } from '@/components/providers/AuthProvider'
+import { isDef } from '@/technical/isDef'
 
 interface RoomUsersTabsProps {
   users: UserDto[] | null
@@ -21,6 +21,7 @@ export const RoomUsersTabs = ({
 
   useEffect(() => {
     setRoomUsers(users ? users : [])
+    setCurrentUser(null);
   }, [users]);
 
   const handleChangeUser = (selectedUser: UserDto) => {
@@ -30,7 +31,7 @@ export const RoomUsersTabs = ({
       setCurrentUser(selectedUser);
   }
 
-  if (!users || !room) {
+  if (!isDef(users) || !isDef(room)) {
     return null;
   }
 

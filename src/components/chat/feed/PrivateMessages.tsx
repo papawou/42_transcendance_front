@@ -23,7 +23,7 @@ export const PrivateMessages = ({
     const { user } = useAuth();
 
     return (
-        <div style={{ width: '200px' }}>
+        <div style={{ width: '165px' }}>
             {pms.messages.map((message: MessageDto, index: number) => {
                 const isCurrentUserMessage = user?.id === message.userId;
                 return (
