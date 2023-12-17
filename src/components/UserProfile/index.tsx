@@ -5,8 +5,8 @@ import { useMemo } from 'react';
 import { isDef } from '@/technical/isDef';
 import dayjs from 'dayjs';
 import { SocialButtons } from './SocialButtons';
-import Avatar from '../Avatar';
 
+import Avatar from '../Avatar';
 
 interface Props {
 	open: boolean;
@@ -52,7 +52,7 @@ const UserProfile = ({ open, onClose, userId }: Props) => {
 							<SocialButtons userId={user.id} />
 						</DialogTitle>
 						<DialogContent sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
-							<div>Victoires: {userHistory.wins.length} Défaites: {userHistory.loses.length}</div>
+							<div>Victoires: {userHistory.wins.length} Défaites: {userHistory.loses.length} / {user.elo}</div>
 							<div>
 								{
 									history.length === 0 ? "Aucune parties jouées" :

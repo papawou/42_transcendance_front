@@ -6,6 +6,7 @@ export { CancelablePromise, CancelError } from './core/CancelablePromise';
 export { OpenAPI } from './core/OpenAPI';
 export type { OpenAPIConfig } from './core/OpenAPI';
 
+export type { CancelFriendRequestDTO } from './models/CancelFriendRequestDTO';
 export type { DuelAcceptDTO } from './models/DuelAcceptDTO';
 export type { DuelInviteDTO } from './models/DuelInviteDTO';
 export type { GameDTO } from './models/GameDTO';

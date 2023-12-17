@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CancelFriendRequestDTO } from '../models/CancelFriendRequestDTO';
 import type { LeaderboardUserDTO } from '../models/LeaderboardUserDTO';
 import type { UserDTO } from '../models/UserDTO';
 import type { UserExpandedDTO } from '../models/UserExpandedDTO';
@@ -164,6 +165,22 @@ export class UsersService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/leaderboard',
+        });
+    }
+
+    /**
+     * @param requestBody
+     * @returns any
+     * @throws ApiError
+     */
+    public static userControllerCancelFriendRequest(
+        requestBody: CancelFriendRequestDTO,
+    ): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/users/friendRequest/cancel',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 

@@ -9,6 +9,7 @@ import { LeaderboardUserDTO } from "../requests/models/LeaderboardUserDTO";
 import { GameDTO } from "../requests/models/GameDTO";
 import { DuelInviteDTO } from "../requests/models/DuelInviteDTO";
 import { DuelAcceptDTO } from "../requests/models/DuelAcceptDTO";
+import { CancelFriendRequestDTO } from "../requests/models/CancelFriendRequestDTO";
 import { UsersService } from "../requests/services/UsersService";
 import { GamesService } from "../requests/services/GamesService";
 import { DefaultService } from "../requests/services/DefaultService";
@@ -65,6 +66,13 @@ export const useUsersServiceUserControllerGetUserHistory = <TQueryKey extends Ar
 };
 export const useUsersServiceUserControllerGetLeaderboardKey = "UsersServiceUserControllerGetLeaderboard";
 export const useUsersServiceUserControllerGetLeaderboard = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetLeaderboardKey, ...(queryKey ?? [])], queryFn: () => UsersService.userControllerGetLeaderboard(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetLeaderboard>>, TError>, "data"> & {
+    data: TData;
+};
+export const useUsersServiceUserControllerCancelFriendRequest = <TData = Awaited<ReturnType<typeof UsersService.userControllerCancelFriendRequest>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerCancelFriendRequest>>, unknown, {
+    requestBody: CancelFriendRequestDTO;
+}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => UsersService.userControllerCancelFriendRequest(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerCancelFriendRequest>>, TError, {
+    requestBody: CancelFriendRequestDTO;
+}, TContext>, "data"> & {
     data: TData;
 };
 export const useGamesServiceGameControllerDuelInvite = <TData = Awaited<ReturnType<typeof GamesService.gameControllerDuelInvite>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof GamesService.gameControllerDuelInvite>>, unknown, {

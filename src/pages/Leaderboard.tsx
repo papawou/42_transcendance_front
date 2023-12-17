@@ -31,6 +31,9 @@ export const Leaderboard = () => {
                                                 {p.name}
                                             </NavLink>
                                         </TableCell>
+                                        <TableCell align="right">
+                                                {p.elo}
+                                        </TableCell>
                                     </TableRow>
                                 ))
                             }

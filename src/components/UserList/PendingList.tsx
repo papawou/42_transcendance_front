@@ -1,49 +1,37 @@
-import "./style.css"
+/* eslint-disable react/no-unescaped-entities */
 import Avatar from '../Avatar';
-import AddFriendButton from '../UserButtons/AddFriendButton';
-import { useUsersServiceUserControllerGetPending } from '@/services/openapi/queries';
-import { useEffect } from "react";
-import { socket } from "@/providers/socketio";
-import { Skeleton } from "@mui/material";
+import { useMe } from "../providers/MeProvider";
+
+import "./style.css"
 
 const PendingList = () => {
-    const { data: users, isLoading, refetch: refetchUsers } = useUsersServiceUserControllerGetPending();
-
-    const emitAddFriend = (friendId: number) => {
-        socket.emit('acceptFriendRequest', { friendId: friendId });
-    }
-
-    const emitRefuseRequest = (friendId: number) => {
-        socket.emit('refuseFriendRequest', { friendId: friendId });
-    }
-
-    useEffect(() => {
-        socket.on('friendRequestResponse', () => {
-            refetchUsers();
-        });
-
-        return () => {
-            socket.off('friendRequestResponse');
-        };
-    }, [refetchUsers]);
-
+    const me = useMe()
     return (
         <div style={{ paddingLeft: '10px' }}>
-            {
-                isLoading ? <Skeleton variant="rectangular" /> :
-                    (
-                        <div className='pending'>
-                            {users.map(user => (
-                                <div style={{ display: "flex", alignItems: "center", gap: "5px" }} key={user.id}>
-                                    <Avatar src={user.pic} width={20} />
-                                    {user.name}
-                                    <AddFriendButton width={10} image='valider.png' onClick={() => emitAddFriend(user.id)} />
-                                    <AddFriendButton width={10} image='refuse.png' onClick={() => emitRefuseRequest(user.id)} />
-                                </div>
-                            ))}
-                        </div>
-                    )
-            }
+            <div className='pending'>
+                <div>
+                    <h4>Demandes d'amis reçues</h4>
+                    {
+                        me.pendingOf?.map(user => (
+                            <div style={{ display: "flex", alignItems: "center", gap: "5px" }} key={user.id}>
+                                <Avatar src={user.pic} width={20} />
+                                {user.name}
+                            </div>
+                        ))
+                    }
+                </div>
+                <div>
+                    <h4>Demandes d'amis envoyées</h4>
+                    {
+                        me.pending?.map(user => (
+                            <div style={{ display: "flex", alignItems: "center", gap: "5px" }} key={user.id}>
+                                <Avatar src={user.pic} width={20} />
+                                {user.name}
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     );
 };

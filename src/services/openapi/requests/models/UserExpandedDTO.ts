@@ -12,5 +12,7 @@ export type UserExpandedDTO = {
     elo: number;
     friends: Array<UserDTO>;
     blocked: Array<UserDTO>;
+    pending: Array<UserDTO>;
+    pendingOf: Array<UserDTO>;
 };
 
