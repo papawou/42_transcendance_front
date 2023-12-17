@@ -3,7 +3,9 @@
 /* eslint-disable */
 import type { LeaderboardUserDTO } from '../models/LeaderboardUserDTO';
 import type { UserDTO } from '../models/UserDTO';
+import type { UserExpandedDTO } from '../models/UserExpandedDTO';
 import type { UserHistoryDTO } from '../models/UserHistoryDTO';
+import type { UserStatusDTO } from '../models/UserStatusDTO';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -33,6 +35,34 @@ export class UsersService {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/users/{id}/user',
+            path: {
+                'id': id,
+            },
+        });
+    }
+
+    /**
+     * @returns UserExpandedDTO
+     * @throws ApiError
+     */
+    public static userControllerGetMe(): CancelablePromise<UserExpandedDTO> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/users/me',
+        });
+    }
+
+    /**
+     * @param id
+     * @returns UserStatusDTO
+     * @throws ApiError
+     */
+    public static userControllerGetUserStatus(
+        id: number,
+    ): CancelablePromise<UserStatusDTO> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/users/{id}/user/status',
             path: {
                 'id': id,
             },

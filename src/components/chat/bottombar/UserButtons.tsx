@@ -5,7 +5,7 @@ import { BanMuteUserDialog } from './BanMuteUserDialog'
 import { DuelDialog } from './DuelDialog'
 import { UserDto, RoomDto } from '../chat.api'
 import { useState } from 'react'
-import UserProfile from '@/components/UserProfile/UserProfile';
+import UserProfile from '@/components/UserProfile'
 
 enum Sentence {
     none = -1,

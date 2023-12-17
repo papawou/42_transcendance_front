@@ -12,7 +12,9 @@ export type { GameDTO } from './models/GameDTO';
 export type { LeaderboardUserDTO } from './models/LeaderboardUserDTO';
 export type { LoginDTO } from './models/LoginDTO';
 export type { UserDTO } from './models/UserDTO';
+export type { UserExpandedDTO } from './models/UserExpandedDTO';
 export type { UserHistoryDTO } from './models/UserHistoryDTO';
+export { UserStatusDTO } from './models/UserStatusDTO';
 
 export { DefaultService } from './services/DefaultService';
 export { GamesService } from './services/GamesService';

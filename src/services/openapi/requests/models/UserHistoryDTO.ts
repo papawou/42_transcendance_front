@@ -5,7 +5,7 @@
 import type { GameDTO } from './GameDTO';
 
 export type UserHistoryDTO = {
-    userId: number;
+    id: number;
     rank: number;
     wins: Array<GameDTO>;
     loses: Array<GameDTO>;

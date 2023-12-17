@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 import { isDef } from "@/technical/isDef"
 import { UserJWT } from "@/technical/AccessTokenManager"
 import { useDefaultServiceAppControllerGetProfile } from "@/services/openapi/queries"
-import UserProfile from "../UserProfile/UserProfile"
+import UserProfile from "../UserProfile"
 
 const Login = ({ login }: { login: (userId: string) => void }) => {
     const [name, setName] = useState<string>("")
