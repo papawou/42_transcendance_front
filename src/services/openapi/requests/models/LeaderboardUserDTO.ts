@@ -6,5 +6,6 @@ export type LeaderboardUserDTO = {
     id: number;
     name: string;
     rank: number;
+    elo: number;
 };
 

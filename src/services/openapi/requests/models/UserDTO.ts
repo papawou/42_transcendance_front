@@ -7,5 +7,6 @@ export type UserDTO = {
     name: string;
     ft_id: string;
     pic: string;
+    elo: number;
 };
 

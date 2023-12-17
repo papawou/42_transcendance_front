@@ -23,12 +23,13 @@ export function SocialButtons({ userId }: { userId: number }) {
     const handlePM = () => {
         socket.emit('sendPM', { userId: userId });
     }
+
     return (
         <div style={{ display: "flex", gap: 16 }}>
             {
                 friends?.some(p => p.id === userId) ?
                     <AddFriendButton width={10} image='deletefriend.png' onClick={() => handleDeleteEmit()} />
-                    : <AddFriendButton width={10} image='addfriend.png' onClick={() => handleEmit()} />
+                    : !(blocked?.some(p => p.id === userId)) && <AddFriendButton width={10} image='addfriend.png' onClick={() => handleEmit()} />
             }
             {
                 blocked?.some(p => p.id === userId) ?

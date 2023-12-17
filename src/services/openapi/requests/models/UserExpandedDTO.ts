@@ -9,6 +9,7 @@ export type UserExpandedDTO = {
     name: string;
     ft_id: string;
     pic: string;
+    elo: number;
     friends: Array<UserDTO>;
     blocked: Array<UserDTO>;
 };

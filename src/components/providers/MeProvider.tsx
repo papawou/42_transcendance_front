@@ -15,6 +15,8 @@ export const useMe = () => useContext(MeContext);
 export const MeProvider = ({ children }: { children: ReactNode }) => {
     const { data: user, refetch } = useUsersServiceUserControllerGetMe()
 
+    console.log(user)
+
     useEffect(() => {
         const poll = setInterval(() => {
             refetch()
