@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { isDef } from '@/technical/isDef';
 import dayjs from 'dayjs';
 import { SocialButtons } from './SocialButtons';
+import QR from '../QR';
 
 import Avatar from '../Avatar';
 
@@ -47,6 +48,7 @@ const UserProfile = ({ open, onClose, userId }: Props) => {
 				(isLoading || isLoadingHistory || !open) ? <></> :
 					<>
 						<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
+						<QR />
 							<Avatar src={user.pic} width={50} />
 							{`Profil de ${user.name}`}
 							<SocialButtons userId={user.id} />

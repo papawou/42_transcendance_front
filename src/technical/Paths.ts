@@ -1,3 +1,4 @@
+
 const Paths = {
 	Home: "/",
 	User: "/user",
@@ -5,7 +6,8 @@ const Paths = {
 	Leaderboard: "/leaderboard",
 	Settings: "/settings",
 	AuthFtCallback: "/auth/ft/callback",
-	Chat: "/chat"
+	Chat: "/chat",
+	TwoFactorAuth: "/2fa"
 }
 
 export default Paths
