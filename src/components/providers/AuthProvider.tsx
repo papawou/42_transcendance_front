@@ -1,5 +1,5 @@
 import { dispatchCustomEvent, registerCustomEvent, removeCustomEvent } from "@/services/events";
-import { UserJWT, addAccessToken, getMetaToken, removeAccessToken } from "@/technical/AccessTokenManager";
+import { UserJWT, addAccessToken, getAccessToken, getMetaToken, removeAccessToken } from "@/technical/AccessTokenManager";
 
 import Paths from "@/technical/Paths";
 import { isDef } from "@/technical/isDef";
@@ -39,6 +39,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, [])
 
     useEffect(() => {
+        const token = getAccessToken()
+        if (!isDef(token)) {
+            dispatchCustomEvent("logout", undefined)
+            return
+        }
+        handleLogin(token)
+    }, [handleLogin])
+
+    useEffect(() => {
         registerCustomEvent("logout", handleLogout);
         return () => removeCustomEvent("logout", handleLogout)
     }, [handleLogout])
@@ -46,8 +55,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const contextValue: AuthContextValue = useMemo(() => ({
         user: user,
         login: (jwt: string) => handleLogin(jwt),
-        logout: () => handleLogout()
-    }), [handleLogin, handleLogout, user])
+        logout: () => dispatchCustomEvent("logout", undefined)
+    }), [handleLogin, user])
 
     return (
         <AuthContext.Provider value={contextValue}>

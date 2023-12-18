@@ -4,6 +4,7 @@ import { UserGame } from "@/shared/shared";
 import { WS_FAIL, WsGame, WsGameOut } from "@/shared/ws-game";
 import Paths from "@/technical/Paths";
 import { isDef } from "@/technical/isDef";
+import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,12 +50,11 @@ export const UserGameProvider = ({ children }: { children: ReactNode }) => {
     }, [userGame])
 
     const handleDuelInvite = useCallback((data: WsGameOut<WsGame.duelInvite>) => {
-        console.log(data)
-        enqueueSnackbar(`Invitation received ${data}`, {
+        enqueueSnackbar(`Invitation received ${data.senderId}`, {
             variant: "info",
-            autoHideDuration: 2000,
+            autoHideDuration: 60000,
             action: (snackbarId) => (<>
-                <button onClick={() => axiosInstance.post("/games/duel/accept", { senderId: data })}>
+                <button onClick={() => axiosInstance.post("/games/duel/accept", { senderId: data.senderId })}>
                     Accepter
                 </button>
                 <button onClick={() => closeSnackbar(snackbarId)}>
