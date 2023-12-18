@@ -33,7 +33,7 @@ export const PrivateMessages = ({
 
                                 <PMessage isCurrentUser={isCurrentUserMessage}>
                                     <div className="sender" style={{ fontSize: '15px' }}>
-                                        <strong>{message.userName}</strong>
+                                        <strong>{isCurrentUserMessage ? 'Me' : message.userName}</strong>
                                     </div>
                                     <div className="message" style={{ fontSize: '10px', wordWrap: 'break-word' }}>
                                         {message.message}
