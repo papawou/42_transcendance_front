@@ -54,7 +54,7 @@ const QR: React.FC = () => {
       .then((res) => {
         setQRisEnabled(true);
         axiosInstance
-          .get(`2fa/verified_first_time`, { secret: QRvalue }, { withCredentials: true })
+          .post(`${import.meta.env.VITE_API_URL}/2fa/verified_first_time`, { secret: QRvalue }, { withCredentials: true })
           .then((res) => {
             setError("");
             setShowModal(false);
