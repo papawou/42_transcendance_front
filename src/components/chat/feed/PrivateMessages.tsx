@@ -1,5 +1,5 @@
 import { styled } from "@mui/material"
-import { MessageDto, PrivateMsgsDto, UserDto } from "../chat.api"
+import { MessageDto, PrivateMsgsDto } from "../chat.api"
 import { useBlockedUser } from "@/components/providers/BlockedUsersProvider";
 import { useAuth } from '@/components/providers/AuthProvider'
 
