@@ -1,35 +1,36 @@
+import axios from "axios";
+
+import type { ApiRequestOptions } from "@/services/openapi/requests/core/ApiRequestOptions";
+import { CancelablePromise } from "@/services/openapi/requests/core/CancelablePromise";
+import type { OpenAPIConfig } from "@/services/openapi/requests/core/OpenAPI";
 import axiosInstance from "@/services/AxiosInstance";
-import { CancelablePromise, OpenAPIConfig } from "@/services/openapi/requests";
-import { ApiRequestOptions } from "@/services/openapi/requests/core/ApiRequestOptions";
-import { isDef } from "@/technical/isDef";
+
+const source = axios.CancelToken.source();
 
 export const request = <T>(
-    config: OpenAPIConfig,
-    options: ApiRequestOptions
+  config: OpenAPIConfig,
+  options: ApiRequestOptions
 ): CancelablePromise<T> => {
-    return new CancelablePromise((resolve, reject, onCancel) => {
-        const abortController = new AbortController();
-        onCancel(() => abortController.abort());
-
-        let url = options.url
-        if (isDef(options.path)) {
-            for(const [key, value] of Object.entries(options.path)) {
-                const regex = new RegExp(`\\{${key}\\}`, "g")
-                url = url.replace(regex, value)
-            }
-        }
-        return axiosInstance
-            .request({
-                url: url,
-                data: options.body,
-                method: options.method,
-                signal: abortController.signal
-            })
-            .then((res) => {
-                resolve(res?.data);
-            })
-            .catch((error) => {
-                reject(error);
-            });
+  return new CancelablePromise((resolve, reject, onCancel) => {
+    onCancel(() => {
+      console.log("canceL")
+      source.cancel("The user aborted a request.")
     });
+
+    return axiosInstance
+      .request({
+        url: options.url,
+        data: options.body,
+        method: options.method,
+        cancelToken: source.token,
+      })
+      .then((res) => {
+        console.log("res", res)
+        resolve(res?.data ?? null);
+      })
+      .catch((error) => {
+        console.log("error", error)
+        reject(error);
+      });
+  });
 };

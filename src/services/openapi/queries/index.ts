@@ -95,19 +95,11 @@ export const useGamesServiceGameControllerSearch = <TData = Awaited<ReturnType<t
 export const useGamesServiceGameControllerSearchCancel = <TData = Awaited<ReturnType<typeof GamesService.gameControllerSearchCancel>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof GamesService.gameControllerSearchCancel>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => GamesService.gameControllerSearchCancel(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof GamesService.gameControllerSearchCancel>>, TError, void, TContext>, "data"> & {
     data: TData;
 };
-export const useDefaultServiceAppControllerGetProfileKey = "DefaultServiceAppControllerGetProfile";
-export const useDefaultServiceAppControllerGetProfile = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, unknown, Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useDefaultServiceAppControllerGetProfileKey, ...(queryKey ?? [])], queryFn: () => DefaultService.appControllerGetProfile(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, TError>, "data"> & {
-    data: TData;
-};
 export const useDefaultServiceAuthControllerLogin = <TData = Awaited<ReturnType<typeof DefaultService.authControllerLogin>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerLogin>>, unknown, {
     requestBody: LoginDTO;
 }, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => DefaultService.authControllerLogin(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerLogin>>, TError, {
     requestBody: LoginDTO;
 }, TContext>, "data"> & {
-    data: TData;
-};
-export const useDefaultServiceAuthControllerHandleFtCallbackKey = "DefaultServiceAuthControllerHandleFtCallback";
-export const useDefaultServiceAuthControllerHandleFtCallback = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, unknown, Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useDefaultServiceAuthControllerHandleFtCallbackKey, ...(queryKey ?? [])], queryFn: () => DefaultService.authControllerHandleFtCallback(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof DefaultService.authControllerHandleFtCallback>>, TError>, "data"> & {
     data: TData;
 };
 export const useDefaultServiceAuthControllerFtCallback = <TData = Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => DefaultService.authControllerFtCallback(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError, void, TContext>, "data"> & {
