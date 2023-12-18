@@ -12,11 +12,15 @@ const QR: React.FC = () => {
   const [isenabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
-    axiosInstance.post(`${import.meta.env.VITE_API_URL}/2fa/isenable`, { withCredentials: true })
+    axiosInstance.post(`2fa/isEnable`, { withCredentials: true })
       .then((res) => {
         setIsEnabled(res.data);
       })
       .catch((error) => {
+        console.log({
+            where: "QR.tsx",
+            what: `2fa/isEnable`
+        });
         console.error('Error fetching data:', error);
       });
   }, []);
@@ -28,8 +32,9 @@ const QR: React.FC = () => {
   };
 
   function handleToggleClick(toggleChecked: boolean) {
+    console.log("cliqué/toggled");
     if (toggleChecked === true) {
-      axiosInstance.post(`${import.meta.env.VITE_API_URL}/2fa/disable`, null, { withCredentials: true });
+      axiosInstance.post(`/2fa/disable`, null, { withCredentials: true });
       toggleChecked = false;
       setIsEnabled(false);
     }
@@ -45,11 +50,11 @@ const QR: React.FC = () => {
     }
 
     axiosInstance
-      .post(`${import.meta.env.VITE_API_URL}/2fa/verified`, { secret: QRvalue }, { withCredentials: true })
+      .post(`2fa/verified`, { secret: QRvalue }, { withCredentials: true })
       .then((res) => {
         setQRisEnabled(true);
         axiosInstance
-          .get(`${import.meta.env.VITE_API_URL}/2fa/verified_first_time`, { secret: QRvalue }, { withCredentials: true })
+          .get(`2fa/verified_first_time`, { secret: QRvalue }, { withCredentials: true })
           .then((res) => {
             setError("");
             setShowModal(false);
@@ -68,17 +73,22 @@ const QR: React.FC = () => {
   };
 
   useEffect(() => {
-    if (QRisEnabled) {
-      axiosInstance.post(`${import.meta.env.VITE_API_URL}/2fa/enable`, null, { withCredentials: true })
+    // if (QRisEnabled) {
+      axiosInstance.post(`2fa/enable`, null, { withCredentials: true })
         .then(res => {
           fetchQR = res;
           setSource(res.data);
         });
-    }
+    // }
+    console.log ({
+        where: "submitQR/useEffect/QRisNOTEnabled",
+        what:"qr is not enabled"
+    });
   }, [QRisEnabled]);
 
   return (
     <div>
+        Coché c'est Enable, Décoché c'est décoché
       <label className="toggle-switch">
         <input
           type="checkbox"
@@ -94,7 +104,7 @@ const QR: React.FC = () => {
           <div className="QR">
           <img src={source} alt="QR Code" />
           </div>
-          <form onSubmit={submitQR}>
+          <form onSubmit={submitQR}> 
             <input
               onChange={(e) => setQRvalue(e.target.value)}
               value={QRvalue}
@@ -112,5 +122,8 @@ const QR: React.FC = () => {
     </div>
   );
 };
+
+// submitqr c'est quand tu cliques sur "Display QR"
+//
 
 export default QR;

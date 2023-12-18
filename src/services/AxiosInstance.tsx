@@ -1,4 +1,4 @@
-import { getAccessToken, removeAccessToken } from "@/technical/AccessTokenManager";
+import { getAccessToken } from "@/technical/AccessTokenManager";
 import { isDef } from "@/technical/isDef";
 import axios, { AxiosError, InternalAxiosRequestConfig, isAxiosError } from "axios";
 import { dispatchCustomEvent } from "./events";

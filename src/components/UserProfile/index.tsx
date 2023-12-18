@@ -48,7 +48,7 @@ const UserProfile = ({ open, onClose, userId }: Props) => {
 				(isLoading || isLoadingHistory || !open) ? <></> :
 					<>
 						<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
-						<QR />
+						{/* <QR /> */}
 							<Avatar src={user.pic} width={50} />
 							{`Profil de ${user.name}`}
 							<SocialButtons userId={user.id} />

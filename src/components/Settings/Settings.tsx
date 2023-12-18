@@ -5,8 +5,8 @@ import QR from '@/components/QR';
 
 const UserSettings = () => {
     const [input, setInput] = useState('');
-    const [show2FA, setShow2FA] = useState(false);
-    const [showQR, setShowQR] = useState(false);
+    // const [show2FA, setShow2FA] = useState(false);
+    // const [showQR, setShowQR] = useState(false);
 
     const handleValidation = () => {
         axiosInstance.post(`/users/change-name/${input.trim()}`);
@@ -17,13 +17,14 @@ const UserSettings = () => {
         setShowQR(false);
     };*/
 
-    const toggleQR = () => {
-        setShowQR(!showQR);
-        setShow2FA(false);
-    };
+    // const toggleQR = () => {
+    //     setShowQR(!showQR);
+    //     setShow2FA(false);
+    // };
 
     return (
         <div style={{ textAlign: 'center' }}>
+            
             <h2 style={{ textAlign: 'center' }}> Changer de nom</h2>
             <input
                 type='text'
@@ -33,10 +34,14 @@ const UserSettings = () => {
                 maxLength={10}
             />
             <button onClick={handleValidation}>Valider</button>
+
+            <br />
+            <h2 style={{ textAlign: 'center' }}>2FA</h2>
+            {<QR />}
             {/*<button onClick={toggle2FA}>Toggle 2FA</button>*/}
-            <button onClick={toggleQR}>Display QR</button>
+            {/* <button onClick={toggleQR}>Display QR</button> */}
             {/*{show2FA && <TwoFactorAuth />}*/}
-            {showQR && <QR />}
+            {/* {showQR && <QR />} */}
         </div>
     );
 };
