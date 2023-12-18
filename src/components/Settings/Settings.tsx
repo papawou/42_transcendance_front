@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '@/services/AxiosInstance';
-import TwoFactorAuth from '@/TwoFactorAuth/TwoFactorAuth'; 
+import TwoFactorAuth from '@/TwoFactorAuth/TwoFactorAuth';
 import QR from '@/components/QR';
 
 const UserSettings = () => {
@@ -12,10 +12,10 @@ const UserSettings = () => {
         axiosInstance.post(`/users/change-name/${input.trim()}`);
     };
 
-    const toggle2FA = () => {
+    /*const toggle2FA = () => {
         setShow2FA(!show2FA);
         setShowQR(false);
-    };
+    };*/
 
     const toggleQR = () => {
         setShowQR(!showQR);
@@ -33,9 +33,9 @@ const UserSettings = () => {
                 maxLength={10}
             />
             <button onClick={handleValidation}>Valider</button>
-            <button onClick={toggle2FA}>Toggle 2FA</button>
-            <button onClick={toggleQR}>Toggle QR</button>
-            {show2FA && <TwoFactorAuth />}
+            {/*<button onClick={toggle2FA}>Toggle 2FA</button>*/}
+            <button onClick={toggleQR}>Display QR</button>
+            {/*{show2FA && <TwoFactorAuth />}*/}
             {showQR && <QR />}
         </div>
     );

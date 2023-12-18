@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import '../css/QRpopup.css';
 import axiosInstance from "@/services/AxiosInstance";
+
+let fetchQR: any;
 
 const QR: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -8,19 +9,19 @@ const QR: React.FC = () => {
   const [source, setSource] = useState("");
   const [QRvalue, setQRvalue] = useState("");
   const [error, setError] = useState("");   
-  const [isenables, setIsEnables] = useState(false);
+  const [isenabled, setIsEnabled] = useState(false);
 
   useEffect(() => {
-    axiosInstance.get(`${import.meta.env.VITE_API_URL}/2fa/isenable`, { withCredentials: true })
+    axiosInstance.post(`${import.meta.env.VITE_API_URL}/2fa/isenable`, { withCredentials: true })
       .then((res) => {
-        setIsEnables(res.data);
+        setIsEnabled(res.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
 
-  const toggleChecked = showModal || isenables;
+  const toggleChecked = showModal || isenabled;
 
   const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShowModal(event.target.checked);
@@ -30,7 +31,7 @@ const QR: React.FC = () => {
     if (toggleChecked === true) {
       axiosInstance.post(`${import.meta.env.VITE_API_URL}/2fa/disable`, null, { withCredentials: true });
       toggleChecked = false;
-      setIsEnables(false);
+      setIsEnabled(false);
     }
   }
 
@@ -39,7 +40,7 @@ const QR: React.FC = () => {
     setError("");
 
     if (QRvalue.length !== 6) {
-      setError("error akhay");
+      setError("Code has to be with 6 digits");
       return;
     }
 
@@ -48,7 +49,7 @@ const QR: React.FC = () => {
       .then((res) => {
         setQRisEnabled(true);
         axiosInstance
-          .post(`${import.meta.env.VITE_API_URL}/2fa/verified_first_time`, { secret: QRvalue }, { withCredentials: true })
+          .get(`${import.meta.env.VITE_API_URL}/2fa/verified_first_time`, { secret: QRvalue }, { withCredentials: true })
           .then((res) => {
             setError("");
             setShowModal(false);
@@ -67,9 +68,10 @@ const QR: React.FC = () => {
   };
 
   useEffect(() => {
-    if (QRisEnabled === false) {
+    if (QRisEnabled) {
       axiosInstance.post(`${import.meta.env.VITE_API_URL}/2fa/enable`, null, { withCredentials: true })
         .then(res => {
+          fetchQR = res;
           setSource(res.data);
         });
     }
@@ -90,7 +92,7 @@ const QR: React.FC = () => {
       {showModal && (
         <div className="QRmodal">
           <div className="QR">
-            <img id='QRimg' src={source} alt="QR Code" />
+          <img src={source} alt="QR Code" />
           </div>
           <form onSubmit={submitQR}>
             <input

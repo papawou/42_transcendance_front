@@ -22,7 +22,7 @@ const TwoFactorAuth: React.FC<TwoFactorAuthProps> = ({ onSubmit }) => {
         if (response.status === 200) {
             onSubmit(input);
             axiosInstance
-            .post(`${import.meta.env.VITE_API_URL}/auth/verified`, null, {
+            .post(`${import.meta.env.VITE_API_URL}/2fa/verified`, null, {
               withCredentials: true,
             })
             .then((response) => {
