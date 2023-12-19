@@ -5,12 +5,14 @@ import { UserStatusDTO } from "../requests/models/UserStatusDTO";
 import { UserHistoryDTO } from "../requests/models/UserHistoryDTO";
 import { UserExpandedDTO } from "../requests/models/UserExpandedDTO";
 import { UserDTO } from "../requests/models/UserDTO";
-import { LoginDTO } from "../requests/models/LoginDTO";
+import { TfaDTO } from "../requests/models/TfaDTO";
 import { LeaderboardUserDTO } from "../requests/models/LeaderboardUserDTO";
 import { GameDTO } from "../requests/models/GameDTO";
+import { FtCallbackDTO } from "../requests/models/FtCallbackDTO";
 import { DuelInviteDTO } from "../requests/models/DuelInviteDTO";
 import { DuelAcceptDTO } from "../requests/models/DuelAcceptDTO";
 import { CancelFriendRequestDTO } from "../requests/models/CancelFriendRequestDTO";
+import { AccessTokenDTO } from "../requests/models/AccessTokenDTO";
 import { UsersService } from "../requests/services/UsersService";
 import { GamesService } from "../requests/services/GamesService";
 import { FaService } from "../requests/services/FaService";
@@ -97,41 +99,34 @@ export const useGamesServiceGameControllerSearch = <TData = Awaited<ReturnType<t
 export const useGamesServiceGameControllerSearchCancel = <TData = Awaited<ReturnType<typeof GamesService.gameControllerSearchCancel>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof GamesService.gameControllerSearchCancel>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => GamesService.gameControllerSearchCancel(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof GamesService.gameControllerSearchCancel>>, TError, void, TContext>, "data"> & {
     data: TData;
 };
-export const useFaServiceFaControllerEnable = <TData = Awaited<ReturnType<typeof FaService.faControllerEnable>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof FaService.faControllerEnable>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => FaService.faControllerEnable(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof FaService.faControllerEnable>>, TError, void, TContext>, "data"> & {
-    data: TData;
-};
-export const useFaServiceFaControllerActivate = <TData = Awaited<ReturnType<typeof FaService.faControllerActivate>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof FaService.faControllerActivate>>, unknown, {
-    requestBody: _2FA_DTO;
-}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => FaService.faControllerActivate(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof FaService.faControllerActivate>>, TError, {
-    requestBody: _2FA_DTO;
+export const useDefaultServiceAuthControllerFtCallback = <TData = Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, unknown, {
+    requestBody: FtCallbackDTO;
+}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => DefaultService.authControllerFtCallback(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError, {
+    requestBody: FtCallbackDTO;
 }, TContext>, "data"> & {
     data: TData;
 };
-export const useFaServiceFaControllerDisable = <TData = Awaited<ReturnType<typeof FaService.faControllerDisable>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof FaService.faControllerDisable>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => FaService.faControllerDisable(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof FaService.faControllerDisable>>, TError, void, TContext>, "data"> & {
+export const useDefaultServiceAuthControllerEnable = <TData = Awaited<ReturnType<typeof DefaultService.authControllerEnable>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerEnable>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => DefaultService.authControllerEnable(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerEnable>>, TError, void, TContext>, "data"> & {
     data: TData;
 };
-export const useFaServiceFaControllerVerify = <TData = Awaited<ReturnType<typeof FaService.faControllerVerify>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof FaService.faControllerVerify>>, unknown, {
-    requestBody: _2FA_DTO;
-}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => FaService.faControllerVerify(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof FaService.faControllerVerify>>, TError, {
-    requestBody: _2FA_DTO;
+export const useDefaultServiceAuthControllerActivate = <TData = Awaited<ReturnType<typeof DefaultService.authControllerActivate>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerActivate>>, unknown, {
+    requestBody: TfaDTO;
+}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => DefaultService.authControllerActivate(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerActivate>>, TError, {
+    requestBody: TfaDTO;
 }, TContext>, "data"> & {
     data: TData;
 };
-export const useFaServiceFaControllerIsEnable = <TData = Awaited<ReturnType<typeof FaService.faControllerIsEnable>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof FaService.faControllerIsEnable>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => FaService.faControllerIsEnable(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof FaService.faControllerIsEnable>>, TError, void, TContext>, "data"> & {
+export const useDefaultServiceAuthControllerDisable = <TData = Awaited<ReturnType<typeof DefaultService.authControllerDisable>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerDisable>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => DefaultService.authControllerDisable(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerDisable>>, TError, void, TContext>, "data"> & {
     data: TData;
 };
-export const useDefaultServiceAppControllerGetProfileKey = "DefaultServiceAppControllerGetProfile";
-export const useDefaultServiceAppControllerGetProfile = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, unknown, Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useDefaultServiceAppControllerGetProfileKey, ...(queryKey ?? [])], queryFn: () => DefaultService.appControllerGetProfile(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof DefaultService.appControllerGetProfile>>, TError>, "data"> & {
-    data: TData;
-};
-export const useDefaultServiceAuthControllerLogin = <TData = Awaited<ReturnType<typeof DefaultService.authControllerLogin>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerLogin>>, unknown, {
-    requestBody: LoginDTO;
-}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => DefaultService.authControllerLogin(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerLogin>>, TError, {
-    requestBody: LoginDTO;
+export const useDefaultServiceAuthControllerVerify = <TData = Awaited<ReturnType<typeof DefaultService.authControllerVerify>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerVerify>>, unknown, {
+    requestBody: TfaDTO;
+}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => DefaultService.authControllerVerify(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerVerify>>, TError, {
+    requestBody: TfaDTO;
 }, TContext>, "data"> & {
     data: TData;
 };
-export const useDefaultServiceAuthControllerFtCallback = <TData = Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => DefaultService.authControllerFtCallback(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerFtCallback>>, TError, void, TContext>, "data"> & {
+export const useDefaultServiceAuthControllerIsEnable = <TData = Awaited<ReturnType<typeof DefaultService.authControllerIsEnable>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof DefaultService.authControllerIsEnable>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => DefaultService.authControllerIsEnable(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof DefaultService.authControllerIsEnable>>, TError, void, TContext>, "data"> & {
     data: TData;
 };
 export const useDefaultServiceChatControllerGetRoomsFromUserKey = "DefaultServiceChatControllerGetRoomsFromUser";

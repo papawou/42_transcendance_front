@@ -4,7 +4,6 @@ import { UserGame } from "@/shared/shared";
 import { WS_FAIL, WsGame, WsGameOut } from "@/shared/ws-game";
 import Paths from "@/technical/Paths";
 import { isDef } from "@/technical/isDef";
-import dayjs from "dayjs";
 import { useSnackbar } from "notistack";
 import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";

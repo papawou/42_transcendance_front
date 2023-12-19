@@ -30,5 +30,7 @@ export const emit = <T extends WsGame>(name: T, payload: WsGameIn<T>, cb?: (res:
 }
 
 export const on = <T extends WsGame>(name: T, cb: (res: WsGameOut<T>) => void) => {
-    socket.on(name, cb)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const tmp: any = cb
+    socket.on(name, tmp)
 }

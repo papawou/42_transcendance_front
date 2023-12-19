@@ -1,4 +1,5 @@
 
+import { dispatchLogout } from "@/services/events";
 import { useUsersServiceUserControllerGetMe } from "@/services/openapi/queries";
 import { UserExpandedDTO } from "@/services/openapi/requests";
 import { ReactNode, createContext, useContext, useEffect, useMemo } from "react";
@@ -12,7 +13,7 @@ const MeContext = createContext<MeContextValue>(Object.create(null))
 export const useMe = () => useContext(MeContext);
 
 export const MeProvider = ({ children }: { children: ReactNode }) => {
-    const { data: user, refetch } = useUsersServiceUserControllerGetMe()
+    const { data: user, refetch, errorUpdateCount } = useUsersServiceUserControllerGetMe()
 
     useEffect(() => {
         const poll = setInterval(() => {
@@ -20,6 +21,12 @@ export const MeProvider = ({ children }: { children: ReactNode }) => {
         }, 5000);
         return () => clearInterval(poll);
     }, [refetch])
+
+    useEffect(() => {
+        if (errorUpdateCount > 0) {
+            dispatchLogout()
+        }
+    }, [errorUpdateCount])
 
     const contextValue: MeContextValue = useMemo(() => {
         return ({

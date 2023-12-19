@@ -2,6 +2,8 @@ import axiosInstance from "@/services/AxiosInstance";
 import { CancelablePromise, OpenAPIConfig } from "@/services/openapi/requests";
 import { ApiRequestOptions } from "@/services/openapi/requests/core/ApiRequestOptions";
 import { isDef } from "@/technical/isDef";
+import { isAxiosError } from "axios";
+import { dispatchLogout } from "@/services/events";
 
 export const request = <T>(
     config: OpenAPIConfig,
@@ -13,7 +15,7 @@ export const request = <T>(
 
         let url = options.url
         if (isDef(options.path)) {
-            for(const [key, value] of Object.entries(options.path)) {
+            for (const [key, value] of Object.entries(options.path)) {
                 const regex = new RegExp(`\\{${key}\\}`, "g")
                 url = url.replace(regex, value)
             }
@@ -29,6 +31,9 @@ export const request = <T>(
                 resolve(res?.data);
             })
             .catch((error) => {
+                if (isAxiosError(error) && error.response?.status === 401) {
+                    dispatchLogout()
+                }
                 reject(error);
             });
     });

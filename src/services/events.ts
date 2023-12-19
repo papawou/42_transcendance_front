@@ -5,7 +5,7 @@ export type CustomEventDetail = {
     "login": undefined
 }
 
-export const dispatchCustomEvent = <T extends CustomEvents>(type: T, data: CustomEventDetail[T]) => {
+const dispatchCustomEvent = <T extends CustomEvents>(type: T, data: CustomEventDetail[T]) => {
     window.dispatchEvent(new CustomEvent(type, data))
 }
 
@@ -19,5 +19,9 @@ export const removeCustomEvent = <T extends CustomEvents>(type: T, cb: (e: Custo
 
 
 export const dispatchLogout = () => {
+    dispatchCustomEvent("logout", undefined)
+}
 
+export const dispatchLogin = () => {
+    dispatchCustomEvent("login", undefined)
 }

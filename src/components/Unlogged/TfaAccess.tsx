@@ -1,8 +1,13 @@
 import axiosInstance from "@/services/AxiosInstance"
 import { useCallback, useState } from "react"
+import { useAuth } from "../providers/AuthProvider"
+import { useSearchParams } from "react-router-dom"
 
 export function TfaAccess() {
+    const { login } = useAuth()
+    const [searchParams,] = useSearchParams()
     const [tfaCodeActivate, setTfaCodeActivate] = useState<string | undefined>("")
+    const [error, setError] = useState(false)
 
     const handleCodeActivateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -10,11 +15,15 @@ export function TfaAccess() {
     }, [])
 
     const handleCodeActivate = useCallback(() => {
-        axiosInstance.post("2fa/activate", { otp: tfaCodeActivate }).then((res) => console.log(res))
-    }, [tfaCodeActivate])
+        setError(false);
+        axiosInstance.post("auth/tfa/verify", { userId: Number(searchParams.get("userId")), otp: tfaCodeActivate })
+            .then(res => login(res.data.access_token))
+            .catch(() => setError(true))
+    }, [login, searchParams, tfaCodeActivate])
 
     return (
         <div>
+            {error && <p>Error OTP</p>}
             <input placeholder='code ici' onChange={handleCodeActivateChange} value={tfaCodeActivate} />
             <button onClick={handleCodeActivate}>ENVOYER</button>
         </div>

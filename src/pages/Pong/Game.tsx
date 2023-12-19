@@ -12,7 +12,6 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
 
 	const onUpdateGame = useCallback((data: WsGameOut<WsGame.metaGetGame>) => {
 		if (data === WS_FAIL) {
-			console.log("onupdategame - inconsistent")
 			return;
 		}
 		game.ge = data;

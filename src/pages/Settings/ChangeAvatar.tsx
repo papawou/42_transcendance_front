@@ -21,7 +21,6 @@ const ChangeAvatar = () => {
 	const sendImage = async (imageToString: string) => {
 		try {
 			const response = await axiosInstance.post(`/users/change-avatar`, {image: imageToString});
-			console.log(response);
 		}
 		catch (error) {
 			console.error('mauvais envoi', error);
