@@ -22,7 +22,7 @@ body {
     background-clip: text;
     color: transparent;
     text-shadow: 10px 10px 7px rgba(0, 0, 0, 0.4);
-    animation: moveText 2s infinite alternate;
+    animation: moveText 1s infinite alternate;
     position: relative;
 }
 

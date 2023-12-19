@@ -1,13 +1,9 @@
 import { CreateRoomDialog } from "./CreateRoomDialog"
 import { JoinRoomDialog } from "./JoinRoomDialog"
 import { AllRoomsTabs } from "./AllRoomsTabs"
-
 import { ChatAPI } from "../chat.api"
 import { socket } from "@/services/socketio"
 import { useEffect, useState } from "react"
-
-
-
   
 export const JoinCreateRoomBar = () => {
 

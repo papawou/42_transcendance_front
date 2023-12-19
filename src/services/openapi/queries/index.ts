@@ -1,21 +1,13 @@
 // generated with @7nohe/openapi-react-query-codegen@0.5.1 
 import { useQuery, useMutation, UseQueryResult, UseQueryOptions, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
-import { _2FA_DTO } from "../requests/models/_2FA_DTO";
-import { UserStatusDTO } from "../requests/models/UserStatusDTO";
-import { UserHistoryDTO } from "../requests/models/UserHistoryDTO";
-import { UserExpandedDTO } from "../requests/models/UserExpandedDTO";
 import { UserDTO } from "../requests/models/UserDTO";
 import { TfaDTO } from "../requests/models/TfaDTO";
-import { LeaderboardUserDTO } from "../requests/models/LeaderboardUserDTO";
-import { GameDTO } from "../requests/models/GameDTO";
 import { FtCallbackDTO } from "../requests/models/FtCallbackDTO";
 import { DuelInviteDTO } from "../requests/models/DuelInviteDTO";
 import { DuelAcceptDTO } from "../requests/models/DuelAcceptDTO";
 import { CancelFriendRequestDTO } from "../requests/models/CancelFriendRequestDTO";
-import { AccessTokenDTO } from "../requests/models/AccessTokenDTO";
 import { UsersService } from "../requests/services/UsersService";
 import { GamesService } from "../requests/services/GamesService";
-import { FaService } from "../requests/services/FaService";
 import { DefaultService } from "../requests/services/DefaultService";
 export const useUsersServiceUserControllerGetUsersKey = "UsersServiceUserControllerGetUsers";
 export const useUsersServiceUserControllerGetUsers = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetUsers>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetUsers>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetUsers>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetUsersKey, ...(queryKey ?? [])], queryFn: () => UsersService.userControllerGetUsers(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetUsers>>, TError>, "data"> & {
