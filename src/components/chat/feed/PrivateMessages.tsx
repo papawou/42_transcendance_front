@@ -1,5 +1,5 @@
 import { styled } from "@mui/material"
-import { MessageDto, PrivateMsgsDto, UserDto } from "../chat.api"
+import { MessageDto, PrivateMsgsDto } from "../chat.api"
 import { useBlockedUser } from "@/components/providers/BlockedUsersProvider";
 import { useAuth } from '@/components/providers/AuthProvider'
 
@@ -33,7 +33,7 @@ export const PrivateMessages = ({
 
                                 <PMessage isCurrentUser={isCurrentUserMessage}>
                                     <div className="sender" style={{ fontSize: '15px' }}>
-                                        <strong>{message.userName}</strong>
+                                        <strong>{isCurrentUserMessage ? 'Me' : message.userName}</strong>
                                     </div>
                                     <div className="message" style={{ fontSize: '10px', wordWrap: 'break-word' }}>
                                         {message.message}
