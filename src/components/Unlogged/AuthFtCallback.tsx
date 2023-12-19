@@ -18,7 +18,6 @@ export function AuthFtCallback() {
             navigate("/",)
             return
         }
-
         axiosInstance
             .post(`/auth/ft/callback`, { code: code })
             .then(res => {

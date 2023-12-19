@@ -1,6 +1,6 @@
 import { getAccessToken } from "@/technical/AccessTokenManager";
 import { io, Socket } from "socket.io-client";
-import { registerCustomEvent } from "../services/events";
+import { registerCustomEvent } from "./events";
 import { WsGame, WsGameIn, WsGameOut } from "@/shared/ws-game";
 import { isDef } from "@/technical/isDef";
 

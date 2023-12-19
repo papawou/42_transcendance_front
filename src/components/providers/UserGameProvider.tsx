@@ -1,4 +1,4 @@
-import { emit, on, socket } from "@/providers/socketio";
+import { emit, on, socket } from "@/services/socketio";
 import axiosInstance from "@/services/AxiosInstance";
 import { UserGame } from "@/shared/shared";
 import { WS_FAIL, WsGame, WsGameOut } from "@/shared/ws-game";

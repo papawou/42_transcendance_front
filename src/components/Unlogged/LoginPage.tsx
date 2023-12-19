@@ -9,10 +9,8 @@ export const LoginPage = () => {
     }, [])
 
     return (
-        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "50px" }}>
-            <button onClick={() => handleClick()}>
-                LOGIN API 42
-            </button>
-        </div>
+        <button onClick={() => handleClick()}>
+            LOGIN API 42
+        </button>
     )
 }   

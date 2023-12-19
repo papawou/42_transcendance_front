@@ -3,7 +3,7 @@ import { WS_FAIL, WsGame, WsGameOut } from "@/shared/ws-game";
 import { isDef } from "@/technical/isDef";
 import { Game } from "./Game";
 import { useCallback, useEffect, useState } from "react";
-import { emit, socket } from "@/providers/socketio";
+import { emit, socket } from "@/services/socketio";
 import { GameEngineClient } from "@/pong/GameEngineClient";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axiosInstance from "@/services/AxiosInstance";

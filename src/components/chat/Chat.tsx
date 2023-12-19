@@ -1,5 +1,5 @@
 import { Feed } from "./feed/Feed"
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 import { ChatNotif } from "./ChatNotif"
 import { ChatAPI, PrivateMsgsDto, RoomDto, UserDto } from "./chat.api"
 import { RoomTabs } from "./sidebar/RoomTabs"

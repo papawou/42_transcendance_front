@@ -1,6 +1,6 @@
 
 import { useMe } from "../providers/MeProvider"
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 import axiosInstance from "@/services/AxiosInstance"
 import AddFriendButton from "../UserButtons/AddFriendButton"
 import { useAuth } from "../providers/AuthProvider"
