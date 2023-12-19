@@ -3,7 +3,6 @@ import { useAuth } from "../providers/AuthProvider"
 import { NavLink } from "react-router-dom"
 import { isDef } from "@/technical/isDef"
 import { UserJWT } from "@/technical/AccessTokenManager"
-import { useDefaultServiceAppControllerGetProfile } from "@/services/openapi/queries"
 import UserProfile from "../UserProfile"
 
 const Login = ({ login }: { login: (userId: string) => void }) => {
@@ -31,7 +30,6 @@ const Login = ({ login }: { login: (userId: string) => void }) => {
 
 const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => {
     const [profileOpen, setProfileOpen] = useState(false)
-    const { refetch } = useDefaultServiceAppControllerGetProfile(undefined)
     return (
         <>
             <UserProfile userId={user.id} open={profileOpen} onClose={() => setProfileOpen(false)} />
@@ -47,7 +45,6 @@ const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => 
             </div>
             <div>
                 <button onClick={() => logout()}>LOGOUT</button>
-                <button onClick={() => refetch()}>DEBUG_ME</button>
             </div>
         </>
     )

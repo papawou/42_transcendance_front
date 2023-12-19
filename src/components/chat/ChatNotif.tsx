@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSnackbar } from "notistack";
-import { socket } from "@/providers/socketio";
+import { socket } from "@/services/socketio";
 
 export const ChatNotif = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();

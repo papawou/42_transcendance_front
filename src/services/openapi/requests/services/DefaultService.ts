@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { FtCallbackDTO } from '../models/FtCallbackDTO';
 import type { LoginDTO } from '../models/LoginDTO';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -26,13 +27,18 @@ export class DefaultService {
     }
 
     /**
+     * @param requestBody
      * @returns any
      * @throws ApiError
      */
-    public static authControllerFtCallback(): CancelablePromise<any> {
+    public static authControllerFtCallback(
+        requestBody: FtCallbackDTO,
+    ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/auth/ft/callback',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 
@@ -59,10 +65,10 @@ export class DefaultService {
     }
 
     /**
-     * @returns any
+     * @returns number
      * @throws ApiError
      */
-    public static chatControllerGetBlockedUsers(): CancelablePromise<any> {
+    public static chatControllerGetBlockedUsers(): CancelablePromise<Array<number>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/chat/blockedUsers',

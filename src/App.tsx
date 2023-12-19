@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Settings from "./pages/Settings";
 import { Leaderboard } from "./pages/Leaderboard";
 
 import { Providers } from "./components/providers";
 import { Boilerplate } from "./pages/Boilerplate";
 import Paths from "./technical/Paths";
 import { Pong } from "./pages/Pong";
+import Settings from "./pages/Settings";
 
 import "./ui/main.css"
 

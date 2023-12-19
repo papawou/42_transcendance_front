@@ -1,5 +1,5 @@
 import { GameEngineClient } from "@/pong/GameEngineClient";
-import { emit, on, socket } from "@/providers/socketio";
+import { emit, on, socket } from "@/services/socketio";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { isDef } from "@/technical/isDef";
 import { useAuth } from "@/components/providers/AuthProvider";
@@ -12,7 +12,6 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
 
 	const onUpdateGame = useCallback((data: WsGameOut<WsGame.metaGetGame>) => {
 		if (data === WS_FAIL) {
-			console.log("onupdategame - inconsistent")
 			return;
 		}
 		game.ge = data;

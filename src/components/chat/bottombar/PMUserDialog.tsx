@@ -1,5 +1,5 @@
 import { Dialog, DialogTitle } from "@mui/material"
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 
 interface PMUserDialogProps {
     open: boolean

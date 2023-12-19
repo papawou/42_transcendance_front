@@ -1,6 +1,6 @@
 import { getAccessToken } from "@/technical/AccessTokenManager";
 import { io, Socket } from "socket.io-client";
-import { registerCustomEvent } from "../services/events";
+import { registerCustomEvent } from "./events";
 import { WsGame, WsGameIn, WsGameOut } from "@/shared/ws-game";
 import { isDef } from "@/technical/isDef";
 
@@ -30,5 +30,7 @@ export const emit = <T extends WsGame>(name: T, payload: WsGameIn<T>, cb?: (res:
 }
 
 export const on = <T extends WsGame>(name: T, cb: (res: WsGameOut<T>) => void) => {
-    socket.on(name, cb)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const tmp: any = cb
+    socket.on(name, tmp)
 }

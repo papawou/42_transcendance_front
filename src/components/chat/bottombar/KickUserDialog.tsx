@@ -1,6 +1,6 @@
 import { Dialog, DialogTitle } from "@mui/material"
 import { UserDto } from "../chat.api"
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 
 interface KickUserDialogProps {
     open: boolean

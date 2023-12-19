@@ -3,7 +3,7 @@ import { JoinRoomDialog } from "./JoinRoomDialog"
 import { AllRoomsTabs } from "./AllRoomsTabs"
 
 import { ChatAPI } from "../chat.api"
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 import { useEffect, useState } from "react"
 
 
