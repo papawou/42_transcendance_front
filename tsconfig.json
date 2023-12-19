@@ -12,6 +12,7 @@
 		"outDir": "./dist",
 		"incremental": true,
 		"skipLibCheck": true,
+		"watch": true,
 		"jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": {

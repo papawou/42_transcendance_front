@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Silkscreen', sans-serif;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background: url('loginback.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.title {
+    font-size: 60px;
+    color: #070707;
+    text-shadow: 10px 10px 7px rgba(0, 0, 0, 0.4);
+    animation: moveText 1s infinite alternate;
+    position: relative; /* Ensure the container for the dot is relative to this */
+}
+
+.ball {
+    position: absolute; /* Position the dot relative to the title */
+    top: 100px; /* Adjust to position above the title */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ffffff; /* White color */
+    animation: bounce 0.5s infinite alternate; /* Animation settings */
+    animation-delay: 0.2s; /* Delay for a staggered effect */
+    box-shadow: 10px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(1);
+    }
+    100% {
+        transform: translateX(10px); /* Adjust the distance of movement */
+    }
+}
+
+@keyframes bounce {
+    0% {
+        top: 460px; /* Starting position */
+    }
+    100% {
+        top: 380px; /* Adjust the bouncing height as needed */
+    }
+}
+
+.login-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #06efef;
+    color: rgb(18, 17, 17);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.logo-in-button {
+    max-width: 22px;
+    height: auto;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.login-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.login-button:active {
+    transform: scale(0.95);
+    box-shadow: none;
+}
