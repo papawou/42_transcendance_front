@@ -1,20 +1,26 @@
 .navbutton-text {
 	text-decoration: none;
-	font-size: 60px;
-	font-family: sans-serif;
-	color: rgb(124, 187, 18);
-	border-style: solid;
-	border-radius: 30px;
-	border-width: 5px;
-	border-color: green;
-	border-spacing: 100px;
-	background-color: rgb(114, 114, 114);
-	transition: border-color 0.3s ease-in-out;
-	transition: color 0.3s ease-in-out;
-	padding: 10px;
+	font-size: 30px;
+	font-family: 'Orbitron', sans-serif;
+	color: #0a0a0a;
+	border: 2px solid #4CAF50;
+	border-radius: 25px;
+	background-color: #4CAF50;
+	padding: 15px 30px;
+	transition: all 0.3s ease-in-out;
+    box-shadow: 10px 1px 10px rgba(0, 0, 0, 0.3);
 }
-
+  
 .navbutton-text:hover {
-	border-color: rgb(124, 187, 18);
-	color : green;
+	background-color: #45a049;
+	border-color: #45a049;
+	transform: scale(1.1);
+}
+  
+.navbutton-text:focus {
+	outline: none;
+}
+  
+.navbutton-text:active {
+	transform: scale(0.95);
 }

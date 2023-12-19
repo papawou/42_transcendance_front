@@ -24,7 +24,7 @@ const PendingList = () => {
                     <h4>Demandes d'amis envoyées</h4>
                     {
                         me.pending?.map(user => (
-                            <div style={{ display: "flex", alignItems: "center", gap: "5px" }} key={user.id}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px" }} key={user.id}>
                                 <Avatar src={user.pic} width={20} />
                                 {user.name}
                             </div>

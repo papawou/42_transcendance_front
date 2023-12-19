@@ -15,7 +15,7 @@ export const Boilerplate = () => {
                 <div style={{ flex: "1 1 auto", border: "1px solid green" }}>
                     <Outlet />
                 </div>
-                <div style={{ flex: "0 1 auto", border: "1px solid red" }}>
+                <div style={{ flex: "0 1 auto", border: "1px solid #00274C" }}>
                     <Chat />
                 </div>
             </div>

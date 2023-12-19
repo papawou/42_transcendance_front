@@ -5,6 +5,7 @@ import { isDef } from "@/technical/isDef"
 import { UserJWT } from "@/technical/AccessTokenManager"
 import { useDefaultServiceAppControllerGetProfile } from "@/services/openapi/queries"
 import UserProfile from "../UserProfile"
+import "./style.css"
 
 const Login = ({ login }: { login: (userId: string) => void }) => {
     const [name, setName] = useState<string>("")
@@ -40,14 +41,14 @@ const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => 
                     e.preventDefault()
                     setProfileOpen(true)
                 }}>
-                    <h2>
+                    <h2 className="user-name">
                         {user.name}
                     </h2>
                 </NavLink>
             </div>
             <div>
-                <button onClick={() => logout()}>LOGOUT</button>
-                <button onClick={() => refetch()}>DEBUG_ME</button>
+            <button onClick={() => logout()} className="cool-button"> LOGOUT </button>
+                <button onClick={() => refetch()} className="cool-button"> DEBUG_ME </button>
             </div>
         </>
     )
@@ -56,7 +57,20 @@ const UserLogged = ({ logout, user }: { logout: () => void, user: UserJWT }) => 
 export function UserNav() {
     const user = useAuth()
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", border: "2px solid black" }}>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            //border: "none",
+            padding: "10px",
+            backgroundColor: "#4CAF50",
+            border: "2px solid #4CAF50",
+            borderRadius: "25px",
+            transition: "all 0.3s ease-in-out",
+            boxShadow: "10px 1px 10px rgba(0, 0, 0, 0.3)",
+            //cursor: "pointer",
+            marginLeft: "20px",
+        }}>
             {
                 !isDef(user.user) ?
                     <Login login={user.login} />

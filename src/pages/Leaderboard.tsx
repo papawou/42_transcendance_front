@@ -4,6 +4,7 @@ import { isDef } from "@/technical/isDef";
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import "./Leaderboard.css"
 
 export const Leaderboard = () => {
     const [userId, setUserId] = useState<number | undefined>(undefined)
@@ -12,7 +13,7 @@ export const Leaderboard = () => {
     return (
         <div>
             {isDef(userId) && <UserProfile open={true} userId={userId} onClose={() => setUserId(undefined)} />}
-            <h1>Leaderboard</h1>
+            <h1 className="cool-heading">Leaderboard</h1>
             <div>{
                 (isLoading) ? "loading..." :
                     <Table>

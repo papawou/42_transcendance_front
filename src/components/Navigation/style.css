@@ -1,7 +1,34 @@
 .navigation {
-	display: flex;
-	justify-content: space-between;
-	list-style-type: none;
-	align-items: center;
-	height: var(--header-height)
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    align-items: center;
+    height: var(--header-height);
+    margin-right: 85px;
+}
+
+.user-name {
+    color: rgb(6, 6, 6);
+    transition: color 0.3s ease-in-out, transform 0.1s ease-out;
+}
+
+.user-name:hover {
+    color: rgb(247, 245, 245);
+	transform: scale(1.05);
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 8px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+button:hover {
+    background-color: #060606;
+    color: #faf8f8;
+    transform: scale(1.05);
 }

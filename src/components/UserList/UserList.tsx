@@ -12,7 +12,7 @@ const User = ({ user }: { user: UserDTO }) => {
 
 	return (
 		<div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-			<Avatar src={user.pic} width={20} /> {user.name}
+			<Avatar src={user.pic} width={25} /> {user.name}
 			<UserProfile
 				open={openProfileDialog}
 				onClose={() => setOpenProfileDialog(false)}

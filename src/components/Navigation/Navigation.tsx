@@ -13,7 +13,7 @@ const Navigation = () => {
 			<NavButton text="PLAY" to={Paths.Pong} />
 			<NavButton text="LEADERBOARD" to={Paths.Leaderboard} />
 			<NavLink to={Paths.Settings}>
-				<Avatar src="logo_settings.png" width={100} />
+				<Avatar src="settings-removebg.png" width={150} />
 			</NavLink>
 		</div>
 	);

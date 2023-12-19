@@ -9,11 +9,8 @@ type Props = {
 
 export const NavButton = ({ text, to }: Props) => {
 	return (
-		<NavLink
-			style={{ textDecoration: "none" }}
-			to={to}
-		>
-			<span className="navbutton-text">{text}</span>
+		<NavLink style={{ textDecoration: "none" }} to={to}>
+		  <button className="navbutton-text">{text}</button>
 		</NavLink>
-	)
-}
+	  );
+	};
