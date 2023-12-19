@@ -9,13 +9,13 @@ export const Boilerplate = () => {
         <div>
             <Navigation />
             <div style={{ display: "flex" }}>
-                <div style={{ flex: "0 1 auto", boxShadow: "0 0 20px rgba(0, 0, 255, 0.5)", borderRadius: "10px", backgroundColor: "rgba(0, 0, 255, 0.1)" }}>
+                <div style={{ flex: "0 1 auto", border: "1px solid blue" }}>
                     <SocialPanel />
                 </div>
-                <div style={{ flex: "1 1 auto", boxShadow: "0 0 20px rgba(0, 128, 0, 0.5)", borderRadius: "10px", margin: "0 10px", backgroundColor: "rgba(0, 128, 0, 0.1)" }}>
+                <div style={{ flex: "1 1 auto", border: "1px solid green" }}>
                     <Outlet />
                 </div>
-                <div style={{ flex: "0 1 auto", boxShadow: "0 0 20px rgba(0, 39, 76, 0.5)", borderRadius: "10px", backgroundColor: "rgba(0, 39, 76, 0.1)" }}>
+                <div style={{ flex: "0 1 auto", border: "1px solid #00274C" }}>
                     <Chat />
                 </div>
             </div>

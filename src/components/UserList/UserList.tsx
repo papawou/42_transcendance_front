@@ -4,6 +4,7 @@ import { UserDTO } from '@/services/openapi/requests';
 
 import AddFriendButton from '../UserButtons/AddFriendButton';
 import UserProfile from '../UserProfile';
+
 import "./style.css"
 
 const User = ({ user }: { user: UserDTO }) => {

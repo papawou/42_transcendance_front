@@ -13,7 +13,7 @@ export const Leaderboard = () => {
     return (
         <div>
             {isDef(userId) && <UserProfile open={true} userId={userId} onClose={() => setUserId(undefined)} />}
-            <h1 className="head">Leaderboard</h1>
+            <h1 className="cool-heading">Leaderboard</h1>
             <div>{
                 (isLoading) ? "loading..." :
                     <Table>
@@ -21,18 +21,18 @@ export const Leaderboard = () => {
                             {
                                 data.sort((a, b) => a.rank - b.rank).map((p) => (
                                     <TableRow key={p.id}>
-                                        <TableCell component="th" scope="row" className="elo">
+                                        <TableCell component="th" scope="row">
                                             {p.rank}
                                         </TableCell>
                                         <TableCell align="right">
                                             <NavLink to={""} onClick={(e) => {
                                                 e.preventDefault()
                                                 setUserId(p.id)
-                                            }}  className="name ">
+                                            }}>
                                                 {p.name}
                                             </NavLink>
                                         </TableCell>
-                                        <TableCell align="right" className="elo">
+                                        <TableCell align="right">
                                                 {p.elo}
                                         </TableCell>
                                     </TableRow>
