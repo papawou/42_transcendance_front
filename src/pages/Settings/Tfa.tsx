@@ -10,7 +10,7 @@ function EnableTfa() {
     const [tfaCodeActivate, setTfaCodeActivate] = useState<string | undefined>("")
 
     const askQrCodeImage = useCallback(() => {
-        axiosInstance.post("2fa/enable").then(res => setQrCodeImage(res.data));
+        axiosInstance.post("auth/tfa/enable").then(res => setQrCodeImage(res.data));
     }, [])
 
     const handleCodeActivateChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +19,7 @@ function EnableTfa() {
     }, [])
 
     const handleCodeActivate = useCallback(() => {
-        axiosInstance.post("2fa/activate", { otp: tfaCodeActivate })
+        axiosInstance.post("auth/tfa/activate", { otp: tfaCodeActivate })
     }, [tfaCodeActivate])
 
     return (
@@ -44,7 +44,7 @@ function EnableTfa() {
 function DisableTfa() {
     return (
         <div>
-            <button onClick={() => axiosInstance.post("2fa/disable")}>DISABLE 2FA</button>
+            <button onClick={() => axiosInstance.post("auth/tfa/disable")}>DISABLE 2FA</button>
         </div>
     )
 }

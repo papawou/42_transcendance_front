@@ -3,6 +3,7 @@ import { isDef } from "@/technical/isDef";
 import { useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../providers/AuthProvider";
+import Paths from "@/technical/Paths";
 
 export function AuthFtCallback() {
     const { login } = useAuth()
@@ -21,14 +22,14 @@ export function AuthFtCallback() {
         axiosInstance
             .post(`/auth/ft/callback`, { code: code })
             .then(res => {
-                if (!isDef(res?.data?.access_token)) {
-                    navigate("/2fa", { replace: true })
+                if (!isDef(res.data?.access_token)) {
+                    navigate(Paths.Tfa(res.data.userId), { replace: true })
                 }
                 else {
                     login(res.data.access_token)
                 }
             })
-    }, [code, login, navigate])
+    }, [code, login])
 
     return (
         <>

@@ -1,9 +1,11 @@
 import axiosInstance from "@/services/AxiosInstance"
 import { useCallback, useState } from "react"
 import { useAuth } from "../providers/AuthProvider"
+import { useSearchParams } from "react-router-dom"
 
 export function TfaAccess() {
     const { login } = useAuth()
+    const [searchParams,] = useSearchParams()
     const [tfaCodeActivate, setTfaCodeActivate] = useState<string | undefined>("")
     const [error, setError] = useState(false)
 
@@ -14,10 +16,10 @@ export function TfaAccess() {
 
     const handleCodeActivate = useCallback(() => {
         setError(false);
-        axiosInstance.post("2fa/activate", { otp: tfaCodeActivate })
-            .then((data) => login(data.access_token))
+        axiosInstance.post("auth/tfa/verify", { userId: Number(searchParams.get("userId")), otp: tfaCodeActivate })
+            .then(res => login(res.data.access_token))
             .catch(() => setError(true))
-    }, [login, tfaCodeActivate])
+    }, [login, searchParams, tfaCodeActivate])
 
     return (
         <div>

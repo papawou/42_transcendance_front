@@ -1,3 +1,5 @@
+import { isDef } from "./isDef"
+
 const Paths = {
 	Home: "/",
 	User: "/user",
@@ -5,6 +7,7 @@ const Paths = {
 	Leaderboard: "/leaderboard",
 	Settings: "/settings",
 	AuthFtCallback: "/auth/ft/callback",
+	Tfa: (userId?: number) => `/auth/tfa${isDef(userId) ? `?userId=${userId}` : ""}`,
 	Chat: "/chat"
 }
 

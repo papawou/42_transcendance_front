@@ -1,8 +1,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { AccessTokenDTO } from '../models/AccessTokenDTO';
 import type { FtCallbackDTO } from '../models/FtCallbackDTO';
-import type { LoginDTO } from '../models/LoginDTO';
+import type { TfaDTO } from '../models/TfaDTO';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -15,14 +16,25 @@ export class DefaultService {
      * @returns any
      * @throws ApiError
      */
-    public static authControllerLogin(
-        requestBody: LoginDTO,
-    ): CancelablePromise<any> {
+    public static authControllerFtCallback(
+        requestBody: FtCallbackDTO,
+    ): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/auth/login',
+            url: '/auth/ft/callback',
             body: requestBody,
             mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * @returns string
+     * @throws ApiError
+     */
+    public static authControllerEnable(): CancelablePromise<string> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/auth/tfa/enable',
         });
     }
 
@@ -31,14 +43,52 @@ export class DefaultService {
      * @returns any
      * @throws ApiError
      */
-    public static authControllerFtCallback(
-        requestBody: FtCallbackDTO,
+    public static authControllerActivate(
+        requestBody: TfaDTO,
     ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/auth/ft/callback',
+            url: '/auth/tfa/activate',
             body: requestBody,
             mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * @returns any
+     * @throws ApiError
+     */
+    public static authControllerDisable(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/auth/tfa/disable',
+        });
+    }
+
+    /**
+     * @param requestBody
+     * @returns AccessTokenDTO
+     * @throws ApiError
+     */
+    public static authControllerVerify(
+        requestBody: TfaDTO,
+    ): CancelablePromise<AccessTokenDTO> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/auth/tfa/verify',
+            body: requestBody,
+            mediaType: 'application/json',
+        });
+    }
+
+    /**
+     * @returns boolean
+     * @throws ApiError
+     */
+    public static authControllerIsEnable(): CancelablePromise<boolean> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/auth/tfa/isActive',
         });
     }
 

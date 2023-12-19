@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 import { LoginPage } from "../Unlogged/LoginPage";
 import { TfaAccess } from "../Unlogged/TfaAccess";
 import { AuthFtCallback } from "../Unlogged/AuthFtCallback";
+import Paths from "@/technical/Paths";
 
 export const LoginProtect = ({ children }: PropsWithChildren) => {
     const isLogged = useIsLogged()
@@ -22,8 +23,8 @@ export const LoginProtect = ({ children }: PropsWithChildren) => {
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "50px" }}>
             <Routes>
                 <Route path="/" element={<LoginPage />} />
-                <Route path="/2fa" element={<TfaAccess />} />
-                <Route path="/auth/ft/callback" element={<AuthFtCallback />} />
+                <Route path={Paths.Tfa()} element={<TfaAccess />} />
+                <Route path={Paths.AuthFtCallback} element={<AuthFtCallback />} />
             </Routes>
         </div>
     )

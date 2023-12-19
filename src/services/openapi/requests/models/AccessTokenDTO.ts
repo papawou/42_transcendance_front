@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type LoginDTO = {
-    name: string;
+export type AccessTokenDTO = {
+    access_token: string;
 };
 
