@@ -2,8 +2,10 @@ import axiosInstance from "@/services/AxiosInstance";
 import { isDef } from "@/technical/isDef";
 import { useEffect, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useAuth } from "../providers/AuthProvider";
 
 export function AuthFtCallback() {
+    const { login } = useAuth()
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
 
@@ -22,8 +24,11 @@ export function AuthFtCallback() {
                 if (!isDef(res?.data?.access_token)) {
                     navigate("/2fa", { replace: true })
                 }
+                else {
+                    login(res.data.access_token)
+                }
             })
-    }, [code])
+    }, [code, login, navigate])
 
     return (
         <>

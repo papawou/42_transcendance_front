@@ -1,8 +1,9 @@
 import axiosInstance from "@/services/AxiosInstance"
 import { useCallback, useState } from "react"
-import { redirect } from "react-router-dom"
+import { useAuth } from "../providers/AuthProvider"
 
 export function TfaAccess() {
+    const { login } = useAuth()
     const [tfaCodeActivate, setTfaCodeActivate] = useState<string | undefined>("")
     const [error, setError] = useState(false)
 
@@ -13,8 +14,10 @@ export function TfaAccess() {
 
     const handleCodeActivate = useCallback(() => {
         setError(false);
-        axiosInstance.post("2fa/activate", { otp: tfaCodeActivate }).then(() => redirect("/")).catch(() => setError(true))
-    }, [tfaCodeActivate])
+        axiosInstance.post("2fa/activate", { otp: tfaCodeActivate })
+            .then((data) => login(data.access_token))
+            .catch(() => setError(true))
+    }, [login, tfaCodeActivate])
 
     return (
         <div>
