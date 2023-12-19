@@ -3,8 +3,6 @@ import { useMe } from '@/components/providers/MeProvider';
 import { isDef } from "@/technical/isDef";
 import { useCallback, useState } from "react";
 
-
-
 function EnableTfa() {
     const [qrCodeImage, setQrCodeImage] = useState<string | undefined>(undefined);
     const [tfaCodeActivate, setTfaCodeActivate] = useState<string | undefined>("")

@@ -5,7 +5,6 @@ body {
     background: url('../../../public/prism.svg') no-repeat center center fixed;
 }
 
-
 .container {
     min-height: 100%;
     display: flex;
