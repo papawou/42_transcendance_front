@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle } from "@mui/material"
 import React from "react"
 import { UserDto } from "../chat.api"
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 
 enum Sentence {
     none = -1,

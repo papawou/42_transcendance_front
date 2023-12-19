@@ -2,7 +2,7 @@ import UserList from "./UserList/UserList";
 import PendingList from "./UserList/PendingList";
 import { useUsersServiceUserControllerGetFriends, useUsersServiceUserControllerGetUsers } from "@/services/openapi/queries";
 import { useEffect } from "react";
-import { socket } from "@/providers/socketio";
+import { socket } from "@/services/socketio";
 
 export const FriendsList = () => {
     const { data, isLoading, refetch: refetchFriend } = useUsersServiceUserControllerGetFriends();

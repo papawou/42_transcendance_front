@@ -22,7 +22,4 @@ axiosInstance.interceptors.response.use(undefined, (error: Error | AxiosError) =
     Promise.reject(error)
 })
 
-
-
-
 export default axiosInstance;

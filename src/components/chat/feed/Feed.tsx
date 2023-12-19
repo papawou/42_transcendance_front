@@ -1,6 +1,6 @@
 import { PrivateMsgsDto, RoomDto } from '../chat.api'
 import { SendMsgBar } from './SendMsgsBar'
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 import { ChatMessages } from './ChatMessages'
 import { PrivateMessages } from './PrivateMessages'
 import { ChatOptions } from './ChatOptions'

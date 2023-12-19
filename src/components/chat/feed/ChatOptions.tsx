@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { RoomDto } from '../chat.api'
 import { ChangePwdDialog } from './ChangePwdDialog'
 import { Dialog, DialogTitle } from "@mui/material"
-import { socket } from "@/providers/socketio"
+import { socket } from "@/services/socketio"
 import { useAuth } from '@/components/providers/AuthProvider'
 
 export const ChatOptions = ({room}: {room: RoomDto}) => {

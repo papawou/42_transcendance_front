@@ -1,5 +1,5 @@
 import { GameEngineClient } from "@/pong/GameEngineClient";
-import { emit, on, socket } from "@/providers/socketio";
+import { emit, on, socket } from "@/services/socketio";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { isDef } from "@/technical/isDef";
 import { useAuth } from "@/components/providers/AuthProvider";

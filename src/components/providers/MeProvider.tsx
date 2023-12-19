@@ -1,13 +1,9 @@
 
 import { useUsersServiceUserControllerGetMe } from "@/services/openapi/queries";
-import { UserDTO } from "@/services/openapi/requests";
+import { UserExpandedDTO } from "@/services/openapi/requests";
 import { ReactNode, createContext, useContext, useEffect, useMemo } from "react";
 
-type MeContextValue = {
-    friends?: UserDTO[]
-    blocked?: UserDTO[],
-    pending?: UserDTO[],
-    pendingOf?: UserDTO[]
+type MeContextValue = UserExpandedDTO & {
     refetch: () => void
 }
 
@@ -21,16 +17,13 @@ export const MeProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const poll = setInterval(() => {
             refetch()
-        }, 1000);
+        }, 5000);
         return () => clearInterval(poll);
     }, [refetch])
 
     const contextValue: MeContextValue = useMemo(() => {
         return ({
-            friends: user?.friends,
-            blocked: user?.blocked,
-            pending: user?.pending,
-            pendingOf: user?.pendingOf,
+            ...user,
             refetch: () => refetch()
         })
     }, [
@@ -38,6 +31,7 @@ export const MeProvider = ({ children }: { children: ReactNode }) => {
         JSON.stringify(user?.blocked.sort((a, b) => a.id - b.id)),
         JSON.stringify(user?.pending.sort((a, b) => a.id - b.id)),
         JSON.stringify(user?.pendingOf.sort((a, b) => a.id - b.id)),
+        user?.tfaValid,
         refetch
     ])
 
