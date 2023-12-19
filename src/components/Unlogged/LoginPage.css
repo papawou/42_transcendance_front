@@ -1,29 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap');
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Orbitron', sans-serif;
+    height: 100px;
+    background: url('../../../public/prism.svg') no-repeat center center fixed;
 }
 
+
 .container {
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 50px;
-    background: url('loginback.png') no-repeat center center fixed;
-    background-size: cover;
 }
 
 .title {
     font-size: 60px;
-    color: #070707;
+    background: linear-gradient(to right, #090909, #817070, #0d3902);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
     text-shadow: 10px 10px 7px rgba(0, 0, 0, 0.4);
-    animation: moveText 1s infinite alternate;
+    animation: moveText 2s infinite alternate;
     position: relative;
 }
+
 
 .ball {
     position: absolute;
@@ -58,7 +61,7 @@ body {
 .login-button {
     padding: 15px 30px;
     font-size: 18px;
-    background-color: #06efef;
+    background-color: #4CAF50;
     color: rgb(18, 17, 17);
     border: none;
     border-radius: 8px;

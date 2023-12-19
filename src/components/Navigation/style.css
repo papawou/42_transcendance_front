@@ -7,6 +7,20 @@
     margin-right: 85px;
 }
 
+.navigation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 10px 1px 10px rgba(0, 0, 0, 0.3);
+    margin-left: 20px; 
+}
+
+
 .user-name {
     color: rgb(6, 6, 6);
     transition: color 0.3s ease-in-out, transform 0.1s ease-out;
@@ -32,3 +46,4 @@ button:hover {
     color: #faf8f8;
     transform: scale(1.05);
 }
+
