@@ -22,18 +22,18 @@ body {
     color: #070707;
     text-shadow: 10px 10px 7px rgba(0, 0, 0, 0.4);
     animation: moveText 1s infinite alternate;
-    position: relative; /* Ensure the container for the dot is relative to this */
+    position: relative;
 }
 
 .ball {
-    position: absolute; /* Position the dot relative to the title */
-    top: 100px; /* Adjust to position above the title */
+    position: absolute;
+    top: 100px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: #ffffff; /* White color */
-    animation: bounce 0.5s infinite alternate; /* Animation settings */
-    animation-delay: 0.2s; /* Delay for a staggered effect */
+    background-color: #ffffff;
+    animation: bounce 0.5s infinite alternate;
+    animation-delay: 0.2s;
     box-shadow: 10px 3px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -42,16 +42,16 @@ body {
         transform: translateX(1);
     }
     100% {
-        transform: translateX(10px); /* Adjust the distance of movement */
+        transform: translateX(10px);
     }
 }
 
 @keyframes bounce {
     0% {
-        top: 460px; /* Starting position */
+        top: 460px;
     }
     100% {
-        top: 380px; /* Adjust the bouncing height as needed */
+        top: 380px;
     }
 }
 
