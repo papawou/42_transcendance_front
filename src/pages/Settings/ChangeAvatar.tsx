@@ -5,7 +5,22 @@ import { useDropzone } from 'react-dropzone'
 const ChangeAvatar = () => {
 
 	const onDrop = async (acceptedFiles: File[]) => {
-		const imageToString = await convertImage(acceptedFiles[0]);
+		const file = acceptedFiles[0];
+
+		const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+		const maxFileSize = 200 * 1024;
+
+		if (!allowedTypes.includes(file.type)) {
+			console.error('Invalid file type. Please upload a valid image.');
+			return;
+		}
+
+		if (file.size > maxFileSize) {
+			console.error('File size exceeds the limit. Please upload an image with a size of up to 200kb.');
+			return;
+		}
+
+		const imageToString = await convertImage(file);
 		await sendImage(imageToString);
 	};
 
@@ -19,7 +34,7 @@ const ChangeAvatar = () => {
 	}
 
 	const sendImage = (imageToString: string) => {
-		axiosInstance.post(`/users/change-avatar`, {image: imageToString});
+		axiosInstance.post(`/users/change-avatar`, { image: imageToString });
 	}
 
 	return (
