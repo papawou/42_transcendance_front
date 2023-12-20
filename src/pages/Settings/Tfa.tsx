@@ -4,8 +4,6 @@ import { isDef } from "@/technical/isDef";
 import { useCallback, useState } from "react";
 import { useSnackbar } from "notistack";
 
-
-
 function EnableTfa() {
     const { id, refetch } = useMe()
     const snackbar = useSnackbar()

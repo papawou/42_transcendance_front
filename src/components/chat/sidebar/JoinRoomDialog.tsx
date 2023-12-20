@@ -1,6 +1,7 @@
 import { Dialog, DialogTitle } from "@mui/material"
 import { socket } from "@/services/socketio"
 import { ChangeEvent, useState, useEffect } from "react"
+//import "./JoinRoomDialog.css"
 
 interface JoinRoomDialogProps {
   open: boolean
@@ -58,7 +59,7 @@ export const JoinRoomDialog = ({
           onChange={handlePwdChange}
         />
         <div>
-          <button onClick={joinRoom}>Join</button>
+          <button onClick={joinRoom}>Join</button>  
           <button onClick={closeAndReset}>Cancel</button>
         </div>
       </div>

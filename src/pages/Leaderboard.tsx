@@ -4,6 +4,7 @@ import { isDef } from "@/technical/isDef";
 import { Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import "./LeaderBoard.css"
 
 export const Leaderboard = () => {
     const [userId, setUserId] = useState<number | undefined>(undefined)
@@ -12,7 +13,7 @@ export const Leaderboard = () => {
     return (
         <div>
             {isDef(userId) && <UserProfile open={true} userId={userId} onClose={() => setUserId(undefined)} />}
-            <h1>Leaderboard</h1>
+            <h1 className="head">Leaderboard</h1>
             <div>{
                 (isLoading) ? "loading..." :
                     <Table>
@@ -27,11 +28,11 @@ export const Leaderboard = () => {
                                             <NavLink to={""} onClick={(e) => {
                                                 e.preventDefault()
                                                 setUserId(p.id)
-                                            }}>
+                                            }} className="name">
                                                 {p.name}
                                             </NavLink>
                                         </TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="right" className="elo">
                                                 {p.elo}
                                         </TableCell>
                                     </TableRow>
