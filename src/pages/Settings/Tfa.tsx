@@ -21,9 +21,13 @@ function EnableTfa() {
     }, [])
 
     const handleCodeActivate = useCallback(() => {
+        if (!isDef(tfaCodeActivate) || tfaCodeActivate.length !== 6) {
+            snackbar.enqueueSnackbar("OTP code should contain 6 digits! Try again!", { variant: "warning" });
+            return;
+        }
         axiosInstance.post("auth/tfa/activate", { userId: id, otp: tfaCodeActivate }).then(() => { refetch(); snackbar.enqueueSnackbar("2FA code has been validated successfully!", { variant: "success" }); 
     })
-    .catch(() => snackbar.enqueueSnackbar("2FA code is invalid! Try again!", { variant: "warning" }));
+    .catch(() => snackbar.enqueueSnackbar("OTP code is invalid! Try again!", { variant: "error" }));
     }, [refetch, snackbar, tfaCodeActivate])
 
     return (
@@ -51,7 +55,7 @@ function DisableTfa() {
 
     const handleClick = useCallback(() => {
         axiosInstance.post("auth/tfa/disable").then(() => refetch()).catch(() => {
-            snackbar.enqueueSnackbar("Code d'activation 2FA invalide", { variant: "warning" })
+            snackbar.enqueueSnackbar("2FA code is invalid! Try again!", { variant: "error" })
         })
     }, [refetch, snackbar])
 
