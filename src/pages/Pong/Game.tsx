@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { isDef } from "@/technical/isDef";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { WS_FAIL, WsGame, WsGameOut } from "@/shared/ws-game";
+import { GetUserAvatar } from "@/components/UserAvatar";
+import { getSidePlayer } from "@/pong/common";
 
 export const Game = ({ game }: { game: GameEngineClient }) => {
 	const { user } = useAuth()
@@ -63,20 +65,24 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
 	return (
 		<div>
 			<div style={{ display: "flex" }}>
-				{
-					!player.isReady &&
-					<button onClick={() => emit(WsGame.setReady, { gameId: game.gameId })}>
-						{player.isReady ? "WAITING" : "READY"}
-					</button>
-				}
+
 			</div>
-			<div style={{ display: "flex" }}>
+			<div style={{ display: "flex", justifyContent: "space-between" }}>
 				{
-					game.getScores().map(p => (
-						<div key={p.userId}>
-							{p.userId} - {p.score}
+					<>
+						<div>
+							{getSidePlayer(game, "left")?.score}
+							<GetUserAvatar userId={getSidePlayer(game, "left")?.userId} />
 						</div>
-					))
+						<button disabled={player.isReady} onClick={() => emit(WsGame.setReady, { gameId: game.gameId })}>
+							{player.isReady ? "WAITING" : "READY"}
+						</button>
+						<button onClick={() => emit(WsGame.leaveRoom, undefined)}>LEAVE GAME</button>
+						<div>
+							{getSidePlayer(game, "right")?.score}
+							<GetUserAvatar userId={getSidePlayer(game, "right")?.userId} />
+						</div>
+					</>
 				}
 			</div>
 			<div style={{ position: "relative" }}>
@@ -87,7 +93,7 @@ export const Game = ({ game }: { game: GameEngineClient }) => {
 					style={{ width: "100%", position: "absolute", backgroundColor: "white" }}
 					ref={canvasRef}
 				></canvas>
-				<div style={{ position: "absolute" }}>TEST</div>
+				<div style={{ position: "absolute" }}>{isDef(game.closed_reason) && <GetUserAvatar userId={Number(Array.from(game.closed_reason).filter(c => c >= '0' && c <= '9'))} />}</div>
 			</div>
 		</div >
 	);

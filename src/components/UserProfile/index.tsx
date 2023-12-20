@@ -1,12 +1,11 @@
-import { Avatar, Button, Dialog, DialogContent, DialogTitle, Table, TableBody, TableCell, TableRow } from '@mui/material';
+import { Button, Dialog, DialogContent, DialogTitle, Table, TableBody, TableCell, TableRow } from '@mui/material';
 
 import { useUsersServiceUserControllerGetUser, useUsersServiceUserControllerGetUserHistory } from '@/services/openapi/queries';
-import { useMemo } from 'react';
+import { useMemo, } from 'react';
 import { isDef } from '@/technical/isDef';
 import dayjs from 'dayjs';
 import { SocialButtons } from './SocialButtons';
 import { UserAvatar } from '../UserAvatar';
-
 
 interface Props {
 	open: boolean;
@@ -17,6 +16,8 @@ interface Props {
 const UserProfile = ({ open, onClose, userId }: Props) => {
 	const { data: user, isLoading } = useUsersServiceUserControllerGetUser({ id: userId }, undefined, { enabled: open })
 	const { data: userHistory, isLoading: isLoadingHistory } = useUsersServiceUserControllerGetUserHistory({ id: userId }, undefined, { enabled: open })
+
+
 
 	const history = useMemo(() => {
 		if (isLoadingHistory || !isDef(userHistory)) {
@@ -38,7 +39,7 @@ const UserProfile = ({ open, onClose, userId }: Props) => {
 				type: p.type,
 				createdAt: p.createdAt
 			}))
-		]
+		].sort((a, b) => dayjs(b.createdAt).diff(dayjs(a.createdAt)))
 	}, [isLoadingHistory, userHistory])
 
 	return (
@@ -48,7 +49,7 @@ const UserProfile = ({ open, onClose, userId }: Props) => {
 					<>
 						<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
 							<UserAvatar hasDialog={false} user={user} isButton={false} />
-							<SocialButtons userId={user.id} />
+							<SocialButtons user={user} />
 						</DialogTitle>
 						<DialogContent sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
 							<div>Victoires: {userHistory.wins.length} Défaites: {userHistory.loses.length} / {user.elo}</div>
@@ -58,7 +59,7 @@ const UserProfile = ({ open, onClose, userId }: Props) => {
 										<Table>
 											<TableBody>
 												{
-													history.map((p) => (
+													history.sort().map((p) => (
 														<TableRow key={p.id}>
 															<TableCell component="th" scope="row">
 																{p.status}

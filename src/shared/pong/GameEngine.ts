@@ -86,10 +86,10 @@ export class GameEngine<T extends GameObjectSide> {
         }
         switch (key) {
             case "w":
-                bar.body.v.y = -100;
+                bar.body.v.y = -200;
                 break;
             case "s":
-                bar.body.v.y = 100;
+                bar.body.v.y = 200;
                 break;
         }
     }
@@ -121,7 +121,7 @@ export class GameEngine<T extends GameObjectSide> {
             return;
         }
         ++player.score
-        if (player.score >= 5) {
+        if (player.score >= (this.type === "TROLL" ? 50 : 5)) {
             this.stop(`Player ${player.userId} has won`)
         }
     }

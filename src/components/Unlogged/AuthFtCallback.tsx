@@ -6,7 +6,7 @@ import { useAuth } from "../providers/AuthProvider";
 import Paths from "@/technical/Paths";
 
 export function AuthFtCallback() {
-    const { login } = useAuth()
+    const { login, logout } = useAuth()
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
 
@@ -34,6 +34,7 @@ export function AuthFtCallback() {
     return (
         <>
             LOADING...
+            <button onClick={() => logout()}>LOGOUT</button>
         </>
     )
 }

@@ -4,14 +4,19 @@ import { socket } from "@/services/socketio"
 import axiosInstance from "@/services/AxiosInstance"
 import AddFriendButton from "../UserButtons/AddFriendButton"
 import { useAuth } from "../providers/AuthProvider"
-import { Fragment, ReactNode, useEffect, useMemo } from "react"
+import { Fragment, ReactNode, useEffect, useMemo, useState } from "react"
 import { useUsersServiceUserControllerCancelFriendRequest } from "@/services/openapi/queries"
+import { DuelDialog } from "../chat/bottombar/DuelDialog"
+import { UserDTO } from "@/services/openapi/requests"
 
 
-export function SocialButtons({ userId }: { userId: number }) {
+export function SocialButtons({ user }: { user: UserDTO }) {
     const auth = useAuth()
     const { mutateAsync: removeFriendRequest } = useUsersServiceUserControllerCancelFriendRequest();
     const { friends, blocked, pending, pendingOf, refetch } = useMe()
+    const [openDuel, setOpenDuel] = useState(false)
+
+    const { id: userId } = user;
 
     useEffect(() => {
         socket.on('friendRequestResponse', () => {
@@ -88,13 +93,23 @@ export function SocialButtons({ userId }: { userId: number }) {
         return tmp
     }, [auth.user?.id, blocked, friends, pending, pendingOf, removeFriendRequest, userId])
 
-
     return (
         <div style={{ display: "flex", gap: 16 }}>
             {
                 buttons.map(b => <Fragment key={b.key}>
                     {b.value}
                 </Fragment>)
+            }
+            {
+                user.id !== auth.user?.id &&
+                <>
+                    <AddFriendButton width={10} image='swords.jpg' onClick={() => setOpenDuel(true)} />
+                    <DuelDialog
+                        open={openDuel}
+                        setOpen={(isOpen) => setOpenDuel(isOpen)}
+                        user={user}
+                    />
+                </>
             }
         </div >
     )

@@ -1,10 +1,10 @@
-import { Avatar, Badge, BadgeProps, IconButton, Stack, Typography, styled } from "@mui/material"
-import { useAuth } from "./providers/AuthProvider"
+import { Avatar, Badge, IconButton, Stack, Typography, styled } from "@mui/material"
 import UserProfile from "./UserProfile"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { UserDTO, UserWithStatusDTO } from "@/services/openapi/requests"
 import { useMe } from "./providers/MeProvider"
 import { isDef } from "@/technical/isDef"
+import axiosInstance from "@/services/AxiosInstance"
 
 type Props = {
     user: UserDTO,
@@ -19,11 +19,25 @@ const StyledBadge = styled(Badge)(({ badgecolor }: { badgecolor?: string }) => (
     }
 }));
 
+export const GetUserAvatar = ({ userId }: { userId?: number }) => {
+    const [user, setUser] = useState<UserDTO>()
+
+    useEffect(() => {
+        if (!isDef(userId)) {
+            return;
+        }
+        axiosInstance.get(`users/${userId}/user`).then(res => setUser(res.data)).catch()
+    }, [userId])
+
+    if (!isDef(user)) {
+        return <Avatar />
+    }
+    return <UserAvatar user={user} />
+}
+
 export const UserAvatar = ({ user, hasDialog = true, isButton = true }: Props) => {
-    const auth = useAuth()
     const me = useMe()
     const [openProfileDialog, setOpenProfileDialog] = useState(false);
-
 
     const colorStatus = useMemo(() => {
         if (me.blocked.some(p => p.id === user.id))

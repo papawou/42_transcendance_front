@@ -4,7 +4,7 @@ import { useAuth } from "../providers/AuthProvider"
 import { useSearchParams } from "react-router-dom"
 
 export function TfaAccess() {
-    const { login } = useAuth()
+    const { login, logout } = useAuth()
     const [searchParams,] = useSearchParams()
     const [tfaCodeActivate, setTfaCodeActivate] = useState<string | undefined>("")
     const [error, setError] = useState(false)
@@ -26,6 +26,7 @@ export function TfaAccess() {
             {error && <p>Error OTP</p>}
             <input placeholder='code ici' onChange={handleCodeActivateChange} value={tfaCodeActivate} />
             <button onClick={handleCodeActivate}>ENVOYER</button>
+            <button onClick={() => logout()}>LOGOUT</button>
         </div>
     )
 }

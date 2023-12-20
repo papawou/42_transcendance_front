@@ -1,4 +1,4 @@
-import { GameObjectServer } from "../server/GameObjectServer";
+import { GameObjectClient } from "@/pong/GameObjectClient";
 
 export type GameEngineStatus = "RUNNING" | "PENDING" | "CLOSED"
 
@@ -44,4 +44,4 @@ export type GameEngineData = {
     closed_reason?: string
 }
 
-export type GameObjectSide = GameObjectServer
+export type GameObjectSide = GameObjectClient
