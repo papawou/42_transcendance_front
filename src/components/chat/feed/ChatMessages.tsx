@@ -1,7 +1,6 @@
 import { styled } from "@mui/material"
 import { MessageDto, RoomDto } from "../chat.api"
-import { useBlockedUser } from "@/components/providers/BlockedUsersProvider";
-import { useAuth } from '@/components/providers/AuthProvider'
+import { useMe } from "@/components/providers/MeProvider";
 
 const CMessage = styled('div')(({ isCurrentUser }: { isCurrentUser: boolean }) => ({
     backgroundColor: isCurrentUser ? 'rgb(124, 187, 18)' : 'green',
@@ -18,18 +17,16 @@ interface ChatMessagesProps {
 export const ChatMessages = ({
     room
 }: ChatMessagesProps) => {
-
-    const blockedUsers = useBlockedUser();
-    const { user } = useAuth();
+    const user = useMe()
 
     return (
         <div style={{ width: '165px' }}>
             {room.messages.map((message: MessageDto, index: number) => {
-                const isCurrentUserMessage = user?.id === message.userId;
+                const isCurrentUserMessage = user.id === message.userId;
                 return (
                     <div key={index}>
                         {
-                            !blockedUsers?.includes(message.userId) ?
+                            !user.blocked.some(p => p.id === message.userId) ?
 
                                 <CMessage isCurrentUser={isCurrentUserMessage}>
                                     <div className="sender" style={{ fontSize: '15px' }}>

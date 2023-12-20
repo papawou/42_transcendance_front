@@ -18,7 +18,7 @@ export type { TfaDTO } from './models/TfaDTO';
 export type { UserDTO } from './models/UserDTO';
 export type { UserExpandedDTO } from './models/UserExpandedDTO';
 export type { UserHistoryDTO } from './models/UserHistoryDTO';
-export { UserStatusDTO } from './models/UserStatusDTO';
+export { UserWithStatusDTO } from './models/UserWithStatusDTO';
 
 export { DefaultService } from './services/DefaultService';
 export { GamesService } from './services/GamesService';

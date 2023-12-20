@@ -1,6 +1,6 @@
 // generated with @7nohe/openapi-react-query-codegen@0.5.1 
 import { useQuery, useMutation, UseQueryResult, UseQueryOptions, UseMutationOptions, UseMutationResult } from "@tanstack/react-query";
-import { UserStatusDTO } from "../requests/models/UserStatusDTO";
+import { UserWithStatusDTO } from "../requests/models/UserWithStatusDTO";
 import { UserHistoryDTO } from "../requests/models/UserHistoryDTO";
 import { UserExpandedDTO } from "../requests/models/UserExpandedDTO";
 import { UserDTO } from "../requests/models/UserDTO";
@@ -28,12 +28,6 @@ export const useUsersServiceUserControllerGetUser = <TQueryKey extends Array<unk
 };
 export const useUsersServiceUserControllerGetMeKey = "UsersServiceUserControllerGetMe";
 export const useUsersServiceUserControllerGetMe = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetMe>>, TError = unknown>(queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetMe>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetMe>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetMeKey, ...(queryKey ?? [])], queryFn: () => UsersService.userControllerGetMe(), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetMe>>, TError>, "data"> & {
-    data: TData;
-};
-export const useUsersServiceUserControllerGetUserStatusKey = "UsersServiceUserControllerGetUserStatus";
-export const useUsersServiceUserControllerGetUserStatus = <TQueryKey extends Array<unknown> = unknown[], TData = Awaited<ReturnType<typeof UsersService.userControllerGetUserStatus>>, TError = unknown>({ id }: {
-    id: number;
-}, queryKey?: TQueryKey, options?: Omit<UseQueryOptions<Awaited<ReturnType<typeof UsersService.userControllerGetUserStatus>>, unknown, Awaited<ReturnType<typeof UsersService.userControllerGetUserStatus>>, unknown[]>, "queryKey" | "queryFn" | "initialData">) => useQuery({ queryKey: [useUsersServiceUserControllerGetUserStatusKey, ...(queryKey ?? [{ id }])], queryFn: () => UsersService.userControllerGetUserStatus(id), ...options }) as Omit<UseQueryResult<Awaited<ReturnType<typeof UsersService.userControllerGetUserStatus>>, TError>, "data"> & {
     data: TData;
 };
 export const useUsersServiceUserControllerChangeName = <TData = Awaited<ReturnType<typeof UsersService.userControllerChangeName>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerChangeName>>, unknown, {

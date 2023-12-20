@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import { PropsWithChildren, ReactNode } from "react";
 import { AuthProvider } from "./AuthProvider";
-import { BlockedUsersProvider } from "./BlockedUsersProvider";
 import { QueryApiProvider } from "./QueryProvider";
 import { UserGameProvider } from "./UserGameProvider";
 import { SnackbarProvider } from "notistack";
@@ -37,11 +36,9 @@ export function Providers({ children }: { children: ReactNode }) {
                 <AuthProvider>
                     <LoginProtect>
                         <MeProvider>
-                            <BlockedUsersProvider>
-                                <UserGameProvider>
-                                    {children}
-                                </UserGameProvider>
-                            </BlockedUsersProvider>
+                            <UserGameProvider>
+                                {children}
+                            </UserGameProvider>
                         </MeProvider>
                     </LoginProtect>
                 </AuthProvider>

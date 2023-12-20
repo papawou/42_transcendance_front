@@ -1,12 +1,12 @@
-import { Button, Dialog, DialogContent, DialogTitle, Table, TableBody, TableCell, TableRow } from '@mui/material';
+import { Avatar, Button, Dialog, DialogContent, DialogTitle, Table, TableBody, TableCell, TableRow } from '@mui/material';
 
 import { useUsersServiceUserControllerGetUser, useUsersServiceUserControllerGetUserHistory } from '@/services/openapi/queries';
 import { useMemo } from 'react';
 import { isDef } from '@/technical/isDef';
 import dayjs from 'dayjs';
 import { SocialButtons } from './SocialButtons';
+import { UserAvatar } from '../UserAvatar';
 
-import Avatar from '../Avatar';
 
 interface Props {
 	open: boolean;
@@ -47,8 +47,7 @@ const UserProfile = ({ open, onClose, userId }: Props) => {
 				(isLoading || isLoadingHistory || !open) ? <></> :
 					<>
 						<DialogTitle sx={{ backgroundColor: 'greenyellow', color: 'black' }}>
-							<Avatar src={user.pic} width={50} />
-							{`Profil de ${user.name}`}
+							<UserAvatar hasDialog={false} user={user} isButton={false} />
 							<SocialButtons userId={user.id} />
 						</DialogTitle>
 						<DialogContent sx={{ backgroundColor: 'greenyellow', color: 'black' }}>

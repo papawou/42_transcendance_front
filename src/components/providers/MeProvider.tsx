@@ -1,7 +1,7 @@
-
-import { dispatchLogout } from "@/services/events";
 import { useUsersServiceUserControllerGetMe } from "@/services/openapi/queries";
 import { UserExpandedDTO } from "@/services/openapi/requests";
+import { isDef } from "@/technical/isDef";
+import { useSnackbar } from "notistack";
 import { ReactNode, createContext, useContext, useEffect, useMemo } from "react";
 
 type MeContextValue = UserExpandedDTO & {
@@ -13,20 +13,13 @@ const MeContext = createContext<MeContextValue>(Object.create(null))
 export const useMe = () => useContext(MeContext);
 
 export const MeProvider = ({ children }: { children: ReactNode }) => {
-    const { data: user, refetch, errorUpdateCount } = useUsersServiceUserControllerGetMe()
+    const { data: user, refetch } = useUsersServiceUserControllerGetMe()
+    const snackbar = useSnackbar()
 
     useEffect(() => {
-        const poll = setInterval(() => {
-            refetch()
-        }, 5000);
+        const poll = setInterval(() => refetch().catch(() => snackbar.enqueueSnackbar("Echec de la récupération du profil", { variant: "warning" })), 1000)
         return () => clearInterval(poll);
-    }, [refetch])
-
-    useEffect(() => {
-        if (errorUpdateCount > 0) {
-            dispatchLogout()
-        }
-    }, [errorUpdateCount])
+    }, [refetch, snackbar])
 
     const contextValue: MeContextValue = useMemo(() => {
         return ({
@@ -41,6 +34,10 @@ export const MeProvider = ({ children }: { children: ReactNode }) => {
         user?.tfaValid,
         refetch
     ])
+
+    if (!isDef(contextValue.id)) {
+        return "LOADING ME..."
+    }
 
     return (
         <MeContext.Provider value={contextValue}>

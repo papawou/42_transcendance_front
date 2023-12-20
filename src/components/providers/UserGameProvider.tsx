@@ -49,11 +49,11 @@ export const UserGameProvider = ({ children }: { children: ReactNode }) => {
     }, [userGame])
 
     const handleDuelInvite = useCallback((data: WsGameOut<WsGame.duelInvite>) => {
-        enqueueSnackbar(`Invitation received ${data.senderId}`, {
+        enqueueSnackbar(`Invitation reçu ${data.senderId}`, {
             variant: "info",
             autoHideDuration: 60000,
             action: (snackbarId) => (<>
-                <button onClick={() => axiosInstance.post("/games/duel/accept", { senderId: data.senderId })}>
+                <button onClick={() => axiosInstance.post("/games/duel/accept", { senderId: data.senderId }).catch(() => enqueueSnackbar("Echec du duel", { variant: "error" })).finally(() => closeSnackbar(snackbarId))}>
                     Accepter
                 </button>
                 <button onClick={() => closeSnackbar(snackbarId)}>
@@ -64,9 +64,9 @@ export const UserGameProvider = ({ children }: { children: ReactNode }) => {
     }, [closeSnackbar, enqueueSnackbar])
 
     const handleDuelStart = useCallback((data: WsGameOut<WsGame.duelStart>) => {
-        enqueueSnackbar(`Duel started ${data}`, { variant: "success" })
+        enqueueSnackbar(`Démarrage du duel ${data}`, { variant: "success" })
         navigate(Paths.Pong)
-    }, [enqueueSnackbar, navigate])
+    }, [enqueueSnackbar])
 
     useEffect(() => {
         on(WsGame.duelInvite, handleDuelInvite)

@@ -1,7 +1,6 @@
 import { styled } from "@mui/material"
 import { MessageDto, PrivateMsgsDto } from "../chat.api"
-import { useBlockedUser } from "@/components/providers/BlockedUsersProvider";
-import { useAuth } from '@/components/providers/AuthProvider'
+import { useMe } from "@/components/providers/MeProvider";
 
 const PMessage = styled('div')(({ isCurrentUser }: { isCurrentUser: boolean }) => ({
     backgroundColor: isCurrentUser ? 'rgb(124, 187, 18)' : 'green',
@@ -18,9 +17,7 @@ interface privateMessagesProps {
 export const PrivateMessages = ({
     pms
 }: privateMessagesProps) => {
-
-    const blockedUsers = useBlockedUser();
-    const { user } = useAuth();
+    const user = useMe()
 
     return (
         <div style={{ width: '165px' }}>
@@ -29,7 +26,7 @@ export const PrivateMessages = ({
                 return (
                     <div key={index}>
                         {
-                            !blockedUsers?.includes(message.userId) ?
+                            !user.blocked.some(p => p.id === message.userId) ?
 
                                 <PMessage isCurrentUser={isCurrentUserMessage}>
                                     <div className="sender" style={{ fontSize: '15px' }}>

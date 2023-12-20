@@ -1,7 +1,6 @@
 .navigation {
 	display: flex;
 	justify-content: space-between;
-	list-style-type: none;
 	align-items: center;
-	height: var(--header-height)
+	height: 100px;
 }

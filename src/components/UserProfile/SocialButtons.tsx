@@ -86,7 +86,7 @@ export function SocialButtons({ userId }: { userId: number }) {
             })
         }
         return tmp
-    }, [blocked, friends, pending, pendingOf, removeFriendRequest, userId])
+    }, [auth.user?.id, blocked, friends, pending, pendingOf, removeFriendRequest, userId])
 
 
     return (

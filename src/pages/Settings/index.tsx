@@ -26,12 +26,14 @@ const Settings = () => {
 					onChange={(e) => setInput(e.target.value.trim())}
 					maxLength={20}
 				/>
-				<button
-					disabled={input.trim().length === 0}
-					onClick={handleValidation}
-				>
-					Valider
-				</button>
+				<div>
+					<button
+						disabled={input.trim().length === 0}
+						onClick={handleValidation}
+					>
+						Changer username
+					</button>
+				</div>
 				<ChangeAvatar />
 			</div>
 			<div style={{ border: "1px solid red" }}>
