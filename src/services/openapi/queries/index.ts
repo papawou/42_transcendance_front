@@ -10,6 +10,7 @@ import { GameDTO } from "../requests/models/GameDTO";
 import { FtCallbackDTO } from "../requests/models/FtCallbackDTO";
 import { DuelInviteDTO } from "../requests/models/DuelInviteDTO";
 import { DuelAcceptDTO } from "../requests/models/DuelAcceptDTO";
+import { ChangeUsernameDTO } from "../requests/models/ChangeUsernameDTO";
 import { CancelFriendRequestDTO } from "../requests/models/CancelFriendRequestDTO";
 import { AccessTokenDTO } from "../requests/models/AccessTokenDTO";
 import { UsersService } from "../requests/services/UsersService";
@@ -36,13 +37,10 @@ export const useUsersServiceUserControllerGetUserStatus = <TQueryKey extends Arr
     data: TData;
 };
 export const useUsersServiceUserControllerChangeName = <TData = Awaited<ReturnType<typeof UsersService.userControllerChangeName>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerChangeName>>, unknown, {
-    newName: string;
-}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ newName }) => UsersService.userControllerChangeName(newName), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerChangeName>>, TError, {
-    newName: string;
+    requestBody: ChangeUsernameDTO;
+}, unknown>, "mutationFn">) => useMutation({ mutationFn: ({ requestBody }) => UsersService.userControllerChangeName(requestBody), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerChangeName>>, TError, {
+    requestBody: ChangeUsernameDTO;
 }, TContext>, "data"> & {
-    data: TData;
-};
-export const useUsersServiceUserControllerChangeAvatar = <TData = Awaited<ReturnType<typeof UsersService.userControllerChangeAvatar>>, TError = unknown, TContext = unknown>(options?: Omit<UseMutationOptions<Awaited<ReturnType<typeof UsersService.userControllerChangeAvatar>>, unknown, void, unknown>, "mutationFn">) => useMutation({ mutationFn: () => UsersService.userControllerChangeAvatar(), ...options }) as Omit<UseMutationResult<Awaited<ReturnType<typeof UsersService.userControllerChangeAvatar>>, TError, void, TContext>, "data"> & {
     data: TData;
 };
 export const useUsersServiceUserControllerGetFriendsKey = "UsersServiceUserControllerGetFriends";

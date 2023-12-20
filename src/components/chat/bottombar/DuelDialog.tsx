@@ -1,6 +1,8 @@
 import { Dialog, DialogTitle } from "@mui/material"
 import { UserDto } from '../chat.api'
 import axiosInstance from "@/services/AxiosInstance"
+import { DuelInviteDTO } from "@/services/openapi/requests"
+import { useCallback } from "react"
 
 interface DuelDialogProps {
     open: boolean
@@ -14,12 +16,13 @@ export const DuelDialog = ({
     user,
 }: DuelDialogProps) => {
 
-    const duelCurrentUser = () => {
+    const duelCurrentUser = useCallback((type: DuelInviteDTO.type) => {
         axiosInstance.post("games/duel/invite", {
-            targetId: user.id
+            targetId: user.id,
+            type: type
         })
         setOpen(false);
-    }
+    }, [setOpen, user.id])
 
     return (
         <Dialog open={open}>
@@ -29,8 +32,11 @@ export const DuelDialog = ({
                     Are you sure you want to Duel {user.name} ?
                 </div>
                 <div>
-                    <button onClick={duelCurrentUser}>Duel</button>
-                    <button onClick={() => { setOpen(false) }}>Cancel</button>
+                    <button onClick={() => duelCurrentUser(DuelInviteDTO.type.CASUAL)}>CASUAL</button>
+                    <button onClick={() => duelCurrentUser(DuelInviteDTO.type.TROLL)}>TROLL</button>
+                </div>
+                <div>
+                    <button onClick={() => setOpen(false)}>Cancel</button>
                 </div>
             </div>
         </Dialog>

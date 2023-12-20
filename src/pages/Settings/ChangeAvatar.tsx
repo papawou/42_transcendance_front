@@ -18,13 +18,8 @@ const ChangeAvatar = () => {
 		});
 	}
 
-	const sendImage = async (imageToString: string) => {
-		try {
-			const response = await axiosInstance.post(`/users/change-avatar`, {image: imageToString});
-		}
-		catch (error) {
-			console.error('mauvais envoi', error);
-		}
+	const sendImage = (imageToString: string) => {
+		axiosInstance.post(`/users/change-avatar`, {image: imageToString});
 	}
 
 	return (

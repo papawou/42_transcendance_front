@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CancelFriendRequestDTO } from '../models/CancelFriendRequestDTO';
+import type { ChangeUsernameDTO } from '../models/ChangeUsernameDTO';
 import type { LeaderboardUserDTO } from '../models/LeaderboardUserDTO';
 import type { UserDTO } from '../models/UserDTO';
 import type { UserExpandedDTO } from '../models/UserExpandedDTO';
@@ -71,30 +72,18 @@ export class UsersService {
     }
 
     /**
-     * @param newName
+     * @param requestBody
      * @returns UserDTO
      * @throws ApiError
      */
     public static userControllerChangeName(
-        newName: string,
+        requestBody: ChangeUsernameDTO,
     ): CancelablePromise<UserDTO> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/users/change-name/{newName}',
-            path: {
-                'newName': newName,
-            },
-        });
-    }
-
-    /**
-     * @returns UserDTO
-     * @throws ApiError
-     */
-    public static userControllerChangeAvatar(): CancelablePromise<UserDTO> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/users/change-avatar',
+            url: '/users/change-name',
+            body: requestBody,
+            mediaType: 'application/json',
         });
     }
 

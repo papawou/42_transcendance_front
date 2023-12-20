@@ -3,6 +3,7 @@ import { Physics } from "./physics/Physics";
 import { isDef } from "@/technical/isDef";
 import { GameEngineData, GameEngineStatus, GameObjectSide, GameType, PlayerData } from "./pong";
 import { Player } from "./Player";
+import dayjs, { Dayjs } from "dayjs";
 
 export class GameEngine<T extends GameObjectSide> {
     sc: Scene<T>;

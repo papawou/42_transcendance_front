@@ -8,8 +8,9 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { AccessTokenDTO } from './models/AccessTokenDTO';
 export type { CancelFriendRequestDTO } from './models/CancelFriendRequestDTO';
+export type { ChangeUsernameDTO } from './models/ChangeUsernameDTO';
 export type { DuelAcceptDTO } from './models/DuelAcceptDTO';
-export type { DuelInviteDTO } from './models/DuelInviteDTO';
+export { DuelInviteDTO } from './models/DuelInviteDTO';
 export type { FtCallbackDTO } from './models/FtCallbackDTO';
 export type { GameDTO } from './models/GameDTO';
 export type { LeaderboardUserDTO } from './models/LeaderboardUserDTO';

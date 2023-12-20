@@ -1,14 +1,19 @@
 import ChangeAvatar from "@/pages/Settings/ChangeAvatar";
 import axiosInstance from "@/services/AxiosInstance";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Tfa } from "./Tfa";
+import { useSnackbar } from "notistack";
 
 const Settings = () => {
+	const { enqueueSnackbar } = useSnackbar()
 	const [input, setInput] = useState('');
 
-	const handleValidation = () => {
-		axiosInstance.post(`/users/change-name/${input.trim()}`);
-	};
+	const handleValidation = useCallback(() => {
+		axiosInstance
+			.post(`/users/change-name`, { username: input })
+			.then(() => enqueueSnackbar("Username mis à jour", { variant: "success" }))
+			.catch(() => enqueueSnackbar("Une erreur est survenue", { variant: "error" }));
+	}, [enqueueSnackbar, input]);
 
 	return (
 		<div style={{ textAlign: 'center' }}>
@@ -17,11 +22,16 @@ const Settings = () => {
 				<input
 					type='text'
 					value={input}
-					placeholder='nouveau nom'
-					onChange={(e) => setInput(e.target.value)}
-					maxLength={10}
+					placeholder='Username'
+					onChange={(e) => setInput(e.target.value.trim())}
+					maxLength={20}
 				/>
-				<button onClick={handleValidation}>Valider</button>
+				<button
+					disabled={input.trim().length === 0}
+					onClick={handleValidation}
+				>
+					Valider
+				</button>
 				<ChangeAvatar />
 			</div>
 			<div style={{ border: "1px solid red" }}>
@@ -30,7 +40,7 @@ const Settings = () => {
 					<Tfa />
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 };
 
