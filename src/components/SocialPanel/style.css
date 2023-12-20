@@ -4,7 +4,7 @@
 	overflow-y: scroll;
 	width: 200px;
 	height: 250px;
-	background-color: rgb(124, 187, 18);
+	background-color: rgba(124, 187, 18, 0);
 	border-radius: 10px;
 	font-family: sans-serif;
 	padding-left: 10px;

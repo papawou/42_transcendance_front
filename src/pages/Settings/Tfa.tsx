@@ -4,10 +4,8 @@ import { isDef } from "@/technical/isDef";
 import { useCallback, useState } from "react";
 import { useSnackbar } from "notistack";
 
-
-
 function EnableTfa() {
-    const { refetch } = useMe()
+    const { id, refetch } = useMe()
     const snackbar = useSnackbar()
     const [qrCodeImage, setQrCodeImage] = useState<string | undefined>(undefined);
     const [tfaCodeActivate, setTfaCodeActivate] = useState<string | undefined>("")
@@ -22,7 +20,7 @@ function EnableTfa() {
     }, [])
 
     const handleCodeActivate = useCallback(() => {
-        axiosInstance.post("auth/tfa/activate", { otp: tfaCodeActivate }).then(() => refetch()).catch(() => snackbar.enqueueSnackbar("Code d'activation 2FA invalide", { variant: "warning" }))
+        axiosInstance.post("auth/tfa/activate", { userId: id, otp: tfaCodeActivate }).then(() => refetch()).catch(() => snackbar.enqueueSnackbar("Code d'activation 2FA invalide", { variant: "warning" }))
     }, [refetch, snackbar, tfaCodeActivate])
 
     return (

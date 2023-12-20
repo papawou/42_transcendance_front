@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&display=swap');
+
+body {
+    height: 100px;
+    background: url('/prism.svg') no-repeat center center fixed;
+}
+
+
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.title {
+    font-size: 60px;
+    background: linear-gradient(to right, #090909, #817070, #0d3902);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 10px 10px 7px rgba(0, 0, 0, 0.4);
+    animation: moveText 2s infinite alternate;
+    position: relative;
+}
+
+
+.ball {
+    position: absolute;
+    top: 100px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    animation: bounce 0.5s infinite alternate;
+    animation-delay: 0.2s;
+    box-shadow: 10px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(1);
+    }
+    100% {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        top: 475px;
+    }
+    100% {
+        top: 380px;
+    }
+}
