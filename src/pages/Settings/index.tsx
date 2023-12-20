@@ -36,8 +36,8 @@ const Settings = () => {
 				</div>
 				<ChangeAvatar />
 			</div>
-			<div style={{ border: "1px solid red" }}>
-				<h2 style={{ textAlign: 'center' }}>2FA</h2>
+			<div style={{ border: "1px solid bold red" }}>
+				<h2 style={{ textAlign: 'center' }}>Two Factor Authentication</h2>
 				<div>
 					<Tfa />
 				</div>

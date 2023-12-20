@@ -57,3 +57,10 @@ body {
         top: 380px;
     }
 }
+
+.logo-in-button {
+    max-width: 22px;
+    height: auto;
+    vertical-align: middle;
+    margin-left: 0px;
+}

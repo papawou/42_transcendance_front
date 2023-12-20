@@ -1,0 +1,43 @@
+.popupContainer {
+    position: relative;
+}
+
+.coolSquarePopup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 1%);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.coolSquarePopup img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.coolSquarePopup input,
+.coolSquarePopup button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.coolSquarePopup button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+.coolSquarePopup button:hover {
+    background-color: #45a049;
+}
